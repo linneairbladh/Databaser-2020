@@ -7,10 +7,7 @@ import java.sql.SQLException;
 public class Course {
 
 	private String courseCode; 
-
-
 	private String courseName;
-	
 	private double credits;
 
 	public String getCourseCode() {
@@ -36,10 +33,8 @@ public class Course {
 	public void setCredits(double credits) {
 		this.credits = credits;
 	}
-	private String itsFridayThen;
+	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
 	try {
 		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 		String url = "jdbc:sqlserver://localhost:1433;database=University";
@@ -54,13 +49,10 @@ public class Course {
 		ResultSet rs = ps.executeQuery();
 		
 		while(rs.next()){
-			System.out.println(rs.getString(2));
+			System.out.println(rs.getString(1));
 		}
-		
-		
-		
+			
 	} catch (ClassNotFoundException | SQLException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 
 	}
