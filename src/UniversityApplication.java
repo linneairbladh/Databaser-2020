@@ -2,10 +2,19 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
+import javax.swing.JPanel;
+import java.awt.FlowLayout;
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
 
 public class UniversityApplication {
 
 	private JFrame frame;
+	private Controller controller;
 
 	/**
 	 * Launch the application.
@@ -40,18 +49,25 @@ public class UniversityApplication {
 		frame.getContentPane().setLayout(null);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setToolTipText("Course");
 		tabbedPane.setBounds(0, 0, 434, 261);
 		frame.getContentPane().add(tabbedPane);
 		
-		JTabbedPane tabbedPane_1 = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane_1.setToolTipText("Overview");
-		tabbedPane.addTab("Overview", null, tabbedPane_1, null);
+		JPanel panel_1 = new JPanel();
+		tabbedPane.addTab("Overview", null, panel_1, null);
 		
-		JTabbedPane Course = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.addTab("Students", null, Course, null);
+		JButton btnShowAllCourses = new JButton("Show all courses");
+		panel_1.add(btnShowAllCourses);
 		
-		JTabbedPane tabbedPane_3 = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.addTab("Course", null, tabbedPane_3, null);
+		JButton btnShowAllStudents = new JButton("Show all students");
+		panel_1.add(btnShowAllStudents);
+		
+		JPanel panel = new JPanel();
+		tabbedPane.addTab("Register", null, panel, null);
+		
+		JButton btnRemoveStudent = new JButton("Remove student");
+		panel.add(btnRemoveStudent);
+		
+		JPanel panel_2 = new JPanel();
+		tabbedPane.addTab("Assignment 2", null, panel_2, null);
 	}
 }
