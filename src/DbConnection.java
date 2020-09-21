@@ -22,5 +22,10 @@ public class DbConnection {
 		System.out.println(rs.getString(1));
 	}
 		
-} catch (ClassNotFoundException | SQLException e) {
+} 
+
+catch (ClassNotFoundException | SQLException e) {
 	e.printStackTrace();
+}
+}
+}

@@ -129,6 +129,23 @@ public class UniversityApplication {
 		panel_Add.setLayout(null);
 		
 		JButton button_AddCourse = new JButton("Add Course");
+		button_AddCourse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+				String courseCode = textField_courseCode.getText();
+				String courseName = textField_courseCode.getText();
+				int credits = credit_spinner.getValue();
+						try {
+							
+	
+						if (courseCode.isEmpty() || courseName.isEmpty() || credits.isEmpty()) {
+							lblCourse.setText("Please fill out all fields.");
+							
+							else if controller.addCourse(courseCode, courseName, credits);
+			
+						}
+			}
+		});
 		button_AddCourse.setBounds(273, 63, 89, 23);
 		panel_Add.add(button_AddCourse);
 		
@@ -248,4 +265,4 @@ public class UniversityApplication {
 		JPanel panel_Assignment2 = new JPanel();
 		tabbedPane.addTab("Assignment 2", null, panel_Assignment2, null);
 	}
-}
+
