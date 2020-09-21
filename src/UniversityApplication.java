@@ -64,8 +64,29 @@ public class UniversityApplication {
 		JPanel panel = new JPanel();
 		tabbedPane.addTab("Register", null, panel, null);
 		
+		JButton btnAddCourse = new JButton("Add Course");
+		panel.add(btnAddCourse);
+		
+		
+		
+		JButton btnAddStudent = new JButton("Add Student");
+		btnAddStudent.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				
+			}
+		});
+		panel.add(btnAddStudent);
+		
+		JButton btnRegisterStudentOn = new JButton("Register new student on course");
+		panel.add(btnRegisterStudentOn);
+		
 		JButton btnRemoveStudent = new JButton("Remove student");
 		panel.add(btnRemoveStudent);
+		
+		JButton btnNewButton = new JButton("Register student on finished course");
+		panel.add(btnNewButton);
 		
 		JPanel panel_2 = new JPanel();
 		tabbedPane.addTab("Assignment 2", null, panel_2, null);
