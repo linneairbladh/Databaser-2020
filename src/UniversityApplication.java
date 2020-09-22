@@ -44,7 +44,15 @@ public class UniversityApplication {
 	private JButton button_FindCourse;
 	private JButton btnRegisterStudent;
 	private JButton BtnRegisterNewStudent;
-	
+	private Course course;
+
+	public Course getCourse() {
+		return course;
+	}
+
+	public void setCourse(Course course) {
+		this.course = course;
+	}
 
 	/**
 	 * Launch the application.
