@@ -38,18 +38,32 @@ public class Controller {
 			}
 		});
 	
-		
-			
-		universityApplication.getButton_AddCourse().addActionListener(new ActionListener) {
+		universityApplication.getButton_AddCourse().addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					String courseCode = universityApplication.getTextField_courseCode().getText();
-					String courseName = universityApplication.getTextField_courseName().getText();
-					String credits = universityApplication.getTextField_courseCredits().getText();
-				}};
+					String cCourseCode = universityApplication.getTextField_courseCode().getText();
+					String cCourseName = universityApplication.getTextField_courseName().getText();
+					String cCredits = universityApplication.getTextField_courseCredits().getText();
 				
-				
+					try {
+						dataAccessLayer.InsertCourse(cCourseCode, cCourseName, cCredits);
+					} catch(SQLException sqlException) {
+				}
+			}
+		});
+		
+		
+		universityApplication.getButton_AddStudent().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String Studentssn = universityApplication.getTextField_ssn().getText();
+				String StudentstudentName = universityApplication.getTextField_studentName().getText();
+			
+				try {
+					dataAccessLayer.InsertStudent(Studentssn, StudentstudentName);
+				} catch(SQLException sqlException) {
+			}
+		}
+	});
 	}
-
 	public DAL getDataAccessLayer() {
 		return dataAccessLayer;
 	}
@@ -68,8 +82,8 @@ public class Controller {
 
 
 
-}
 
+}
 //Lägg till kurs
 
 //Lägg till student

@@ -9,8 +9,8 @@ import com.microsoft.sqlserver.jdbc.SQLServerDriver;
 
 public class DAL {
 	
-	private String url = "jdbc:sqlserver://localhost:1433;database=University";
-	private String user = "useradmin";
+	private static String url = "jdbc:sqlserver://localhost:1433;database=University";
+	private static String user = "useradmin";
 	private static String password = "password";
 	
 	private Connection conn = null;
@@ -47,23 +47,36 @@ public class DAL {
 		return resultSet;	
 	}
 	
+
 	//Lägg till kurs
 	public void InsertCourse(String courseCode, String courseName, double credits) throws SQLException {
 		conn = sqlConn();
 		String query = "INSERT INTO Course VALUES('" +courseCode + "', '" +  courseName + "','" + credits + "')";
+
+	public void InsertCourse(String courseCode, String courseName, String cCredits) throws SQLException {
+		conn = sqlConn();
+		String query = "INSERT INTO Course VALUES(' " +courseCode + "', '" +  courseName + "'," + cCredits + ")";
+
 		System.out.println(query);
 		PreparedStatement ps = conn.prepareStatement(query);
 		ps.executeUpdate();
 	}
 	
+
 	//Lägg till student
 	public void InsertStudent(String studentSSN, String studentName) throws SQLException {
 		conn = sqlConn();
 		String query = "INSERT INTO Student VALUES(' " +studentSSN + "', '" +  studentName +")";
+
+	public void InsertStudent(String ssn, String studentName) throws SQLException {
+		conn = sqlConn();
+		String query = "INSERT INTO Student VALUES(' " +ssn + "', '" +  studentName + "',"  +")";
+
 		System.out.println(query);
 		PreparedStatement ps = conn.prepareStatement(query);
 		ps.executeUpdate();
 	}
+
 
 	
 	//Registrera kurs på student
@@ -83,6 +96,45 @@ public class DAL {
 	PreparedStatement ps = conn.prepareStatement(query);
 	ps.executeUpdate();
 	}
+
+	
+	public String addNewStudent(String[] student) {
+		return "INSERT INTO Student VALUES(?, ?, ?)";
+	}
+	
+	
+	
+	//metod för att lägga till kurs, Adam och måns version
+	public boolean addCourse(Course c) throws SQLException{
+		String courseCode = c.getCourseCode();
+		String courseName = c.getCourseName();
+		double credits = c.getCredits();
+		
+		Connection con = null;
+		PreparedStatement state = null;
+		
+		try {
+			con = SqlCon.getConnection();
+			state = con.prepareStatement("Insert into Course values(?,?,?)");
+			
+			state.setString(1, courseCode);
+			state.setString(2, courseName);
+			state.setDouble(3, credits);
+			
+			 int row = state.executeUpdate();
+	            if (row == 1) {
+	                return true;
+	         
+		}
+		
+        return false;
+    } finally {
+        SqlCon.closeResources(con, state);
+    }
+}
+		
+		
+
 }
 
 	
