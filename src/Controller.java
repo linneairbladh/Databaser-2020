@@ -22,3 +22,11 @@ public boolean addCourse(String courseCode, String courseName, double credits) t
 
 
 }
+
+//Lägg till kurs
+
+//Lägg till student
+
+//Registrera kurs på student
+
+//Registrera avklarad kurs på student
