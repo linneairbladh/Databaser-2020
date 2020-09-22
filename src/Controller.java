@@ -2,7 +2,7 @@ import java.sql.SQLException;
 
 public class Controller {
 
-private DAL dal;
+	
 private UniversityApplication universityApplication;
 
 public Controller(DAL dal, UniversityApplication universityApplication) {
