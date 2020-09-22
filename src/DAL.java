@@ -29,10 +29,6 @@ public class DAL {
 
 
 
-	//slut på den koden
-
-		
-	//metod för att hämta alla kurser, copy från Björn
 	public ResultSet getCourse(String courseCode) throws SQLException {
 	
 		String query = "SELECT * FROM COURSE";	
@@ -43,10 +39,13 @@ public class DAL {
 		
 			}
 	
-	//metod för att lägga till kurs, copy från Björn
-	public void InsertCourse(String courseCode, String courseName double credits) throws SQLException {
-		connection = 
-	 
+	
+	public void InsertCourse(String courseCode, String courseName, double credits) throws SQLException {
+		conn = sqlConn();
+		String query = "INSERT INTO Course VALUES(' " +courseCode + "', '" +  courseName + "'," + credits + ")";
+		System.out.println(query);
+		PreparedStatement ps = conn.prepareStatement(query);
+		ps.executeUpdate();
 	}
 	
 	//metod för att lägga till kurs, Adam och måns version
