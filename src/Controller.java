@@ -1,24 +1,37 @@
 import java.sql.SQLException;
 
 public class Controller {
-
-private DAL dal;
-private UniversityApplication universityApplication;
-
-public Controller(DAL dal, UniversityApplication universityApplication) {
-	this.dal = dal;
-	this.universityApplication = universityApplication;
+	private DAL dataAccessLayer;
+	private UniversityApplication universityApplication;
 	
+	public Controller(DAL dataAccessLayer, UniversityApplication universityApplication) {
+		this.dataAccessLayer = dataAccessLayer;
+		this.universityApplication = universityApplication;
+	declareEvents();
 }
-
-
-
-public boolean addCourse(String courseCode, String courseName, double credits) throws SQLException {
-	Course c = new Course(courseCode, courseName, credits);
-	return this.dal.addCourse(c);
+	public void declareEvents() {
+			universityApplication.getButton_AddCourse().addActionListener(new ActionListener) {
+				
+			}
 	
-	universityApplication.textField_StudentName.get
-}
+	universityApplication.get
+	}
+	public DAL getDataAccessLayer() {
+		return dataAccessLayer;
+	}
+	public void setDataAccessLayer(DAL dataAccessLayer) {
+		this.dataAccessLayer = dataAccessLayer;
+	}
+	public UniversityApplication getUniversityApplication() {
+		return universityApplication;
+	}
+	public void setUniversityApplication(UniversityApplication universityApplication) {
+		this.universityApplication = universityApplication;
+	}
+
+
+
+
 
 
 }

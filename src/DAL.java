@@ -8,40 +8,27 @@ import java.sql.Statement;
 import com.microsoft.sqlserver.jdbc.SQLServerDriver;
 
 public class DAL {
-	//Kod från Klassen SqlCon
-	private static final SqlCon INSTANCE = new SqlCon();
 	
-	String url = "jdbc:sqlserver://localhost:1433;database=University";
-	String user = "useradmin";
-	String password = "password";
+	private String url = "jdbc:sqlserver://localhost:1433;database=University";
+	private String user = "useradmin";
+	private static String password = "password";
 	
-	private SqlCon () { //denna är såklart fel pga från klassen SqlCon
+	private Connection conn = null;
 	
-
-		try {
-			DriverManager.registerDriver(new SQLServerDriver());
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	private Connection sqlConn() throws SQLException {
+			try { 
+				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+			Connection conn = DriverManager.getConnection(url, user, password);
+			return conn;
 	}
-
-	private Connection createConnection() throws SQLException {
-		return DriverManager.getConnection(url, user, password);
-	}
-
-	public static Connection getConnection() throws SQLException {
-		return INSTANCE.createConnection();
-	}
-
-	public static void closeResources(Connection con, Statement state) throws SQLException {
-		con.close();
-		state.close();
-	}
-
-	//slut på den koden
 
 		
-	//metod för att hämta alla kurser, copy från Björn
+
+
+
 	public ResultSet getCourse(String courseCode) throws SQLException {
 	
 		String query = "SELECT * FROM COURSE";	
@@ -52,10 +39,13 @@ public class DAL {
 		
 			}
 	
-	//metod för att lägga till kurs, copy från Björn
-	public void InsertCourse(String courseCode, String courseName double credits) throws SQLException {
 	
-	 
+	public void InsertCourse(String courseCode, String courseName, double credits) throws SQLException {
+		conn = sqlConn();
+		String query = "INSERT INTO Course VALUES(' " +courseCode + "', '" +  courseName + "'," + credits + ")";
+		System.out.println(query);
+		PreparedStatement ps = conn.prepareStatement(query);
+		ps.executeUpdate();
 	}
 	
 	//metod för att lägga till kurs, Adam och måns version
