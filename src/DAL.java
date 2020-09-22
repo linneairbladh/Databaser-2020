@@ -9,8 +9,8 @@ import com.microsoft.sqlserver.jdbc.SQLServerDriver;
 
 public class DAL {
 	
-	private String url = "jdbc:sqlserver://localhost:1433;database=University";
-	private String user = "useradmin";
+	private static String url = "jdbc:sqlserver://localhost:1433;database=University";
+	private static String user = "useradmin";
 	private static String password = "password";
 	
 	private Connection conn = null;
@@ -40,13 +40,27 @@ public class DAL {
 			}
 	
 	
-	public void InsertCourse(String courseCode, String courseName, double credits) throws SQLException {
+	public void InsertCourse(String courseCode, String courseName, String cCredits) throws SQLException {
 		conn = sqlConn();
-		String query = "INSERT INTO Course VALUES(' " +courseCode + "', '" +  courseName + "'," + credits + ")";
+		String query = "INSERT INTO Course VALUES(' " +courseCode + "', '" +  courseName + "'," + cCredits + ")";
 		System.out.println(query);
 		PreparedStatement ps = conn.prepareStatement(query);
 		ps.executeUpdate();
 	}
+	
+	public void InsertStudent(String ssn, String studentName) throws SQLException {
+		conn = sqlConn();
+		String query = "INSERT INTO Student VALUES(' " +ssn + "', '" +  studentName + "',"  +")";
+		System.out.println(query);
+		PreparedStatement ps = conn.prepareStatement(query);
+		ps.executeUpdate();
+	}
+	
+	public String addNewStudent(String[] student) {
+		return "INSERT INTO Student VALUES(?, ?, ?)";
+	}
+	
+	
 	
 	//metod för att lägga till kurs, Adam och måns version
 	public boolean addCourse(Course c) throws SQLException{
