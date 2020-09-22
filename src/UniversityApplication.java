@@ -90,6 +90,10 @@ public class UniversityApplication {
 		JPanel panel_Overview = new JPanel();
 		tabbedPane.addTab("Overview", null, panel_Overview, null);
 		
+		JTextArea textArea_Overview = new JTextArea();
+		textArea_Overview.setBounds(83, 222, 233, 64);
+		panel_Overview.add(textArea_Overview);
+		
 		textField_studentName = new JTextField();
 		textField_studentName.setColumns(10);
 		textField_studentName.setBounds(111, 71, 96, 20);
@@ -138,9 +142,7 @@ public class UniversityApplication {
 		separator.setBounds(22, 117, 349, 2);
 		panel_Overview.add(separator);
 		
-		JTextArea textArea_Overview = new JTextArea();
-		textArea_Overview.setBounds(83, 222, 233, 64);
-		panel_Overview.add(textArea_Overview);
+		
 		//SLUT PÅ FLIK OVERVIEW
 		
 		//ALLT PÅ FLIK ADD
@@ -156,7 +158,7 @@ public class UniversityApplication {
 		button_AddCourse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			
-			/*try {
+			try {
 						
 			String courseCode = textField_courseCode.getText();
 			String courseName = textField_courseName.getText();
@@ -169,9 +171,9 @@ public class UniversityApplication {
 				textArea_Add.setText("Error.");	}
 				
 			catch (NumberFormatException e1) {
-				lblCourse.setText("Credits can only be numbers.");}*/
+				lblCourse.setText("Credits can only be numbers.");}
 			
-			 
+
 			 
 			}
 		
@@ -247,6 +249,10 @@ public class UniversityApplication {
 		JPanel panel_Register = new JPanel();
 		tabbedPane.addTab("Register", null, panel_Register, null);
 		panel_Register.setLayout(null);
+		
+		JTextArea textArea_Register = new JTextArea();
+		textArea_Register.setBounds(112, 271, 220, 22);
+		panel_Register.add(textArea_Register);
 		
 		JButton BtnRegisterNewStudent = new JButton("Register new student on course");
 		BtnRegisterNewStudent.addActionListener(new ActionListener() {
@@ -324,15 +330,14 @@ public class UniversityApplication {
 		textField_CourseCode3.setBounds(269, 47, 49, 20);
 		panel_Register.add(textField_CourseCode3);
 		
-		JTextArea textArea_Register = new JTextArea();
-		textArea_Register.setBounds(112, 271, 220, 22);
-		panel_Register.add(textArea_Register);
+	
 		//SLUT PÅ FLIK REGISTER 
 		
 		//ALLT PÅ FLIK ASSIGNMENT 2
 		JPanel panel_Assignment2 = new JPanel();
 		tabbedPane.addTab("Assignment 2", null, panel_Assignment2, null);
 		
+		//SLUT PÅ FLIK ASSIGNMENT 2
 	}
 	
 	public JFrame getFrame() {
