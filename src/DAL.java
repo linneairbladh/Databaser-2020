@@ -169,7 +169,27 @@ public class DAL {
 		}
 	}
 	
-	
+	public boolean addStudies(Studies st) throws SQLException {
+		String studentSsn = st.getStudentSsn();
+		String courseCode = st.getCourseCode();
+		
+		Connection conn = null;
+		PreparedStatement sql = null;
+		try {
+			conn = Sqlcon.getConnection();
+			sql = conn.prepareStatement("INSERT INTO Studies VALUES (?,?)");
+			sql.setString(1, studentSsn);
+			sql.setString(2, courseCode);
+			
+			int i = sql.executeUpdate();
+			if (i == 1) {
+				return true;
+			}
+			return false;
+		} finally {
+			Sqlcon.closeSqlCon(conn, sql);
+			}
+		}
 }
 
 	
