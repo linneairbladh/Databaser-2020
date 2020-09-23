@@ -37,17 +37,10 @@ public class Controller {
 				}
 			}
 		});
-	
+		
 		universityApplication.getButton_AddCourse().addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					String cCourseCode = universityApplication.getTextField_courseCode().getText();
-					String cCourseName = universityApplication.getTextField_courseName().getText();
-					String cCredits = universityApplication.getTextField_courseCredits().getText();
-				
-					try {
-						dataAccessLayer.InsertCourse(cCourseCode, cCourseName, cCredits);
-					} catch(SQLException sqlException) {
-				}
+					addallcourses(e); 
 			}
 		});
 		
@@ -76,7 +69,16 @@ public class Controller {
 	public void setUniversityApplication(UniversityApplication universityApplication) {
 		this.universityApplication = universityApplication;
 	}
-
+	public void addallcourses(ActionEvent e) {
+		String cCourseCode = universityApplication.getTextField_courseCode().getText();
+		String cCourseName = universityApplication.getTextField_courseName().getText();
+		String cCredits = universityApplication.getTextField_courseCredits().getText();
+	
+		try {
+			dataAccessLayer.InsertCourse(cCourseCode, cCourseName, cCredits);
+		} catch(SQLException sqlException) {
+	}
+	}
 
 
 
