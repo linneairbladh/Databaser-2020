@@ -10,6 +10,7 @@ import com.microsoft.sqlserver.jdbc.SQLServerDriver;
 
 public class DAL {
 	
+
 			//Get all courses
 			public ArrayList<Course> getAllCourses() throws SQLException{
 				Connection conn = null;
@@ -86,6 +87,11 @@ public class DAL {
 				}
 			}
 }
+
+	
+
+	
+
 
 
 	
