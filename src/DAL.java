@@ -25,36 +25,78 @@ public class DAL {
 			return conn;
 	}
 
-		
-
-
-
+	//Hitta kurs
 	public ResultSet getCourse(String courseCode) throws SQLException {
 	
+		conn = sqlConn();
 		String query = "SELECT * FROM COURSE";	
-		PreparedStatement ps = con.preparedStatetment(query);
+		PreparedStatement ps = conn.prepareStatement(query);
 		
 		ResultSet resultSet = ps.executeQuery();
-		return resultSet;
+		return resultSet;	
+	}
+	
+	//Hitta student
+	public ResultSet getStudent(String studentSSN, String studentName) throws SQLException {
 		
-			}
+		conn = sqlConn();
+		String query = "SELECT * FROM Student";	
+		PreparedStatement ps = conn.prepareStatement(query);
+		
+		ResultSet resultSet = ps.executeQuery();
+		return resultSet;	
+	}
 	
-	
+
+	//Lägg till kurs
+	public void InsertCourse(String courseCode, String courseName, double credits) throws SQLException {
+		conn = sqlConn();
+		String query = "INSERT INTO Course VALUES('" +courseCode + "', '" +  courseName + "','" + credits + "')";
+
 	public void InsertCourse(String courseCode, String courseName, String cCredits) throws SQLException {
 		conn = sqlConn();
 		String query = "INSERT INTO Course VALUES(' " +courseCode + "', '" +  courseName + "'," + cCredits + ")";
+
 		System.out.println(query);
 		PreparedStatement ps = conn.prepareStatement(query);
 		ps.executeUpdate();
 	}
 	
+
+	//Lägg till student
+	public void InsertStudent(String studentSSN, String studentName) throws SQLException {
+		conn = sqlConn();
+		String query = "INSERT INTO Student VALUES(' " +studentSSN + "', '" +  studentName +")";
+
 	public void InsertStudent(String ssn, String studentName) throws SQLException {
 		conn = sqlConn();
 		String query = "INSERT INTO Student VALUES(' " +ssn + "', '" +  studentName + "',"  +")";
+
 		System.out.println(query);
 		PreparedStatement ps = conn.prepareStatement(query);
 		ps.executeUpdate();
 	}
+
+
+	
+	//Registrera kurs på student
+	public void InsertCourseStudent(String studentSsn, String courseCode) throws SQLException {
+		conn = sqlConn();
+		String query = "INSERT INTO Studies VALUES('" + studentSsn + "', '" +  courseCode +"')";
+		System.out.println(query);
+		PreparedStatement ps = conn.prepareStatement(query);
+		ps.executeUpdate();
+	}
+	
+	//Registrera avklarad kurs på student
+	public void InsertFinishedCourseStudent(String studentSsn, String courseCode, String grade) throws SQLException {
+	conn = sqlConn();
+	String query = "INSERT INTO HasStudied VALUES('" + studentSsn + "', '" +  courseCode + "','" + grade + "')";
+	System.out.println(query);
+	PreparedStatement ps = conn.prepareStatement(query);
+	ps.executeUpdate();
+	}
+
 	
 	public String addNewStudent(String[] student) {
 		return "INSERT INTO Student VALUES(?, ?, ?)";
@@ -92,6 +134,7 @@ public class DAL {
 }
 		
 		
+ 
 }
 
 	
