@@ -211,7 +211,7 @@ public class DAL {
 				}
 				return false;
 			} finally {
-				Sqlcon.closeSqlCon(con, sql);
+				Sqlcon.closeSqlCon(conn, sql);
 			}
 		}
 	
