@@ -8,9 +8,9 @@ public class Course {
 
 	private String courseCode; 
 	private String courseName;
-	private double credits;
+	private int credits;
 
-	public Course(String courseCode, String courseName, double credits) {
+	public Course(String courseCode, String courseName, int credits) {
 	this.courseCode = courseCode;
 	this.courseName = courseName;
 	this.credits = credits;
@@ -33,11 +33,11 @@ public class Course {
 		this.courseName = courseName;
 	}
 
-	public double getCredits() {
+	public int getCredits() {
 		return credits;
 	}
 
-	public void setCredits(double credits) {
+	public void setCredits(int credits) {
 		this.credits = credits;
 	}
 	
