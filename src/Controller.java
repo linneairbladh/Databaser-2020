@@ -38,6 +38,7 @@ public class Controller {
 			}
 		});
 	
+		 
 		universityApplication.getButton_AddCourse().addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					String cCourseCode = universityApplication.getTextField_courseCode().getText();
