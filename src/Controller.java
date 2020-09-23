@@ -6,16 +6,37 @@ import java.sql.SQLException;
 public class Controller {
 	private DAL dataAccessLayer;
 	private UniversityApplication universityApplication;
-	private Course course;
 	
-	public Controller(DAL dataAccessLayer, UniversityApplication universityApplication, Course course) {
+	
+	public Controller(DAL dataAccessLayer, UniversityApplication universityApplication) {
 		this.dataAccessLayer = dataAccessLayer;
 		this.universityApplication = universityApplication;
-		this.course = course;
-		declareEvents();
+		
+	//Visar alla studenter genom ArrayList
+	public List <Student> getAllStudents() throws (SQLException) {
+		return this.dataAccessLayer.getAllStudents();
 	}
 	
-	public void declareEvents() {
+	//Visar alla kurser genom ArrayList
+	public List <Course> getAllCourses () throws (SQLException)	{
+		return this.dataAccessLayer.getAllCourses();
+		
+
+
+	
+	//Lägg till kurs
+
+	//Lägg till student
+
+	//Registrera kurs på student
+
+	//Registrera avklarad kurs på student
+
+	
+}
+}
+	
+	/*public void declareEvents() {
 		universityApplication.getButton_FindCourse().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String courseCode = universityApplication.getTextField_courseCode().getText();
@@ -87,11 +108,4 @@ public class Controller {
 
 
 
-}
-//Lägg till kurs
-
-//Lägg till student
-
-//Registrera kurs på student
-
-//Registrera avklarad kurs på student
+}*/
