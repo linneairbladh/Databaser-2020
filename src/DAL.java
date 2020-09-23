@@ -104,9 +104,8 @@ public class DAL {
 				String ssn = rSet.getString("ssn");
 				String name = rSet.getString("name");
 				String address = rSet.getString("address");
-				String mail = rSet.getString("mail");
 				
-				Student s = new Student(ssn, name, address, mail);
+				Student s = new Student(ssn, name, address);
 				AllS.add(s);
 			}
 			return AllS;
@@ -119,19 +118,17 @@ public class DAL {
 		String ssn = s.getSsn();
 		String name = s.getStudentName();
 		String address = s.getAdress();
-		String mail = s.getMail();
 		
 		Connection conn = null;
 		PreparedStatement sql = null;
 		
 		try {
 			conn = Sqlcon.getConnection();
-			sql = conn.prepareStatement("INSERT INTO Student VALUES (?,?,?,?)");
+			sql = conn.prepareStatement("INSERT INTO Student VALUES (?,?,?)");
 			
 			sql.setString(1, ssn);
 			sql.setString(2, name);
 			sql.setString(3, address);
-			sql.setString(4, mail);
 			
 			int i = sql.executeUpdate();	
 			if (i == 1) {
@@ -159,9 +156,9 @@ public class DAL {
 			if (rSet.next()) {
 				String name = rSet.getString("name");
 				String address = rSet.getString("address");
-				String mail = rSet.getString("mail");
 				
-				s = new Student(ssn, name, address, mail);
+				
+				s = new Student(ssn, name, address);
 			}
 			return s;
 		} finally { 
