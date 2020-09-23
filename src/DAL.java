@@ -38,6 +38,8 @@ public class DAL {
 				Sqlcon.closeSqlCon(conn, sql);
 			}
 			}
+			
+			// add new course
 			public boolean addCourse(Course c) throws SQLException{
 				String courseCode = c.getCourseCode();
 				String courseName = c.getCourseName();
@@ -65,6 +67,7 @@ public class DAL {
 
 			}
 			
+			// find course tied to specific courseCode
 			public Course getCourse(String courseCode) throws SQLException{
 				Connection conn = null;
 				PreparedStatement sql = null;
@@ -88,140 +91,135 @@ public class DAL {
 				}
 			}
 
-
-	public ArrayList<Student> AllStudents() throws SQLException {
-		PreparedStatement sql = null;
-		Connection conn = null;
+			// get all Students
+			public ArrayList<Student> AllStudents() throws SQLException {
+				PreparedStatement sql = null;
+				Connection conn = null;
 		
-		try {
-			conn = Sqlcon.getConnection();
-			sql = conn.prepareStatement("SELECT * FROM Student");
+				try {
+					conn = Sqlcon.getConnection();
+					sql = conn.prepareStatement("SELECT * FROM Student");
 			
-			ResultSet rSet = sql.executeQuery();
+					ResultSet rSet = sql.executeQuery();
 			
-			ArrayList<Student> AllS = new ArrayList<>();
-			while(rSet.next()) {
-				String ssn = rSet.getString("ssn");
-				String name = rSet.getString("name");
-				String address = rSet.getString("address");
+					ArrayList<Student> AllS = new ArrayList<>();
+					while(rSet.next()) {
+						String ssn = rSet.getString("ssn");
+						String name = rSet.getString("name");
+						String address = rSet.getString("address");
 				
-				Student s = new Student(ssn, name, address);
-				AllS.add(s);
-			}
-			return AllS;
-		} finally { 
-			Sqlcon.closeSqlCon(conn, sql);
-			}
-	}
-	
-	public boolean addStudent(Student s) throws SQLException {
-		String ssn = s.getSsn();
-		String name = s.getStudentName();
-		String address = s.getAdress();
-		
-		Connection conn = null;
-		PreparedStatement sql = null;
-		
-		try {
-			conn = Sqlcon.getConnection();
-			sql = conn.prepareStatement("INSERT INTO Student VALUES (?,?,?)");
-			
-			sql.setString(1, ssn);
-			sql.setString(2, name);
-			sql.setString(3, address);
-			
-			int i = sql.executeUpdate();	
-			if (i == 1) {
-				return true;
-			}
-			return false;
-		}	finally {
-				Sqlcon.closeSqlCon(conn, sql);
-		}
-		
-		
-	}
-	public Student getStudent(String ssn) throws SQLException {
-		Connection conn = null;
-		PreparedStatement sql = null;
-		
-		try { 
-			conn = Sqlcon.getConnection();
-			sql = conn.prepareStatement("SELECT * FROM Student WHERE ssn = ?");
-			sql.setString(1, ssn);
-			
-			ResultSet rSet = sql.executeQuery();
-			
-			Student s = null;
-			if (rSet.next()) {
-				String name = rSet.getString("name");
-				String address = rSet.getString("address");
-				
-				
-				s = new Student(ssn, name, address);
-			}
-			return s;
-		} finally { 
-			Sqlcon.closeSqlCon(conn, sql);
-		}
-	}
-
-	
-	public boolean addStudies(Studies st) throws SQLException {
-		String studentSsn = st.getStudentSsn();
-		String courseCode = st.getCourseCode();
-		
-		Connection conn = null;
-		PreparedStatement sql = null;
-		try {
-			conn = Sqlcon.getConnection();
-			sql = conn.prepareStatement("INSERT INTO Studies VALUES (?,?)");
-			sql.setString(1, studentSsn);
-			sql.setString(2, courseCode);
-			
-			int i = sql.executeUpdate();
-			if (i == 1) {
-				return true;
-			}
-			return false;
-		} finally {
-			Sqlcon.closeSqlCon(conn, sql);
-			}
-		}
-
-		public boolean addHasStudied(HasStudied hs) throws SQLException{
-			String ssn = hs.getStudentSsn();
-			String courseCode = hs.getCourseCode();
-			String grade = hs.getGrade();
-			
-			Connection conn = null; 
-			PreparedStatement sql = null;
-			
-			try {
-				conn = Sqlcon.getConnection();
-				
-				sql= conn.prepareStatement("INSERT INTO HasStudied VALUES(?, ?, ?)");
-				sql.setString(1, ssn);
-				sql.setString(2, courseCode);
-				sql.setString(3, grade);
-				
-				int rows = sql.executeUpdate();
-				if(rows == 1) {
-					return true;
+						Student s = new Student(ssn, name, address);
+						AllS.add(s);
+					}
+					return AllS;
+				} finally { 
+					Sqlcon.closeSqlCon(conn, sql);
 				}
-				return false;
-			} finally {
-				Sqlcon.closeSqlCon(conn, sql);
 			}
+	
+			// add new student
+			public boolean addStudent(Student s) throws SQLException {
+				String ssn = s.getSsn();
+				String name = s.getStudentName();
+				String address = s.getAdress();
+		
+				Connection conn = null;
+				PreparedStatement sql = null;
+		
+				try {
+					conn = Sqlcon.getConnection();
+					sql = conn.prepareStatement("INSERT INTO Student VALUES (?,?,?)");
+			
+					sql.setString(1, ssn);
+					sql.setString(2, name);
+					sql.setString(3, address);
+			
+					int i = sql.executeUpdate();	
+					if (i == 1) {
+						return true;
+					}
+					return false;
+				}	finally {
+					Sqlcon.closeSqlCon(conn, sql);
 		}
+		
+		
+			}
+			
+			// find student with specific studentSsn
+			public Student getStudent(String ssn) throws SQLException {
+				Connection conn = null;
+				PreparedStatement sql = null;
+		
+				try { 
+					conn = Sqlcon.getConnection();
+					sql = conn.prepareStatement("SELECT * FROM Student WHERE ssn = ?");
+					sql.setString(1, ssn);
+			
+					ResultSet rSet = sql.executeQuery();
+			
+					Student s = null;
+					if (rSet.next()) {
+						String name = rSet.getString("name");
+						String address = rSet.getString("address");
+				
+				
+						s = new Student(ssn, name, address);
+					}
+					return s;
+				} finally { 
+					Sqlcon.closeSqlCon(conn, sql);
+				}
+			}
+			
+			// add new studies 
+			public boolean addStudies(Studies st) throws SQLException {
+				String studentSsn = st.getStudentSsn();
+				String courseCode = st.getCourseCode();
+		
+				Connection conn = null;
+				PreparedStatement sql = null;
+				try {
+					conn = Sqlcon.getConnection();
+					sql = conn.prepareStatement("INSERT INTO Studies VALUES (?,?)");
+					sql.setString(1, studentSsn);
+					sql.setString(2, courseCode);
+						
+					int i = sql.executeUpdate();
+					if (i == 1) {
+						return true;
+					}
+					return false;
+				} finally {
+					Sqlcon.closeSqlCon(conn, sql);
+				}
+			}
+			// add new has studied
+			public boolean addHasStudied(HasStudied hs) throws SQLException{
+				String ssn = hs.getStudentSsn();
+				String courseCode = hs.getCourseCode();
+				String grade = hs.getGrade();
+				
+				Connection conn = null; 
+				PreparedStatement sql = null;
+			
+				try {
+					conn = Sqlcon.getConnection();
+				
+					sql= conn.prepareStatement("INSERT INTO HasStudied VALUES(?, ?, ?)");
+					sql.setString(1, ssn);
+					sql.setString(2, courseCode);
+					sql.setString(3, grade);
+				
+					int rows = sql.executeUpdate();
+					if(rows == 1) {
+						return true;
+					}
+					return false;
+				} finally {
+					Sqlcon.closeSqlCon(conn, sql);
+				}
+			}
 	
 
 }
-
-	
-
-	
-
-
-
-	
