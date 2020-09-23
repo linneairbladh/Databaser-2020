@@ -189,7 +189,7 @@ public class DAL {
 			}
 		}
 
-		public boolean addHasStudies(HasStudied hs) throws SQLException{
+		public boolean addHasStudied(HasStudied hs) throws SQLException{
 			String ssn = hs.getStudentSsn();
 			String courseCode = hs.getCourseCode();
 			String grade = hs.getGrade();
