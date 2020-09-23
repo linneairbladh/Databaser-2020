@@ -220,34 +220,29 @@ public class DAL {
 					Sqlcon.closeSqlCon(conn, sql);
 				}
 			}
-<<<<<<< HEAD
-		}
-		public HasStudied getHs (String ssn, String courseCode) throws SQLException {
-			Connection conn = null;
-			PreparedStatement sql = null;
-			
-			try {
-				conn = Sqlcon.getConnection();
-				sql = conn.prepareStatement("SELECT * FROM HasStudied WHERE ssn = ? AND courseCode = ?");
-				
-				sql.setString(1, ssn);
-				sql.setString(2, courseCode);
-				
-				ResultSet rSet = sql.executeQuery();
-				
-				if(rSet.next()) {
-					String grade = rSet.getString("grade");
-					
-					return new HasStudied(ssn, courseCode, grade);
-				}
-				return null;
-			} finally {
-				Sqlcon.closeSqlCon(conn, sql);
-			}
-			
-		}
-=======
-	
->>>>>>> MonnyPonny
 
+			
+			public HasStudied getHs (String ssn, String courseCode) throws SQLException {
+				Connection conn = null;
+				PreparedStatement sql = null;
+			
+				try {
+					conn = Sqlcon.getConnection();
+					sql = conn.prepareStatement("SELECT * FROM HasStudied WHERE ssn = ? AND courseCode = ?");
+				
+					sql.setString(1, ssn);
+					sql.setString(2, courseCode);
+				
+					ResultSet rSet = sql.executeQuery();
+				
+					if(rSet.next()) {
+						String grade = rSet.getString("grade");
+					
+						return new HasStudied(ssn, courseCode, grade);
+					}
+					return null;
+				} finally {
+					Sqlcon.closeSqlCon(conn, sql);
+			}
+		}
 }
