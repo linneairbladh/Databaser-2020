@@ -14,7 +14,7 @@ public class DAL {
 	private static String password = "password";
 	
 	private Connection conn = null;
-	
+	//hej
 	private Connection sqlConn() throws SQLException {
 			try { 
 				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
