@@ -203,7 +203,7 @@ public class DAL {
 				sql= conn.prepareStatement("INSERT INTO HasStudied VALUES(?, ?, ?)");
 				sql.setString(1, ssn);
 				sql.setString(2, courseCode);
-				sql.setInt(3, grade);
+				sql.setString(3, grade);
 				
 				int rows = sql.executeUpdate();
 				if(rows == 1) {
