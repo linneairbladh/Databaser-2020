@@ -239,6 +239,31 @@ public class DAL {
 			
 		}
 
+		public ArrayList<HasStudied> hs(String courseCode) throws SQLException{
+			Connection conn = null;
+			PreparedStatement sql = null;
+			
+			try {
+				conn = Sqlcon.getConnection();
+				sql = conn.prepareStatement("SELECT * FROM HasStudied WHERE courseCode = ?");
+				sql.setString(1, courseCode);
+				
+				ResultSet rSet = sql.executeQuery();
+				ArrayList<HasStudied> hs = new ArrayList<HasStudied>();
+				while(rSet.next()) {
+					String ssn = rSet.getString(1);
+					String grade = rSet.getString(3);
+					
+					HasStudied studied = new HasStudied(ssn,courseCode, grade);
+					hs.add(studied);
+				}
+				return hs;
+			} finally {
+				Sqlcon.closeSqlCon(conn, sql);
+			}
+			
+		}
+
 }
 
 	
