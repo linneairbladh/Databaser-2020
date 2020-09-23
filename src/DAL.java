@@ -168,6 +168,7 @@ public class DAL {
 			Sqlcon.closeSqlCon(conn, sql);
 		}
 	}
+
 	
 	public boolean addStudies(Studies st) throws SQLException {
 		String studentSsn = st.getStudentSsn();
@@ -190,6 +191,34 @@ public class DAL {
 			Sqlcon.closeSqlCon(conn, sql);
 			}
 		}
+
+		public boolean addHasStudies(HasStudied hs) throws SQLException{
+			String ssn = hs.getStudentSsn();
+			String courseCode = hs.getCourseCode();
+			String grade = hs.getGrade();
+			
+			Connection conn = null; 
+			PreparedStatement sql = null;
+			
+			try {
+				conn = Sqlcon.getConnection();
+				
+				sql= conn.prepareStatement("INSERT INTO HasStudied VALUES(?, ?, ?)");
+				sql.setString(1, ssn);
+				sql.setString(2, courseCode);
+				sql.setInt(3, grade);
+				
+				int rows = sql.executeUpdate();
+				if(rows == 1) {
+					return true;
+				}
+				return false;
+			} finally {
+				Sqlcon.closeSqlCon(con, sql);
+			}
+		}
+	
+
 }
 
 	
