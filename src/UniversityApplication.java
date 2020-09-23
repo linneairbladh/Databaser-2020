@@ -179,7 +179,7 @@ public class UniversityApplication {
 						if (controller.getCourse(courseCode) != null) {
 							textArea_Add.setText("Kursen ﬁnns redan");
 						} else {
-							boolean success = controller.insertCourse(courseCode, courseName, credit);
+							boolean success = controller.addallcourses(courseCode, courseName, credit);
 							if (success) {
 								textArea_Add.setText(courseCode + " har lagts till.");
 								textField_courseName.setText("");

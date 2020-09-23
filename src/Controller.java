@@ -69,7 +69,9 @@ public class Controller {
 	public void setUniversityApplication(UniversityApplication universityApplication) {
 		this.universityApplication = universityApplication;
 	}
-	public void addallcourses(ActionEvent e) {
+	
+	//metod för att lägga till kurser
+	public void addallcourses(String CourseCode, String CourseName, String Credits) { //action event e 
 		String cCourseCode = universityApplication.getTextField_courseCode().getText();
 		String cCourseName = universityApplication.getTextField_courseName().getText();
 		String cCredits = universityApplication.getTextField_courseCredits().getText();
