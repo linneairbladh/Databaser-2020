@@ -218,7 +218,7 @@ public class UniversityApplication {
 							textArea_Add.setText("Student med detta personnummer exsiterar redan!");
 							textField_StudentSSN.setText("");
 						} else {
-							controller.insertStudent(ssn, name); //address
+							controller.AddStudent(ssn, name); //address
 							textArea_Add.setText(name + " har lagts till");
 							textField_StudentName.setText("");
 							//textField_StudentAddress.setText("");
