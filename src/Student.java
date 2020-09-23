@@ -3,13 +3,11 @@ public class Student {
 	
 	private String ssn;
 	private String studentName;
-	private String mail;
 	private String adress;
 	
-	public Student (String studentName, String ssn, String mail, String adress ) {
+	public Student (String studentName, String ssn, String adress ) {
 	this.ssn = ssn;
 	this.studentName = studentName;
-	this.mail = mail;
 	this.adress = adress;
 	}
 	
@@ -36,12 +34,5 @@ public class Student {
 		this.adress = adress;
 	}
 
-	public String getMail() {
-		return mail;
-	}
-
-	public void setMail(String mail) {
-		this.mail = mail;
-	}
 	
 }

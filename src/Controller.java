@@ -2,6 +2,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class Controller {
 	private DAL dataAccessLayer;
@@ -11,29 +12,76 @@ public class Controller {
 	public Controller(DAL dataAccessLayer, UniversityApplication universityApplication) {
 		this.dataAccessLayer = dataAccessLayer;
 		this.universityApplication = universityApplication;
-		
+	}
+	
 	//Visar alla studenter genom ArrayList
-	public List <Student> getAllStudents() throws (SQLException) {
+	public List <Student> getAllStudents() throws SQLException {
 		return this.dataAccessLayer.getAllStudents();
 	}
 	
 	//Visar alla kurser genom ArrayList
-	public List <Course> getAllCourses () throws (SQLException)	{
-		return this.dataAccessLayer.getAllCourses();
+	public List <Course> getAllCourses () throws SQLException {
+		return this.dataAccessLayer.getAllCourses();	
+	}	
 		
-
-
 	
-	//Lägg till kurs
-
 	//Lägg till student
+	public boolean AddStudent (String studentName, String ssn, String adress) throws SQLException {
+		Student s1 = new Student (studentName, ssn, adress);
+	 	return this.dataAccessLayer.AddStudent(s1);	
+	}
 
+	//Lägg till kurs
+	public boolean AddCourse (String courseName, String courseCode,int credit) throws SQLException {
+		Course c1 = new Course (courseName, courseCode, credit);
+	 	return this.dataAccessLayer.AddStudent(c1);	
+	}
+	
 	//Registrera kurs på student
+	public boolean AddStudies (String ssn, String courseCode) throws SQLExeption {
+		Studies s2 = new Studies (ssn, courseCode);
+	 	return this.dataAccessLayer.AddStudies(s2);	
+	}
 
 	//Registrera avklarad kurs på student
-
+	public boolean AddHasStudied (String ssn, String courseCode, String grade) throws SQLExeption {
+		HasStudied s3 = new HasStudied (ssn, courseCode, grade);
+	 	return this.dataAccessLayer.AddHasStudied(s3);	
+	}
 	
-}
+	
+	//Hitta en student och dess information
+	public Student getStudent (String ssn) throws SQLException {
+		return this.dataAccessLayer.getStudent(ssn);
+	}
+	
+	//Hitta en kurs och dess information 
+	public Course getCourse (String courseCode) throws SQLException {
+		return this.dataAccessLayer.getCourse(courseCode);
+	}
+	
+	//Visar en kurs för en studet
+	public Studies getStudies (String courseCode, String ssn) throws SQLException {
+			return this.dataAccessLayer.getStudies(courseCode, ssn);
+	}
+		
+	//Visar en student och dess betyg på avklarad student
+	public HasStudied getHasStudied(String courseCode, String ssn) throws SQLException {
+			return this.dataAccessLayer.getHasStudied (courseCode, ssn);
+	}
+	
+	//Visa alla akutella studenter
+	public List <Studies> getAllStudies(String ssn, String courseCode) throws SQLException {
+		return this.dataAccessLayer.getAllStudies();
+	}
+	
+	//Visar alla avslutade kurser
+	public List <HasStudied> getAllHasStudied(String ssn, String courseCode) throws SQLException {
+		return this.dataAccessLayer.getAllHasStudied();	
+	}
+	
+	
+	
 }
 	
 	/*public void declareEvents() {
