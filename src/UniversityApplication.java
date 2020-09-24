@@ -3,6 +3,7 @@ import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import javax.swing.JPanel;
@@ -125,7 +126,7 @@ public class UniversityApplication {
 			public void actionPerformed(ActionEvent e) {
 				
 				String name = textField_StudentName.getText();
-				//String address = regAddressTextField.getText();
+				String address = textField_StudentAddress.getText();
 				String ssn = textField_ssn.getText();
 				if (textField_ssn.getText().isEmpty()) {
 					textArea_Student.setText("Fyll i personnummer.");
@@ -135,10 +136,10 @@ public class UniversityApplication {
 							textArea_Student.setText("Student med detta personnummer exsiterar redan!");
 							textField_ssn.setText("");
 						} else {
-							controller.AddStudent(ssn, name); //address
+							controller.AddStudent(ssn, name, address); 
 							textArea_Student.setText(name + " har lagts till");
 							textField_StudentName.setText("");
-							//textField_StudentAddress.setText("");
+							textField_StudentAddress.setText("");
 							textField_ssn.setText("");
 						}
 					} catch (SQLException e1) {

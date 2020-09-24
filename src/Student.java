@@ -3,12 +3,12 @@ public class Student {
 	
 	private String ssn;
 	private String studentName;
-	private String adress;
+	private String address;
 	
-	public Student (String studentName, String ssn, String adress ) {
+	public Student (String studentName, String ssn, String address ) {
 	this.ssn = ssn;
 	this.studentName = studentName;
-	this.adress = adress;
+	this.address = address;
 	}
 	
 	public String getSsn() {
@@ -26,12 +26,12 @@ public class Student {
 		this.studentName = studentName;
 	}
 
-	public String getAdress() {
-		return adress;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setAdress(String adress) {
-		this.adress = adress;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	
