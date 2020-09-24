@@ -28,13 +28,13 @@ public class Controller {
 	//Lägg till student
 	public boolean AddStudent (String studentName, String ssn, String adress) throws SQLException {
 		Student s1 = new Student (studentName, ssn, adress);
-	 	return this.dataAccessLayer.AddStudent(s1);	
+	 	return this.dataAccessLayer.addStudent(s1);	
 	}
 
 	//Lägg till kurs
 	public boolean AddCourse (String courseName, String courseCode,int credit) throws SQLException {
 		Course c1 = new Course (courseName, courseCode, credit);
-	 	return this.dataAccessLayer.AddStudent(c1);	
+	 	return this.dataAccessLayer.addStudent(c1);	
 	}
 	
 	//Registrera kurs på student

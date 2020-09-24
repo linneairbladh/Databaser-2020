@@ -121,7 +121,7 @@ public class DAL {
 			public boolean addStudent(Student s) throws SQLException {
 				String ssn = s.getSsn();
 				String name = s.getStudentName();
-				String address = s.getAdress();
+				String address = s.getAddress();
 		
 				Connection conn = null;
 				PreparedStatement sql = null;
