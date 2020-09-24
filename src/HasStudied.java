@@ -5,8 +5,7 @@ public class HasStudied {
 	private String courseCode; 
 	private String grade;
 	
-	public HasStudied() {
-	}
+
 	public HasStudied (String studentSsn, String courseCode, String grade) {
 		this.studentSsn = studentSsn;
 		this.courseCode = courseCode;
