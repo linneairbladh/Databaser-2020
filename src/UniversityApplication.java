@@ -88,9 +88,42 @@ public class UniversityApplication {
 		tabbedPane.setBounds(0, 0, 434, 421);
 		frame.getContentPane().add(tabbedPane);
 		
-		//ALLT PÅ FLIK STUDENT
+		//fliken student
 		JPanel panel_Student = new JPanel();
 		tabbedPane.addTab("Student", null, panel_Student, null);
+				
+		JPanel panel_Course = new JPanel();
+		tabbedPane.addTab("Course", null, panel_Course, null);
+		panel_Course.setLayout(null);
+				
+		JPanel panel_Register = new JPanel();
+		tabbedPane.addTab("Register", null, panel_Register, null);
+		panel_Register.setLayout(null);
+			
+		//Comboboxar		
+		JComboBox comboBoxGrade = new JComboBox();
+		comboBoxGrade.addItem("A");
+		comboBoxGrade.addItem("B");
+		comboBoxGrade.addItem("C");
+		comboBoxGrade.addItem("D");
+		comboBoxGrade.addItem("E");
+		comboBoxGrade.addItem("F");
+		comboBoxGrade.setBounds(261, 232, 49, 22);
+		panel_Register.add(comboBoxGrade);
+				
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(320, 18, 30, 22);
+		panel_Register.add(comboBox);
+		
+		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setBounds(320, 53, 30, 22);
+		panel_Register.add(comboBox_1);
+		
+		
+		
+		//Allt på Student
+		
 		
 		JTextArea textArea_Student = new JTextArea();
 		textArea_Student.setBounds(38, 197, 357, 141);
@@ -168,9 +201,6 @@ public class UniversityApplication {
 		//SLUT PÅ FLIK STUDENT
 		
 		//ALLT PÅ FLIK COURSE
-		JPanel panel_Course = new JPanel();
-		tabbedPane.addTab("Course", null, panel_Course, null);
-		panel_Course.setLayout(null);
 		
 		JTextArea textArea_Course = new JTextArea();
 		textArea_Course.setBounds(31, 256, 357, 101);
@@ -185,32 +215,7 @@ public class UniversityApplication {
 				String courseName = textField_courseName.getText();
 				String courseCode = textField_courseCode.getText();
 				String credit  = textField_courseCredits.getText();
-				
-
-				if (textField_courseCode.getText().isEmpty()) {
-					textArea_Course.setText("Fyll i kurskod.");
-				} else {
-					try {
-
-						if (controller.getCourse(courseCode) != null) {
-							textArea_Course.setText("Kursen finns redan");
-						} else {
-							boolean success = controller.AddCourse(courseCode, courseName, credit);
-							if (success) {
-								textArea_Course.setText(courseCode + " har lagts till.");
-								textField_courseName.setText("");
-								textField_courseCode.setText("");
-								textField_courseCredits.setText("");
-							} else {
-								textArea_Course.setText("Kurs med denna kurskod finns redan");
-							}
-						}
-					} catch (SQLException e1) {
-						textArea_Course.setText("Se till att du satt r‰tt v‰rde pÂ kurspo‰ng");
-					} catch (Exception e2) {
-						textField_courseCredits.setText("MÂste vara en siﬀra!");
-					}
-
+		
 				Course course = controller.getCourse(courseCode);
 				
 				if(courseName.isEmpty() || courseCode.isEmpty() || credit.isEmpty()) {
@@ -316,24 +321,7 @@ public class UniversityApplication {
 		panel_Course.add(separator);
 		
 		
-		
-		
-		
 		//ALLT PÅ FLIK REGISTER
-		JPanel panel_Register = new JPanel();
-		tabbedPane.addTab("Register", null, panel_Register, null);
-		panel_Register.setLayout(null);
-		
-		JComboBox comboBoxGrade = new JComboBox();
-		comboBoxGrade.addItem("A");
-		comboBoxGrade.addItem("B");
-		comboBoxGrade.addItem("C");
-		comboBoxGrade.addItem("D");
-		comboBoxGrade.addItem("E");
-		comboBoxGrade.addItem("F");
-		
-		comboBoxGrade.setBounds(261, 232, 49, 22);
-		panel_Register.add(comboBoxGrade);
 		
 		JTextArea textArea_Register = new JTextArea();
 		textArea_Register.setBounds(70, 295, 268, 80);
@@ -407,15 +395,7 @@ public class UniversityApplication {
 		btnRegisterResu.setBounds(84, 116, 226, 23);
 		panel_Register.add(btnRegisterResu);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(320, 18, 30, 22);
-		panel_Register.add(comboBox);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(320, 53, 30, 22);
-		panel_Register.add(comboBox_1);
-		
-
 		//SLUT PÅ FLIK REGISTER 
 		
 		//ALLT PÅ FLIK ASSIGNMENT 2
