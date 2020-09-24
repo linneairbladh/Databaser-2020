@@ -41,17 +41,9 @@ public class UniversityApplication {
 	private JButton button_FindCourse;
 	private JButton btnRegisterStudent;
 	private JButton BtnRegisterNewStudent;
-	private Course course;
 	private JTextField textField_StudentName;
 	private JTextField textField_StudentAddress;
 
-	public Course getCourse() {
-		return course;
-	}
-
-	public void setCourse(Course course) {
-		this.course = course;
-	}
 
 	/**
 	 * Launch the application.
@@ -93,7 +85,7 @@ public class UniversityApplication {
 		tabbedPane.setBounds(0, 0, 434, 421);
 		frame.getContentPane().add(tabbedPane);
 		
-		//ALLT PÅ FLIK OVERVIEW
+		//ALLT PÅ FLIK STUDENT
 		JPanel panel_Student = new JPanel();
 		tabbedPane.addTab("Student", null, panel_Student, null);
 		
@@ -131,11 +123,35 @@ public class UniversityApplication {
 		JButton btnAddStudent = new JButton("Add Student");
 		btnAddStudent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			}
+				
+				String name = textField_StudentName.getText();
+				//String address = regAddressTextField.getText();
+				String ssn = textField_ssn.getText();
+				if (textField_ssn.getText().isEmpty()) {
+					textArea_Student.setText("Fyll i personnummer.");
+				} else {
+					try {
+						if (controller.getStudent(ssn) != null) {
+							textArea_Student.setText("Student med detta personnummer exsiterar redan!");
+							textField_ssn.setText("");
+						} else {
+							controller.AddStudent(ssn, name); //address
+							textArea_Student.setText(name + " har lagts till");
+							textField_StudentName.setText("");
+							//textField_StudentAddress.setText("");
+							textField_ssn.setText("");
+						}
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+				
+					}	
+					}}
 		});
 		btnAddStudent.setBounds(257, 76, 113, 23);
 		panel_Student.add(btnAddStudent);
 		
+				
 		JLabel lblStudentAddress = new JLabel("Student address *");
 		lblStudentAddress.setBounds(22, 133, 105, 19);
 		panel_Student.add(lblStudentAddress);
@@ -146,12 +162,16 @@ public class UniversityApplication {
 		panel_Student.add(textField_StudentAddress);
 		
 		
-		//SLUT PÅ FLIK OVERVIEW
+		//SLUT PÅ FLIK STUDENT
 		
-		//ALLT PÅ FLIK ADD
+		//ALLT PÅ FLIK COURSE
 		JPanel panel_Course = new JPanel();
 		tabbedPane.addTab("Course", null, panel_Course, null);
 		panel_Course.setLayout(null);
+		
+		JTextArea textArea_Course = new JTextArea();
+		textArea_Course.setBounds(31, 216, 357, 141);
+		panel_Course.add(textArea_Course);
 		
 		JButton button_AddCourse = new JButton("Add Course");
 		button_AddCourse.addActionListener(new ActionListener() {
@@ -163,25 +183,25 @@ public class UniversityApplication {
 				int credit = Integer.parseInt(creditString);
 				
 				if (textField_courseCode.getText().isEmpty()) {
-					textArea_Add.setText("Fyll i kurskod.");
+					textArea_Course.setText("Fyll i kurskod.");
 				} else {
 					try {
 
 						if (controller.getCourse(courseCode) != null) {
-							textArea_Add.setText("Kursen ﬁnns redan");
+							textArea_Course.setText("Kursen ﬁnns redan");
 						} else {
-							boolean success = controller.addallcourses(courseCode, courseName, credit);
+							boolean success = controller.addCourse(courseCode, courseName, credit);
 							if (success) {
-								textArea_Add.setText(courseCode + " har lagts till.");
+								textArea_Course.setText(courseCode + " har lagts till.");
 								textField_courseName.setText("");
 								textField_courseCode.setText("");
 								textField_courseCredits.setText("");
 							} else {
-								textArea_Add.setText("Kurs med denna kurskod ﬁnns redan");
+								textArea_Course.setText("Kurs med denna kurskod ﬁnns redan");
 							}
 						}
 					} catch (SQLException e1) {
-						textArea_Add.setText("Se till att du satt r‰tt v‰rde pÂ kurspo‰ng");
+						textArea_Course.setText("Se till att du satt r‰tt v‰rde pÂ kurspo‰ng");
 					} catch (Exception e) {
 						textField_courseCredits.setText("MÂste vara en siﬀra!");
 					}
@@ -191,42 +211,7 @@ public class UniversityApplication {
 
 		});
 		button_AddCourse.setBounds(273, 63, 89, 23);	
-		panel_Add.add(button_AddCourse); 
-		
-
-		JButton button_AddStudent = new JButton("Add Student");
-		button_AddStudent.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				String name = textField_StudentName.getText();
-				//String address = regAddressTextField.getText();
-				String ssn = textField_StudentSSN.getText();
-				if (textField_StudentSSN.getText().isEmpty()) {
-					textArea_Add.setText("Fyll i personnummer.");
-				} else {
-					try {
-						if (controller.getStudent(ssn) != null) {
-							textArea_Add.setText("Student med detta personnummer exsiterar redan!");
-							textField_StudentSSN.setText("");
-						} else {
-							controller.AddStudent(ssn, name); //address
-							textArea_Add.setText(name + " har lagts till");
-							textField_StudentName.setText("");
-							//textField_StudentAddress.setText("");
-							textField_StudentSSN.setText("");
-						}
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-				}
-			}
-	
-		});
-		button_AddStudent.setBounds(269, 202, 93, 23);
-		panel_Add.add(button_AddStudent);
-		button_AddCourse.setBounds(268, 35, 113, 23);	
-		panel_Course.add(button_AddCourse);
+		panel_Course.add(button_AddCourse); 
 		
 		textField_courseCredits = new JTextField();
 		textField_courseCredits.setBounds(108, 95, 96, 20);
@@ -263,9 +248,7 @@ public class UniversityApplication {
 		button_findCourse.setBounds(268, 73, 113, 23);
 		panel_Course.add(button_findCourse);
 		
-		JTextArea textArea_Course = new JTextArea();
-		textArea_Course.setBounds(31, 216, 357, 141);
-		panel_Course.add(textArea_Course);
+		
 		
 		
 		
@@ -365,7 +348,7 @@ public class UniversityApplication {
 		btnRegisterResu.setBounds(84, 116, 226, 23);
 		panel_Register.add(btnRegisterResu);
 		
-	
+
 		//SLUT PÅ FLIK REGISTER 
 		
 		//ALLT PÅ FLIK ASSIGNMENT 2
@@ -374,87 +357,5 @@ public class UniversityApplication {
 		
 		//SLUT PÅ FLIK ASSIGNMENT 2
 	}
+}
 	
-	public JFrame getFrame() {
-		return frame;
-	}
-	
-	
-
-	public Controller getController() {
-		return controller;
-	}
-	
-
-	public JTextField getTextField_StudentSSN2() {
-		return textField_StudentSSN2;
-	}
-
-	public JTextField getTextField_courseCode2() {
-		return textField_courseCode2;
-	}
-
-	public JTextField getTextField_StudentSSN3() {
-		return textField_StudentSSN3;
-	}
-
-	public JTextField getTextField_CourseCode3() {
-		return textField_courseCode1;
-	}
-
-	public JTextField getTextField_courseCode() {
-		return textField_courseCode;
-	}
-
-	public JTextField getTextField_courseName() {
-		return textField_courseName;
-	}
-
-	public JTextField getTextField_StudentSSN() {
-		return textField_StudentSSN;
-	}
-
-	public JTextField getTextField_StudentName() {
-		return textField_StudentName;
-	}
-
-	public JTextField getTextField_studentName() {
-		return textField_studentName;
-	}
-
-	public JTextField getTextField_ssn() {
-		return textField_ssn;
-	}
-
-	public JTextField getTextField_courseCodeFind() {
-		return textField_courseCodeFind;
-	}
-
-	public JTextField getTextField_courseCredits() {
-		return textField_courseCredits;
-	}
-
-	public JButton getButton_AddStudent() {
-		return button_AddStudent;
-	}
-
-	public JButton getButton_AddCourse() {
-		return button_AddCourse;
-	}
-
-	public JButton getButton_FindStudent() {
-		return button_FindStudent;
-	}
-
-	public JButton getButton_FindCourse() {
-		return button_FindCourse;
-	}
-
-	public JButton getBtnRegisterStudent() {
-		return btnRegisterStudent;
-	}
-
-	public JButton getBtnRegisterNewStudent() {
-		return BtnRegisterNewStudent;
-	}
-	}	
