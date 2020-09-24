@@ -92,7 +92,7 @@ public class DAL {
 			}
 
 			// get all Students
-			public ArrayList<Student> AllStudents() throws SQLException {
+			public ArrayList<Student> getAllStudents() throws SQLException {
 				PreparedStatement sql = null;
 				Connection conn = null;
 		
@@ -222,7 +222,7 @@ public class DAL {
 			}
 
 			
-			public HasStudied getHs (String ssn, String courseCode) throws SQLException {
+			public HasStudied getHasStudied (String ssn, String courseCode) throws SQLException {
 				Connection conn = null;
 				PreparedStatement sql = null;
 			
@@ -246,8 +246,8 @@ public class DAL {
 			}
 		}
 
-
-		public ArrayList<HasStudied> hs(String courseCode) throws SQLException{
+		//get all that has studied grade
+		public ArrayList<HasStudied> getAllHasStudied(String courseCode) throws SQLException{
 			Connection conn = null;
 			PreparedStatement sql = null;
 			

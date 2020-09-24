@@ -241,7 +241,7 @@ public class UniversityApplication {
 					boolean correct = controller.addCourse(courseName, courseCode, creditsToInt);
 							
 				if (correct){
-					textArea_Course.setText("Course was added");
+					textArea_Course.setText("The course was added.");
 					try {
 						for (Course c : controller.getAllCourses()) {
 							comboBox_1.addItem(course.getCourseCode());
@@ -262,7 +262,7 @@ public class UniversityApplication {
 					textArea_Course.setText("Error.");
 				}
 			} else if (course != null) {
-				textArea_Course.setText("The course already exist.");
+				textArea_Course.setText("The course is already existing.");
 
 			}
 
@@ -355,16 +355,17 @@ public class UniversityApplication {
 		btnRegisterStudent_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				/*String studentSsn = textField_StudentSSN2.getText();
+				String studentSsn = textField_StudentSSN2.getText();
 				String courseCode = textField_courseCode2.getText();
 			    String grade = comboBoxGrade.getSelectedItem().toString();
 			
 			    Student student = controller.getStudent(studentSsn);
 			    Course  course = controller.getCourse(courseCode);
-			    HasStudied hasStudied = controller.getHasStudied(courseCode, studentSsn);		
-			}*/
+			    HasStudied hasStudied = controller.getHasStudied(courseCode, studentSsn);
+			    
+			}
 				
-			}});
+			});
 		btnRegisterStudent_1.setBounds(84, 265, 226, 23);
 		panel_Register.add(btnRegisterStudent_1);
 			
