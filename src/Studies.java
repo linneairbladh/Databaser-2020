@@ -1,10 +1,8 @@
 
 public class Studies {
+	
 	private String studentSsn;
 	private String courseCode; 
-	
-	public Studies() {
-	}
 	
 	public Studies (String studentSsn, String courseCode) {
 		this.studentSsn = studentSsn;
