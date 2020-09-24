@@ -26,27 +26,27 @@ public class Controller {
 		
 	
 	//Lägg till student
-	public boolean addStudent (String studentName, String ssn, String adress) throws SQLException {
+	public boolean AddStudent (String studentName, String ssn, String adress) throws SQLException {
 		Student s1 = new Student (studentName, ssn, adress);
-	 	return this.dataAccessLayer.addStudent(s1);	
+	 	return this.dataAccessLayer.AddStudent(s1);	
 	}
 
 	//Lägg till kurs
-	public boolean addCourse (String courseName, String courseCode,int credit) throws SQLException {
+	public boolean AddCourse (String courseName, String courseCode,int credit) throws SQLException {
 		Course c1 = new Course (courseName, courseCode, credit);
-	 	return this.dataAccessLayer.addCourse(c1);	
+	 	return this.dataAccessLayer.AddStudent(c1);	
 	}
 	
 	//Registrera kurs på student
-	public boolean addStudies (String ssn, String courseCode) throws SQLException {
+	public boolean AddStudies (String ssn, String courseCode) throws SQLExeption {
 		Studies s2 = new Studies (ssn, courseCode);
-	 	return this.dataAccessLayer.addStudies(s2);	
+	 	return this.dataAccessLayer.AddStudies(s2);	
 	}
 
 	//Registrera avklarad kurs på student
-	public boolean addHasStudied (String ssn, String courseCode, String grade) throws SQLException {
+	public boolean AddHasStudied (String ssn, String courseCode, String grade) throws SQLExeption {
 		HasStudied s3 = new HasStudied (ssn, courseCode, grade);
-	 	return this.dataAccessLayer.addHasStudied(s3);	
+	 	return this.dataAccessLayer.AddHasStudied(s3);	
 	}
 	
 	
@@ -75,7 +75,7 @@ public class Controller {
 		return this.dataAccessLayer.getAllStudies();
 	}
 	
-	//Visar alla avslutade kurser och deras resultat
+	//Visar alla avslutade kurser
 	public List <HasStudied> getAllHasStudied(String ssn, String courseCode) throws SQLException {
 		return this.dataAccessLayer.getAllHasStudied();	
 	}
