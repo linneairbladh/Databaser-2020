@@ -14,7 +14,7 @@ public class Student {
 	public String getSsn() {
 		return ssn;
 	}
-	public void setSssn(String ssn) {
+	public void setSsn(String ssn) {
 		this.ssn = ssn;
 	}
 	

@@ -170,7 +170,7 @@ public class UniversityApplication {
 							textArea_Student.setText("Student med detta personnummer exsiterar redan!");
 							textField_ssn.setText("");
 						} else {
-							controller.AddStudent(ssn, name, address); 
+							controller.addStudent(ssn, name, address); 
 							textArea_Student.setText(name + " har lagts till");
 							textField_StudentName.setText("");
 							textField_StudentAddress.setText("");
