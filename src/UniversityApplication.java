@@ -3,6 +3,7 @@ import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import javax.swing.JPanel;
@@ -188,7 +189,7 @@ public class UniversityApplication {
 					try {
 
 						if (controller.getCourse(courseCode) != null) {
-							textArea_Course.setText("Kursen ﬁnns redan");
+							textArea_Course.setText("Kursen finns redan");
 						} else {
 							boolean success = controller.addCourse(courseCode, courseName, credit);
 							if (success) {
@@ -197,12 +198,12 @@ public class UniversityApplication {
 								textField_courseCode.setText("");
 								textField_courseCredits.setText("");
 							} else {
-								textArea_Course.setText("Kurs med denna kurskod ﬁnns redan");
+								textArea_Course.setText("Kurs med denna kurskod finns redan");
 							}
 						}
 					} catch (SQLException e1) {
 						textArea_Course.setText("Se till att du satt r‰tt v‰rde pÂ kurspo‰ng");
-					} catch (Exception e) {
+					} catch (Exception e2) {
 						textField_courseCredits.setText("MÂste vara en siﬀra!");
 					}
 				}
