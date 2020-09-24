@@ -72,12 +72,12 @@ public class Controller {
 	
 	//Visa alla akutella studenter
 	public List <Studies> getAllStudies(String ssn, String courseCode) throws SQLException {
-		return this.dataAccessLayer.getAllStudies();
+		return this.dataAccessLayer.getAllStudies(courseCode);
 	}
 	
 	//Visar alla avslutade kurser
 	public List <HasStudied> getAllHasStudied(String ssn, String courseCode) throws SQLException {
-		return this.dataAccessLayer.getAllHasStudied();	
+		return this.dataAccessLayer.getAllHasStudied(courseCode);
 	}
 	
 	
