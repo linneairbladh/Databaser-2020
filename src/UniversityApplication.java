@@ -111,7 +111,6 @@ public class UniversityApplication {
 		comboBoxGrade.setBounds(261, 232, 49, 22);
 		panel_Register.add(comboBoxGrade);
 				
-		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setBounds(320, 18, 30, 22);
 		panel_Register.add(comboBox);
@@ -209,7 +208,9 @@ public class UniversityApplication {
 		JButton button_AddCourse = new JButton("Add Course");
 		button_AddCourse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
+				
+				//combobox 1 course, combobox student
+				
 				try {
 					
 				String courseName = textField_courseName.getText();
@@ -238,22 +239,45 @@ public class UniversityApplication {
 				else if ( course == null ) {
 					int creditsToInt = Integer.parseInt(credit);
 					boolean correct = controller.addCourse(courseName, courseCode, creditsToInt);
-				
+							
 				if (correct){
 					textArea_Course.setText("Course was added");
+					try {
+						for (Course c : controller.getAllCourses()) {
+							comboBox_1.addItem(course.getCourseCode());
+						}
+					} catch (Exception ex) {
+						ex.printStackTrace();
+					}
+					try {
+						for (Course c1 : controller.getAllCourses()) {
+							comboBox.addItem(course.getCourseCode());
+						}
+					}	
+					catch (Exception ex) {
+						ex.printStackTrace();
+					
 				}
-				
-				else {
+					} else {
 					textArea_Course.setText("Error.");
 				}
-							
-				}
-				}
-				
-				catch (Exception e3) {
-					e3.printStackTrace();
-				}			
-				}
+			} else if (course != null) {
+				textArea_Course.setText("The course already exist.");
+
+			}
+
+		}
+
+		catch (NumberFormatException e1) {
+			textArea_Course.setText("Credits can only be numbers.");
+
+		} catch (Exception e2) {
+			e2.printStackTrace();
+
+		}
+
+	}
+					
 			
 		});
 		button_AddCourse.setBounds(268, 35, 113, 23);	
