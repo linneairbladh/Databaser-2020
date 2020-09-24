@@ -194,6 +194,58 @@ public class DAL {
 					Sqlcon.closeSqlCon(conn, sql);
 				}
 			}
+			
+			
+			public Studies getStudies (String ssn, String courseCode) throws SQLException {
+				Connection conn = null;
+				PreparedStatement sql = null;
+			
+				try {
+					conn = Sqlcon.getConnection();
+					sql = conn.prepareStatement("SELECT * FROM Studies WHERE ssn = ? AND courseCode = ?");
+				
+					sql.setString(1, ssn);
+					sql.setString(2, courseCode);
+				
+					ResultSet rSet = sql.executeQuery();
+				
+					if(rSet.next()) {
+						String grade = rSet.getString("grade");
+					
+						return new Studies(ssn, courseCode);
+					}
+					return null;
+				} finally {
+					Sqlcon.closeSqlCon(conn, sql);
+			}
+		}
+			
+			public ArrayList<Studies> getAllStudies(String courseCode) throws SQLException{
+				Connection conn = null;
+				PreparedStatement sql = null;
+				
+				try {
+					conn = Sqlcon.getConnection();
+					sql = conn.prepareStatement("SELECT * FROM Studies");
+					sql.setString(1, courseCode);
+					
+					ResultSet rSet = sql.executeQuery();
+					ArrayList<Studies> listStudies = new ArrayList<Studies>();
+					while(rSet.next()) {
+						String ssn = rSet.getString(1);
+						String grade = rSet.getString(3);
+						
+						Studies studies = new Studies(ssn, courseCode);
+						listStudies.add(studies);
+					}
+					return listStudies;
+				} finally {
+					Sqlcon.closeSqlCon(conn, sql);
+				}
+				
+			}
+			
+			
 			// add new has studied
 			public boolean addHasStudied(HasStudied hs) throws SQLException{
 				String ssn = hs.getStudentSsn();
@@ -221,6 +273,7 @@ public class DAL {
 				}
 			}
 
+		
 			
 			public HasStudied getHasStudied (String ssn, String courseCode) throws SQLException {
 				Connection conn = null;
@@ -272,14 +325,8 @@ public class DAL {
 			
 		}
 
+		
+
 }
 
 	
-
-	
-
-
-
-
-
-

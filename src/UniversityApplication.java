@@ -363,6 +363,7 @@ public class UniversityApplication {
 			    Course  course = controller.getCourse(courseCode);
 			    HasStudied hasStudied = controller.getHasStudied(courseCode, studentSsn);
 			    
+			    
 			}
 				
 			});
