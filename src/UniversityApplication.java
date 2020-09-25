@@ -3,6 +3,7 @@ import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
@@ -195,7 +196,11 @@ public class UniversityApplication {
 							textField_ssn.setText("");
 						} else {
 							controller.addStudent(ssn, name, address); 
+
 							textArea_Student.setText(name + "was added");
+
+							textArea_Student.setText(name + " har lagts till");
+
 							textField_StudentName.setText("");
 							textField_StudentAddress.setText("");
 							textField_ssn.setText("");
@@ -280,29 +285,31 @@ public class UniversityApplication {
 				String courseName = textField_courseName.getText();
 				String courseCode = textField_courseCode.getText();
 				String credit  = textField_courseCredits.getText();
-		
-				Course course = controller.getCourse(courseCode);
 				
 				if(courseName.isEmpty() || courseCode.isEmpty() || credit.isEmpty()) {
 					textArea_Course.setText("Please fill all fields.");
 
-				}
+				}else {
+					ResultSet rs = controller.findCourse(courseCode);
+					System.out.println(rs.getInt(0));
+					if(rs.next()) {
+						int creditsToInt = Integer.parseInt(credit);
+						boolean correct = controller.addCourse(courseName, courseCode, creditsToInt);
+						if(correct) {
+							textArea_Course.setText("Course was added");
+						}else {
+							textArea_Course.setText("fel");
+						}
+				}else {
+					textArea_Course.setText("fel");
+				}}}
 				
-				else if (courseName.isEmpty()) {
-					 textArea_Course.setText("Please fill in course name.");
-				 }
+					catch (Exception e1) {
+						e1.printStackTrace();
+					}
 				
-				else if (courseCode.isEmpty()) {
-					 textArea_Course.setText("Please fill in code course.");
-				 }
-				
-				else if (credit.isEmpty()) {
-					 textArea_Course.setText("Please fill in course credits.");
-				 }
-				
-				else if ( course == null ) {
-					int creditsToInt = Integer.parseInt(credit);
-					boolean correct = controller.addCourse(courseName, courseCode, creditsToInt);
+				/*
+					
 							
 				if (correct){
 					textArea_Course.setText("The course was added.");
@@ -337,13 +344,15 @@ public class UniversityApplication {
 
 		} catch (Exception e2) {
 			e2.printStackTrace();
-
+*/
 		}
+		
 
-	}
+	
+				
 					
 			
-		});
+			});
 		button_AddCourse.setBounds(268, 35, 113, 23);	
 		panel_Course.add(button_AddCourse); 
 		
