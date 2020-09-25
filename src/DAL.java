@@ -10,8 +10,25 @@ import com.microsoft.sqlserver.jdbc.SQLServerDriver;
 
 public class DAL {
 
-	
+	Connection conn = null;
+    PreparedStatement sql = null;
+    
+    
+    private ResultSet runExecuteQuery(String sqlString) throws SQLException {
+        conn = Sqlcon.getConnection();
+        sql = conn.prepareStatement(sqlString);
+        ResultSet rs = sql.executeQuery();
+        return rs;
+    }
+    
+    //Starta kopplingen och uppdatera
+    private void runExecuteUpdate (String sqlString) throws SQLException {
+        conn = Sqlcon.getConnection();
+        sql = conn.prepareStatement(sqlString);
+        sql.executeUpdate();
+    }
 
+	
 			//Get all courses
 			public ArrayList<Course> getAllCourses() throws SQLException{
 				Connection conn = null;
@@ -39,7 +56,34 @@ public class DAL {
 			}
 			}
 			
-			// add new course
+			//Add Course som funkar 
+			public void addCourse(String courseCode, String courseName, int credits) throws SQLException {
+	            String sqlString = "INSERT INTO Course VALUES ( '" + courseCode + "', '" + courseName + "', " + credits + ");";
+	            runExecuteUpdate(sqlString);
+	            conn.close();
+	                
+	        }
+			
+			//Find a course som funkar
+	        public Course findCourse(String courseCode) throws SQLException {
+	            String sqlString = "SELECT * FROM Course WHERE courseCode = '" + courseCode + "';";
+	            ResultSet rs = runExecuteQuery(sqlString);
+	            if (rs.next()) {
+	                courseCode = rs.getString(1);
+	                String courseName = rs.getString(2);
+	                int credits = rs.getInt(3);
+	                Course c = new Course(courseCode, courseName, credits);
+	                sql.close();
+	                conn.close();      
+	                return c;
+	            
+	            }
+	            return null;
+	        }
+	       
+
+			
+			/*/// add new course
 			public boolean addCourse(Course c) throws SQLException{
 				String courseCode = c.getCourseCode();
 				String courseName = c.getCourseName();
@@ -89,7 +133,7 @@ public class DAL {
 				} finally {
 					Sqlcon.closeSqlCon(conn, sql);
 				}
-			}
+			}*/
 
 			// get all Students
 			public ArrayList<Student> getAllStudents() throws SQLException {
