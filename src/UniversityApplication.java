@@ -179,7 +179,7 @@ public class UniversityApplication {
 		panel_Student.add(btnFindStudent);
 		
 	
-		JButton btnAddStudent = new JButton("Add Student");
+		/*JButton btnAddStudent = new JButton("Add Student");
 		btnAddStudent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -209,7 +209,40 @@ public class UniversityApplication {
 		});
 		btnAddStudent.setBounds(257, 76, 113, 23);
 		panel_Student.add(btnAddStudent);
-			
+		*/
+		
+		JButton btnAddStudent = new JButton("Add Student");
+		btnAddStudent.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				String name = textField_StudentName.getText();
+				String address = textField_StudentAddress.getText();
+				String ssn = textField_ssn.getText();
+				
+				 if(name.isEmpty() || address.isEmpty() || ssn.isEmpty()) {
+					 textArea_Student.setText("Please type in all fields");
+	                }else {
+	                    
+	                    try {
+	                      
+	                            Controller.addStudent(name, address, ssn);
+	                            textArea_Student.setText("Student added");
+	                            
+	                        }catch (SQLException sql){
+	                            textArea_Student.setText("ErrorMessage");
+	                        }    
+	                        
+	                    
+	                }
+				 	textField_StudentName.setText(" ");
+				 	textField_StudentAddress.setText(" ");
+				 	textField_ssn.setText(" ");
+
+	            }
+		});
+		btnAddStudent.setBounds(257, 76, 113, 23);
+		panel_Student.add(btnAddStudent);
+		
 		//SLUT PÅ FLIK STUDENT
 		
 		//ALLT PÅ FLIK COURSE
