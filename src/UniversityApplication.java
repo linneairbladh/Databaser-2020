@@ -176,7 +176,7 @@ public class UniversityApplication {
 						try {
 							
 							
-							Controller.addStudent(ssn, studentName, address);
+							controller.addStudent(ssn, studentName, address);
 							textArea_Student.setText("Course added");
 							
 							
@@ -345,12 +345,11 @@ public class UniversityApplication {
 				String studentSsn = textField_StudentSSN2.getText();
 				String courseCode = textField_courseCode2.getText();
 			    String grade = comboBoxGrade.getSelectedItem().toString();
-			
+			   
 			    Student student = controller.getStudent(studentSsn);
 			    Course  course = controller.getCourse(courseCode);
 			    HasStudied hasStudied = controller.getHasStudied(courseCode, studentSsn);
-			    
-			    
+			   }
 			}
 				
 			});
