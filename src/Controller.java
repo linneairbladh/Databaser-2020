@@ -24,6 +24,7 @@ public class Controller {
 		return this.dataAccessLayer.getAllCourses();	
 	}	
 		
+
 	
 	//Lägg till student
 	public boolean addStudent (String studentName, String ssn, String adress) throws SQLException {
@@ -36,6 +37,9 @@ public class Controller {
 		Course c1 = new Course (courseName, courseCode, credit);
 	 	return this.dataAccessLayer.addCourse(c1);	
 	}
+
+
+
 	
 	//Registrera kurs på student
 	public boolean addStudies (String ssn, String courseCode) throws SQLException {

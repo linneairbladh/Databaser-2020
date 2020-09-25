@@ -67,14 +67,15 @@ public class UniversityApplication {
 	/**
 	 * Create the application.
 	 */
-	public UniversityApplication() {
-		initialize();
-	}
+
 	
 	public UniversityApplication(Controller controller) {
 		this.controller = controller; 
 	}
-
+	public UniversityApplication() {
+		
+		initialize();
+	}
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -83,11 +84,11 @@ public class UniversityApplication {
 		frame.setBounds(100, 100, 450, 460);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
+	
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(0, 0, 434, 421);
 		frame.getContentPane().add(tabbedPane);
-		
+	
 		//fliken student
 		JPanel panel_Student = new JPanel();
 		tabbedPane.addTab("Student", null, panel_Student, null);
@@ -111,9 +112,10 @@ public class UniversityApplication {
 		comboBoxGrade.setBounds(261, 232, 49, 22);
 		panel_Register.add(comboBoxGrade);
 				
-		JComboBox comboBox = new JComboBox();
+		JComboBox<String> comboBox = new JComboBox<String>();
 		comboBox.setBounds(320, 18, 30, 22);
 		panel_Register.add(comboBox);
+		
 		
 		JComboBox comboBox_1 = new JComboBox();
 		comboBox_1.setBounds(320, 53, 30, 22);
@@ -159,30 +161,47 @@ public class UniversityApplication {
 		btnAddStudent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				String name = textField_StudentName.getText();
-				String address = textField_StudentAddress.getText();
-				String ssn = textField_ssn.getText();
-				if (textField_ssn.getText().isEmpty()) {
-					textArea_Student.setText("Fyll i personnummer.");
-				} else {
-					try {
-						if (controller.getStudent(ssn) != null) {
-							textArea_Student.setText("Student med detta personnummer exsiterar redan!");
-							textField_ssn.setText("");
-						} else {
-							controller.AddStudent(ssn, name, address); 
-							textArea_Student.setText(name + " har lagts till");
-							textField_StudentName.setText("");
-							textField_StudentAddress.setText("");
-							textField_ssn.setText("");
-						}
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
 				
-					}	
-					}}
+				
+				
+				String ssn = textField_ssn.getText();
+				String studentName = textField_StudentName.getText();
+				String address  = textField_StudentAddress.getText();
+		
+				if(ssn.isEmpty() || studentName.isEmpty() || address.isEmpty()) {
+					textArea_Student.setText("Please type in all fields");
+				}else {
+					
+					try {
+						try {
+							
+							
+							Controller.addStudent(ssn, studentName, address);
+							textArea_Student.setText("Course added");
+							
+							
+						}catch (SQLException sql){
+							textArea_Student.setText("ErrorMessage");
+						}	
+						
+						
+						
+					}catch (NumberFormatException ne) {
+						textArea_Student.setText("Only numbers is allowed");
+					}
+					
+				}
+				textField_courseName.setText(" ");
+				textField_courseCode.setText(" ");
+				textField_courseCredits.setText(" ");
+
+	}
+					
+			
 		});
+						
+				
+		
 		btnAddStudent.setBounds(257, 76, 113, 23);
 		panel_Student.add(btnAddStudent);
 		
@@ -211,70 +230,38 @@ public class UniversityApplication {
 				
 				//combobox 1 course, combobox student
 				
-				try {
+			
 					
 				String courseName = textField_courseName.getText();
 				String courseCode = textField_courseCode.getText();
-				String credit  = textField_courseCredits.getText();
+				String credits  = textField_courseCredits.getText();
 		
-				Course course = controller.getCourse(courseCode);
-				
-				if(courseName.isEmpty() || courseCode.isEmpty() || credit.isEmpty()) {
-					textArea_Course.setText("Please fill all fields.");
-
-				}
-				
-				else if (courseName.isEmpty()) {
-					 textArea_Course.setText("Please fill in course name.");
-				 }
-				
-				else if (courseCode.isEmpty()) {
-					 textArea_Course.setText("Please fill in code course.");
-				 }
-				
-				else if (credit.isEmpty()) {
-					 textArea_Course.setText("Please fill in course credits.");
-				 }
-				
-				else if ( course == null ) {
-					int creditsToInt = Integer.parseInt(credit);
-					boolean correct = controller.addCourse(courseName, courseCode, creditsToInt);
+				if(courseCode.isEmpty() || courseName.isEmpty() || textField_courseCredits.getText().isEmpty()) {
+					textArea_Course.setText("Please type in all fields");
+				}else {
+					
+					try {
+						try {
 							
-				if (correct){
-					textArea_Course.setText("The course was added.");
-					try {
-						for (Course c : controller.getAllCourses()) {
-							comboBox_1.addItem(course.getCourseCode());
-						}
-					} catch (Exception ex) {
-						ex.printStackTrace();
+							Integer cred = Integer.parseInt(credits);
+							Controller.addCourse(courseCode	, courseName, cred);
+							textArea_Course.setText("Course added");
+							
+							
+						}catch (SQLException sql){
+							textArea_Course.setText("ErrorMessage");
+						}	
+						
+						
+						
+					}catch (NumberFormatException ne) {
+						textArea_Course.setText("Only numbers is allowed");
 					}
-					try {
-						for (Course c1 : controller.getAllCourses()) {
-							comboBox.addItem(course.getCourseCode());
-						}
-					}	
-					catch (Exception ex) {
-						ex.printStackTrace();
 					
 				}
-					} else {
-					textArea_Course.setText("Error.");
-				}
-			} else if (course != null) {
-				textArea_Course.setText("The course is already existing.");
-
-			}
-
-		}
-
-		catch (NumberFormatException e1) {
-			textArea_Course.setText("Credits can only be numbers.");
-
-		} catch (Exception e2) {
-			e2.printStackTrace();
-
-		}
+				textField_courseName.setText(" ");
+				textField_courseCode.setText(" ");
+				textField_courseCredits.setText(" ");
 
 	}
 					
