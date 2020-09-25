@@ -66,7 +66,7 @@ public class Controller {
 	}
 		
 	//Visar en student och dess betyg på avklarad student
-	public HasStudied getHasStudied(String courseCode, String ssn) throws SQLException {
+	public HasStudied getHasStudied(String ssn, String courseCode) throws SQLException {
 			return this.dataAccessLayer.getHasStudied (courseCode, ssn);
 	}
 	
