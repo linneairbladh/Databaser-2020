@@ -10,10 +10,14 @@ import com.microsoft.sqlserver.jdbc.SQLServerDriver;
 
 public class DAL {
 
-	Connection conn = null;
-    PreparedStatement sql = null;
+	private Connection conn = null;
+    private PreparedStatement sql = null;
     
+    public DAL() {     
+    	
+    }
     
+    //Starta kopplingen, kör sql och få restultset
     private ResultSet runExecuteQuery(String sqlString) throws SQLException {
         conn = Sqlcon.getConnection();
         sql = conn.prepareStatement(sqlString);
@@ -21,14 +25,69 @@ public class DAL {
         return rs;
     }
     
-    //Starta kopplingen och uppdatera
+    //Starta kopplingen, kör sql och uppdatera 
     private void runExecuteUpdate (String sqlString) throws SQLException {
         conn = Sqlcon.getConnection();
         sql = conn.prepareStatement(sqlString);
         sql.executeUpdate();
     }
 
+    ///////// Metoder
+    
+  //Lägg till student!
+  	public void addStudent(String ssn, String studentName, String address) throws SQLException {
+  		String sqlString = "INSERT INTO Student VALUES( '" + ssn + "', '" + studentName + "', '" + address + "');";
+  		runExecuteUpdate(sqlString);
+  		conn.close();
+  	}
+  	
+    //Lägg till kurs! 
+	public void addCourse(String courseCode, String courseName, int credits) throws SQLException {
+        String sqlString = "INSERT INTO Course VALUES ( '" + courseCode + "', '" + courseName + "', " + credits + ");";
+        runExecuteUpdate(sqlString);
+        conn.close();
+            
+    }
 	
+	//Hitta student!
+	public Student findStudent(String ssn) throws SQLException {
+		Student student;
+		String sqlString = "SELECT * FROM Student WHERE ssn = '" + ssn + "'";
+		ResultSet resultset = runExecuteQuery(sqlString);
+		if (resultset.next()) {
+			ssn = resultset.getString(1);
+			String name = resultset.getString(2);
+			String email = resultset.getString(3);
+			student = new Student(ssn, name, email);
+			conn.close();
+			return student;
+		}
+		return null;
+		
+		
+	}
+	
+	
+	//Hitta kurs!
+    public Course findCourse(String courseCode) throws SQLException {
+        String sqlString = "SELECT * FROM Course WHERE courseCode = '" + courseCode + "';";
+        ResultSet rs = runExecuteQuery(sqlString);
+        if (rs.next()) {
+            courseCode = rs.getString(1);
+            String courseName = rs.getString(2);
+            int credits = rs.getInt(3);
+            Course c = new Course(courseCode, courseName, credits);
+            sql.close();
+            conn.close();      
+            return c;
+        
+        }
+        return null;
+    }
+   
+    
+    
+    
 			//Get all courses
 			public ArrayList<Course> getAllCourses() throws SQLException{
 				Connection conn = null;
@@ -56,31 +115,7 @@ public class DAL {
 			}
 			}
 			
-			//Add Course som funkar 
-			public void addCourse(String courseCode, String courseName, int credits) throws SQLException {
-	            String sqlString = "INSERT INTO Course VALUES ( '" + courseCode + "', '" + courseName + "', " + credits + ");";
-	            runExecuteUpdate(sqlString);
-	            conn.close();
-	                
-	        }
 			
-			//Find a course som funkar
-	        public Course findCourse(String courseCode) throws SQLException {
-	            String sqlString = "SELECT * FROM Course WHERE courseCode = '" + courseCode + "';";
-	            ResultSet rs = runExecuteQuery(sqlString);
-	            if (rs.next()) {
-	                courseCode = rs.getString(1);
-	                String courseName = rs.getString(2);
-	                int credits = rs.getInt(3);
-	                Course c = new Course(courseCode, courseName, credits);
-	                sql.close();
-	                conn.close();      
-	                return c;
-	            
-	            }
-	            return null;
-	        }
-	       
 
 			
 			/*/// add new course

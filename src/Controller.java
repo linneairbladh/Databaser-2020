@@ -4,9 +4,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+
+
 public class Controller {
 	
-static DAL dataAccessLayer = new DAL();
+	static DAL dataAccessLayer = new DAL();
     
     public Controller() {
     
@@ -29,9 +31,18 @@ static DAL dataAccessLayer = new DAL();
     
     //Hitta kurs!
     public Course findCourse(String courseCode) throws SQLException {
-        return DAL.findCourse(courseCode);
+        return dataAccessLayer.findCourse(courseCode);
     }
 
+    //Lägg till student!
+    public static void addStudent (String ssn, String studentName, String address) throws SQLException {
+    	dataAccessLayer.addStudent(ssn, studentName, address);
+	}
+	
+    //Hitta student!
+	public static Student findStudent(String ssn) throws SQLException {
+		return dataAccessLayer.findStudent(ssn);
+	}
 	
 	//Visar alla studenter genom ArrayList
 	public List <Student> getAllStudents() throws SQLException {
@@ -45,7 +56,7 @@ static DAL dataAccessLayer = new DAL();
 		
 	
 	//Lägg till student
-	public boolean addStudent (String studentName, String ssn, String adress) throws SQLException {
+	/*public boolean addStudent (String studentName, String ssn, String adress) throws SQLException {
 		Student s1 = new Student (studentName, ssn, adress);
 	 	return this.dataAccessLayer.addStudent(s1);	
 	}
@@ -75,10 +86,11 @@ static DAL dataAccessLayer = new DAL();
 		return this.dataAccessLayer.getStudent(ssn);
 	}
 	
+	/*
 	//Hitta en kurs och dess information 
 	public Course getCourse (String courseCode) throws SQLException {
 		return this.dataAccessLayer.getCourse(courseCode);
-	}
+	}*/
 	
 	//Visar en kurs för en studet
 	public Studies getStudies (String courseCode, String ssn) throws SQLException {
