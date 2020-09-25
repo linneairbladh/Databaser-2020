@@ -5,7 +5,14 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class Controller {
-	private DAL dataAccessLayer;
+	
+static DAL dataAccessLayer = new DAL();
+    
+    public Controller() {
+    
+    }
+
+	//private DAL dataAccessLayer;
 	private UniversityApplication universityApplication;
 	
 	
@@ -13,6 +20,18 @@ public class Controller {
 		this.dataAccessLayer = dataAccessLayer;
 		this.universityApplication = universityApplication;
 	}
+	
+	//Lägg till kurs!
+    public static void addCourse (String courseName, String courseCode,int credits) throws SQLException {
+        dataAccessLayer.addCourse(courseCode, courseName, credits);
+             
+    }
+    
+    //Hitta kurs!
+    public Course findCourse(String courseCode) throws SQLException {
+        return DAL.findCourse(courseCode);
+    }
+
 	
 	//Visar alla studenter genom ArrayList
 	public List <Student> getAllStudents() throws SQLException {
@@ -31,11 +50,12 @@ public class Controller {
 	 	return this.dataAccessLayer.addStudent(s1);	
 	}
 
+	/*
 	//Lägg till kurs
 	public boolean addCourse (String courseName, String courseCode,int credit) throws SQLException {
 		Course c1 = new Course (courseName, courseCode, credit);
 	 	return this.dataAccessLayer.addCourse(c1);	
-	}
+	}*/
 	
 	//Registrera kurs på student
 	public boolean addStudies (String ssn, String courseCode) throws SQLException {

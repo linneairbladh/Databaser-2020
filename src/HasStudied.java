@@ -5,13 +5,14 @@ public class HasStudied {
 	private String courseCode; 
 	private String grade;
 	
-
+	//Constructor för HasStudied
 	public HasStudied (String studentSsn, String courseCode, String grade) {
 		this.studentSsn = studentSsn;
 		this.courseCode = courseCode;
 		this.grade = grade;
 	}
 
+	//Set & Get 
 	public String getStudentSsn() {
 		return studentSsn;
 	}
