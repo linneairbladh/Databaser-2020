@@ -10,6 +10,7 @@ import com.microsoft.sqlserver.jdbc.SQLServerDriver;
 
 public class DAL {
 
+
 	private Connection conn = null;
     private PreparedStatement sql = null;
     
@@ -31,6 +32,43 @@ public class DAL {
         sql = conn.prepareStatement(sqlString);
         sql.executeUpdate();
     }
+
+    ///////// Metoder
+    
+  //Lägg till student!
+  	public void addStudent(String ssn, String studentName, String address) throws SQLException {
+  		String sqlString = "INSERT INTO Student VALUES( '" + ssn + "', '" + studentName + "', '" + address + "');";
+  		runExecuteUpdate(sqlString);
+  		conn.close();
+  	}
+  	
+    //Lägg till kurs! 
+	public void addCourse(String courseCode, String courseName, int credits) throws SQLException {
+        String sqlString = "INSERT INTO Course VALUES ( '" + courseCode + "', '" + courseName + "', " + credits + ");";
+        runExecuteUpdate(sqlString);
+        conn.close();
+            
+    }
+	
+	//Hitta student!
+	public Student findStudent(String ssn) throws SQLException {
+		Student s;
+		String sqlString = "SELECT * FROM Student WHERE ssn = '" + ssn + "'";
+		ResultSet resultset = runExecuteQuery(sqlString);
+		if (resultset.next()) {
+			ssn = resultset.getString(1);
+			String name = resultset.getString(2);
+			String email = resultset.getString(3);
+			s = new Student(ssn, name, email);
+			conn.close();
+			return s;
+		}
+		return null;
+		
+		
+	}
+	
+
 
     ///////// Metoder
     
@@ -115,10 +153,13 @@ public class DAL {
 			}
 			}
 			
+
 			
 
 			
-			/*/// add new course
+
+			// add new course
+
 			public boolean addCourse(Course c) throws SQLException{
 				String courseCode = c.getCourseCode();
 				String courseName = c.getCourseName();
@@ -168,7 +209,12 @@ public class DAL {
 				} finally {
 					Sqlcon.closeSqlCon(conn, sql);
 				}
-			}*/
+			}
+
+
+			
+
+		
 
 			// get all Students
 			public ArrayList<Student> getAllStudents() throws SQLException {
@@ -196,83 +242,7 @@ public class DAL {
 				}
 			}
 	
-			// add new student
-			public boolean addStudent(Student s) throws SQLException {
-				String ssn = s.getSsn();
-				String name = s.getStudentName();
-				String address = s.getAddress();
-		
-				Connection conn = null;
-				PreparedStatement sql = null;
-		
-				try {
-					conn = Sqlcon.getConnection();
-					sql = conn.prepareStatement("INSERT INTO Student VALUES (?,?,?)");
 			
-					sql.setString(1, ssn);
-					sql.setString(2, name);
-					sql.setString(3, address);
-			
-					int i = sql.executeUpdate();	
-					if (i == 1) {
-						return true;
-					}
-					return false;
-				}	finally {
-					Sqlcon.closeSqlCon(conn, sql);
-		}
-		
-		
-			}
-			
-			// find student with specific studentSsn
-			public Student getStudent(String ssn) throws SQLException {
-				Connection conn = null;
-				PreparedStatement sql = null;
-		
-				try { 
-					conn = Sqlcon.getConnection();
-					sql = conn.prepareStatement("SELECT * FROM Student WHERE ssn = ?");
-					sql.setString(1, ssn);
-			
-					ResultSet rSet = sql.executeQuery();
-			
-					Student s = null;
-					if (rSet.next()) {
-						String name = rSet.getString("name");
-						String address = rSet.getString("address");
-				
-				
-						s = new Student(ssn, name, address);
-					}
-					return s;
-				} finally { 
-					Sqlcon.closeSqlCon(conn, sql);
-				}
-			}
-			
-			// add new studies 
-			public boolean addStudies(Studies st) throws SQLException {
-				String studentSsn = st.getStudentSsn();
-				String courseCode = st.getCourseCode();
-		
-				Connection conn = null;
-				PreparedStatement sql = null;
-				try {
-					conn = Sqlcon.getConnection();
-					sql = conn.prepareStatement("INSERT INTO Studies VALUES (?,?)");
-					sql.setString(1, studentSsn);
-					sql.setString(2, courseCode);
-						
-					int i = sql.executeUpdate();
-					if (i == 1) {
-						return true;
-					}
-					return false;
-				} finally {
-					Sqlcon.closeSqlCon(conn, sql);
-				}
-			}
 			
 			
 			public Studies getStudies (String ssn, String courseCode) throws SQLException {

@@ -65,14 +65,15 @@ public class UniversityApplication {
 	/**
 	 * Create the application.
 	 */
-	public UniversityApplication() {
-		initialize();
-	}
+
 	
 	public UniversityApplication(Controller controller) {
 		this.controller = controller; 
 	}
-
+	public UniversityApplication() {
+		
+		initialize();
+	}
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -81,11 +82,11 @@ public class UniversityApplication {
 		frame.setBounds(100, 100, 450, 460);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
+	
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(0, 0, 434, 421);
 		frame.getContentPane().add(tabbedPane);
-		
+	
 		//fliken student
 		JPanel panel_Student = new JPanel();
 		tabbedPane.addTab("Student", null, panel_Student, null);
@@ -109,6 +110,7 @@ public class UniversityApplication {
 		comboBoxGrade.setBounds(261, 232, 49, 22);
 		panel_Register.add(comboBoxGrade);
 				
+
 		/*JComboBox comboBoxStudentSSN = new JComboBox();
 		comboBoxStudentSSN.setBounds(186, 18, 124, 22);
 		try {
@@ -121,7 +123,17 @@ public class UniversityApplication {
 		}
 
 		panel_Register.add(comboBoxStudentSSN);
+
+		JComboBox<String> comboBox = new JComboBox<String>();
+		comboBox.setBounds(320, 18, 30, 22);
+		panel_Register.add(comboBox);
 		
+		
+		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setBounds(320, 53, 30, 22);
+		panel_Register.add(comboBox_1);
+		
+
 		JComboBox comboBoxCourseCode = new JComboBox();
 		comboBoxCourseCode.setBounds(261, 51, 49, 22);
 		try {
@@ -183,9 +195,11 @@ public class UniversityApplication {
 		btnAddStudent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				String name = textField_StudentName.getText();
-				String address = textField_StudentAddress.getText();
+				
+				
+				
 				String ssn = textField_ssn.getText();
+
 				if (textField_ssn.getText().isEmpty()) {
 					textArea_Student.setText("Fill in SSN.");
 				} else {
@@ -206,7 +220,45 @@ public class UniversityApplication {
 				
 					}	
 					}}
+
+				String studentName = textField_StudentName.getText();
+				String address  = textField_StudentAddress.getText();
+		
+				if(ssn.isEmpty() || studentName.isEmpty() || address.isEmpty()) {
+					textArea_Student.setText("Please type in all fields");
+				}else {
+					
+					try {
+						try {
+							
+							
+							controller.addStudent(ssn, studentName, address);
+							textArea_Student.setText("Course added");
+							
+							
+						}catch (SQLException sql){
+							textArea_Student.setText("ErrorMessage");
+						}	
+						
+						
+						
+					}catch (NumberFormatException ne) {
+						textArea_Student.setText("Only numbers is allowed");
+					}
+					
+				}
+				textField_courseName.setText(" ");
+				textField_courseCode.setText(" ");
+				textField_courseCredits.setText(" ");
+
+	}
+					
+			
+
 		});
+						
+				
+		
 		btnAddStudent.setBounds(257, 76, 113, 23);
 		panel_Student.add(btnAddStudent);
 		*/
@@ -251,6 +303,7 @@ public class UniversityApplication {
 		textArea_Course.setBounds(31, 256, 357, 101);
 		panel_Course.add(textArea_Course);
 		
+
 		JLabel label = new JLabel("Course code *");
 		label.setBounds(10, 171, 93, 14);
 		panel_Course.add(label);
@@ -269,6 +322,53 @@ public class UniversityApplication {
 		label_1.setBounds(10, 201, 82, 14);
 		panel_Course.add(label_1);
 		
+
+		JButton button_AddCourse = new JButton("Add Course");
+		button_AddCourse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				//combobox 1 course, combobox student
+				
+			
+					
+				String courseName = textField_courseName.getText();
+				String courseCode = textField_courseCode.getText();
+				String credits  = textField_courseCredits.getText();
+		
+				if(courseCode.isEmpty() || courseName.isEmpty() || textField_courseCredits.getText().isEmpty()) {
+					textArea_Course.setText("Please type in all fields");
+				}else {
+					
+					try {
+						try {
+							
+							Integer cred = Integer.parseInt(credits);
+							Controller.addCourse(courseCode	, courseName, cred);
+							textArea_Course.setText("Course added");
+							
+							
+						}catch (SQLException sql){
+							textArea_Course.setText("ErrorMessage");
+						}	
+						
+						
+						
+					}catch (NumberFormatException ne) {
+						textArea_Course.setText("Only numbers is allowed");
+					}
+					
+				}
+				textField_courseName.setText(" ");
+				textField_courseCode.setText(" ");
+				textField_courseCredits.setText(" ");
+
+	}
+					
+			
+		});
+		button_AddCourse.setBounds(268, 35, 113, 23);	
+		panel_Course.add(button_AddCourse); 
+
 		
 		textField_courseCredits = new JTextField();
 		textField_courseCredits.setBounds(108, 95, 96, 20);
@@ -375,11 +475,14 @@ public class UniversityApplication {
 				String studentSsn = textField_StudentSSN2.getText();
 				String courseCode = textField_courseCode2.getText();
 			    String grade = comboBoxGrade.getSelectedItem().toString();
-			
+			   
 			    Student student = controller.getStudent(studentSsn);
 			    Course  course = controller.getCourse(courseCode);
 			    HasStudied hasStudied = controller.getHasStudied(courseCode, studentSsn);
-			  
+
+
+			   }
+
 			}
 				
 			});
