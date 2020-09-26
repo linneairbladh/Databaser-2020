@@ -50,6 +50,20 @@ public class DAL {
             
     }
 	
+	//Registrerar student på kurs!
+		public void addStudentOnCourse (String ssn, String courseCode) throws SQLException {
+	  		String sqlString = "INSERT INTO Studies VALUES( '" + ssn + "', '" + courseCode + "');";
+	  		runExecuteUpdate(sqlString);
+	  		conn.close();
+	  	}
+	  	
+	//Registrerar resultat för en student på en kurs!
+		public void addStudentOnFinishedCourse (String ssn, String courseCode, String grade) throws SQLException {
+	  		String sqlString = "INSERT INTO HasStudied VALUES('" + ssn + "', '" + courseCode + "', '" + grade + "');";
+	  		runExecuteUpdate(sqlString);
+	  		conn.close();
+	  	}
+	
 	//Hitta student!
 	public Student findStudent(String ssn) throws SQLException {
 		Student s;
@@ -62,43 +76,6 @@ public class DAL {
 			s = new Student(ssn, name, email);
 			conn.close();
 			return s;
-		}
-		return null;
-		
-		
-	}
-	
-
-
-    ///////// Metoder
-    
-  //Lägg till student!
-  	public void addStudent(String ssn, String studentName, String address) throws SQLException {
-  		String sqlString = "INSERT INTO Student VALUES( '" + ssn + "', '" + studentName + "', '" + address + "');";
-  		runExecuteUpdate(sqlString);
-  		conn.close();
-  	}
-  	
-    //Lägg till kurs! 
-	public void addCourse(String courseCode, String courseName, int credits) throws SQLException {
-        String sqlString = "INSERT INTO Course VALUES ( '" + courseCode + "', '" + courseName + "', " + credits + ");";
-        runExecuteUpdate(sqlString);
-        conn.close();
-            
-    }
-	
-	//Hitta student!
-	public Student findStudent(String ssn) throws SQLException {
-		Student student;
-		String sqlString = "SELECT * FROM Student WHERE ssn = '" + ssn + "'";
-		ResultSet resultset = runExecuteQuery(sqlString);
-		if (resultset.next()) {
-			ssn = resultset.getString(1);
-			String name = resultset.getString(2);
-			String email = resultset.getString(3);
-			student = new Student(ssn, name, email);
-			conn.close();
-			return student;
 		}
 		return null;
 		
@@ -124,258 +101,117 @@ public class DAL {
     }
    
     
-    
-    
-			//Get all courses
-			public ArrayList<Course> getAllCourses() throws SQLException{
-				Connection conn = null;
-				PreparedStatement sql = null;
-			try {
-				conn = Sqlcon.getConnection();
-				sql = conn.prepareStatement("SELECT * FROM Course");
-				
-				ResultSet rSet = sql.executeQuery();
-			
-				ArrayList<Course> allC = new ArrayList<>();
-				while(rSet.next()) {
-					String courseCode = rSet.getString("courseCode");
-					String courseName = rSet.getString("courseName");
-					int credits = rSet.getInt("credits");
-				
-				Course c = new Course(courseCode, courseName, credits);
-				allC.add(c);
-				
-				}
-				return allC;
-				
-			} finally {
-				Sqlcon.closeSqlCon(conn, sql);
-			}
-			}
-			
-
-			
-
-			
-
-			// add new course
-
-			public boolean addCourse(Course c) throws SQLException{
-				String courseCode = c.getCourseCode();
-				String courseName = c.getCourseName();
-				int credits = c.getCredits();
-				
-				
-				Connection conn = null;
-				PreparedStatement sql = null; 
-			
-			try {
-				conn = Sqlcon.getConnection();
-				sql = conn.prepareStatement("INSERT INTO Course VALUES(?, ?, ?)");
-				sql.setString(1, courseCode);
-				sql.setString(2, courseName);
-				sql.setInt(3, credits);
-				
-				int row = sql.executeUpdate();
-				if (row == 1) {
-					return true;
-				}
-					return false;
-			} finally {
-				Sqlcon.closeSqlCon(conn, sql);
-			}
-
-			}
-			
-			// find course tied to specific courseCode
-			public Course getCourse(String courseCode) throws SQLException{
-				Connection conn = null;
-				PreparedStatement sql = null;
-				
-				try {
-					conn = Sqlcon.getConnection();
-					sql = conn.prepareStatement("SELECT * FROM Course WHERE courseCode = ? ");
-					sql.setString(1, courseCode);
+		//Hittar alla kurser!
+	public ArrayList<Course> getAllCourses() throws SQLException{
+		ArrayList <Course> courseList = new ArrayList <Course>(); 
+		String sqlString = "SELECT * FROM Course";
+		
+		ResultSet rs = runExecuteQuery(sqlString);
+		while (rs.next()) {
+			String courseCode = rs.getString(1);
+			String courseName = rs.getString(2);
+			int credits = rs.getInt(3);
 					
-					ResultSet rSet = sql.executeQuery();
-					if(rSet.next()) {
-						String courseName = rSet.getString("courseName");
-						int credits = rSet.getInt("credits");
-						
-						return new Course(courseCode, courseName, credits);
-						
-					}
-						return null;
-				} finally {
-					Sqlcon.closeSqlCon(conn, sql);
-				}
-			}
-
-
-			
-
-		
-
-			// get all Students
-			public ArrayList<Student> getAllStudents() throws SQLException {
-				PreparedStatement sql = null;
-				Connection conn = null;
-		
-				try {
-					conn = Sqlcon.getConnection();
-					sql = conn.prepareStatement("SELECT * FROM Student");
-			
-					ResultSet rSet = sql.executeQuery();
-			
-					ArrayList<Student> AllS = new ArrayList<>();
-					while(rSet.next()) {
-						String ssn = rSet.getString("ssn");
-						String name = rSet.getString("name");
-						String address = rSet.getString("address");
-				
-						Student s = new Student(ssn, name, address);
-						AllS.add(s);
-					}
-					return AllS;
-				} finally { 
-					Sqlcon.closeSqlCon(conn, sql);
-				}
-			}
+			Course course = new Course(courseCode, courseName, credits);
+			courseList.add(course);
+	}
+	  sql.close();
+      conn.close();      
+      return courseList;
 	
-			
-			
-			
-			public Studies getStudies (String ssn, String courseCode) throws SQLException {
-				Connection conn = null;
-				PreparedStatement sql = null;
-			
-				try {
-					conn = Sqlcon.getConnection();
-					sql = conn.prepareStatement("SELECT * FROM Studies WHERE ssn = ? AND courseCode = ?");
+}
+	
+	//Hittar alla studenter!
+	public ArrayList<Student> getAllStudents() throws SQLException{
+		ArrayList <Student> studentList = new ArrayList <Student>(); 
+		String sqlString = "SELECT * FROM Student";
+	
+	ResultSet rs = runExecuteQuery(sqlString);
+	while (rs.next()) {
+		String ssn = rs.getString(1);
+		String studentName = rs.getString(2);
+		String address = rs.getString(3);
 				
-					sql.setString(1, ssn);
-					sql.setString(2, courseCode);
-				
-					ResultSet rSet = sql.executeQuery();
-				
-					if(rSet.next()) {
-						String grade = rSet.getString("grade");
-					
-						return new Studies(ssn, courseCode);
-					}
-					return null;
-				} finally {
-					Sqlcon.closeSqlCon(conn, sql);
-			}
-		}
-			
-			public ArrayList<Studies> getAllStudies(String courseCode) throws SQLException{
-				Connection conn = null;
-				PreparedStatement sql = null;
-				
-				try {
-					conn = Sqlcon.getConnection();
-					sql = conn.prepareStatement("SELECT * FROM Studies");
-					sql.setString(1, courseCode);
-					
-					ResultSet rSet = sql.executeQuery();
-					ArrayList<Studies> listStudies = new ArrayList<Studies>();
-					while(rSet.next()) {
-						String ssn = rSet.getString(1);
-						String grade = rSet.getString(3);
-						
-						Studies studies = new Studies(ssn, courseCode);
-						listStudies.add(studies);
-					}
-					return listStudies;
-				} finally {
-					Sqlcon.closeSqlCon(conn, sql);
-				}
-				
-			}
-			
-			
-			// add new has studied
-			public boolean addHasStudied(HasStudied hs) throws SQLException{
-				String ssn = hs.getStudentSsn();
-				String courseCode = hs.getCourseCode();
-				String grade = hs.getGrade();
-				
-				Connection conn = null; 
-				PreparedStatement sql = null;
-			
-				try {
-					conn = Sqlcon.getConnection();
-				
-					sql= conn.prepareStatement("INSERT INTO HasStudied VALUES(?, ?, ?)");
-					sql.setString(1, ssn);
-					sql.setString(2, courseCode);
-					sql.setString(3, grade);
-				
-					int rows = sql.executeUpdate();
-					if(rows == 1) {
-						return true;
-					}
-					return false;
-				} finally {
-					Sqlcon.closeSqlCon(conn, sql);
-				}
-			}
-
-		
-			
-			public HasStudied getHasStudied (String ssn, String courseCode) throws SQLException {
-				Connection conn = null;
-				PreparedStatement sql = null;
-			
-				try {
-					conn = Sqlcon.getConnection();
-					sql = conn.prepareStatement("SELECT * FROM HasStudied WHERE ssn = ? AND courseCode = ?");
-				
-					sql.setString(1, ssn);
-					sql.setString(2, courseCode);
-				
-					ResultSet rSet = sql.executeQuery();
-				
-					if(rSet.next()) {
-						String grade = rSet.getString("grade");
-					
-						return new HasStudied(ssn, courseCode, grade);
-					}
-					return null;
-				} finally {
-					Sqlcon.closeSqlCon(conn, sql);
-			}
-		}
-
-		//get all that has studied grade
-		public ArrayList<HasStudied> getAllHasStudied(String courseCode) throws SQLException{
-			Connection conn = null;
-			PreparedStatement sql = null;
-			
-			try {
-				conn = Sqlcon.getConnection();
-				sql = conn.prepareStatement("SELECT * FROM HasStudied WHERE courseCode = ?");
-				sql.setString(1, courseCode);
-				
-				ResultSet rSet = sql.executeQuery();
-				ArrayList<HasStudied> hs = new ArrayList<HasStudied>();
-				while(rSet.next()) {
-					String ssn = rSet.getString(1);
-					String grade = rSet.getString(3);
-					
-					HasStudied studied = new HasStudied(ssn,courseCode, grade);
-					hs.add(studied);
-				}
-				return hs;
-			} finally {
-				Sqlcon.closeSqlCon(conn, sql);
-			}
-			
-		}
-
-		
+		Student student = new Student(ssn, studentName, address);
+		studentList.add(student);
+	}
+		sql.close();
+		conn.close();      
+		return studentList;
 
 }
+
+		//Hittar en students betyg för en kurs!
+	public HasStudied ShowStudentResult (String ssn, String courseCode, String grade) throws SQLException{
+		
+		HasStudied hs = null;
+		String sqlString = "SELECT * FROM HasStudied WHERE coursCode = ' " + courseCode + "' AND ssn = '" + ssn + "';";
+		ResultSet rs = runExecuteQuery(sqlString);
+		
+		if (rs.next()) {
+			
+			 courseCode = rs.getString(1);
+			 ssn = rs.getString(2);
+			 grade = rs.getString(3);
+			 hs = new HasStudied(ssn, courseCode, grade);	
+		}
+		
+		  conn.close();      
+	      return hs;
+				
+	}
+	
+	//Lista på alla kursers resultat!
+	public ArrayList <HasStudied> ShowAllCourseResult (String ssn, String courseCode) throws SQLException {
+		ArrayList <HasStudied> courseResultList = new ArrayList <HasStudied>();
+		String sqlString = "SELECT * FROM HasStudied WHERE ssn = '" + ssn + "' AND courseID = '" + courseCode + "';";
+		
+		ResultSet rs = runExecuteQuery(sqlString);
+		
+		while (rs.next()) {
+			String ssn1 = rs.getString(1);
+			String courseCode1 = rs.getString(2);
+			String grade = rs.getString(3);
+					
+			HasStudied hs = new HasStudied(ssn1, courseCode1, grade);
+			courseResultList.add(hs);
+	}
+	  sql.close();
+      conn.close();      
+      return courseResultList;
+		}
+	
+	// Lista på alla studenters resultat!
+	public ArrayList <HasStudied> ShowAllStudentResult (String courseCode) throws SQLException {
+		ArrayList <HasStudied> studentResultList = new ArrayList <HasStudied>();
+		String sqlString = "SELECT * FROM HasStudied WHERE  courseID = '" + courseCode + "';";
+		
+		ResultSet rs = runExecuteQuery(sqlString);
+		
+		while (rs.next()) {
+			String ssn1 = rs.getString(1);
+			String courseCode1 = rs.getString(2);
+			String grade = rs.getString(3);
+					
+			HasStudied hs = new HasStudied(ssn1, courseCode1, grade);
+			studentResultList.add(hs);
+		}
+      conn.close();      
+      return studentResultList;
+		}
+		
+	
+	
+	//Om en student inte finns!
+	public String studentNotFound(String str) {
+		String sNotExistMessage = "The student was not founf";
+		return sNotExistMessage;
+	}
+	
+	
+			
+
+			
+}		
 
 	
