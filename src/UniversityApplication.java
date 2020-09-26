@@ -44,6 +44,8 @@ public class UniversityApplication {
 	private JTextField textField_StudentAddress;
 	private JTextField textField_courseCodeRegister;
 	private JTextField textField_studentSSN2;
+	private JTextField textField;
+	private JTextField textField_1;
 
 
 	/**
@@ -184,7 +186,24 @@ public class UniversityApplication {
 		JButton btnFindStudent = new JButton("Find Student");
 		btnFindStudent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+			String ssn = textField_ssn.getText();
+			if(!ssn.isEmpty()) {
+				try {
+					Student s = Controller.findStudent(ssn);
+						
+					if(s == null) {
+						textArea_Student.setText("Unable to find a student with the given SSN, check spelling ETC");
+					} else {
+						textArea_Student.setText(s.getSsn() + " " + "Was found");
+					}
+				} catch (SQLException e1) {
+					textArea_Student.setText("An error occured please try again");
+				}
 			}
+			
+			
+			
+			}	
 		});
 		btnFindStudent.setBounds(257, 119, 113, 23);
 		panel_Student.setLayout(null);
@@ -402,6 +421,8 @@ public class UniversityApplication {
 		panel_Course.add(separator);
 		
 		
+        button_AddCourse.setBounds(268, 35, 113, 23);	
+        panel_Course.add(button_AddCourse); 
 
 
 		
@@ -480,6 +501,20 @@ public class UniversityApplication {
 		JLabel label_CourseCode2 = new JLabel("Course code");
 		label_CourseCode2.setBounds(84, 57, 85, 14);
 		panel_Register.add(label_CourseCode2);
+		
+		JButton btnShowStudentResult = new JButton("Show student result");
+		btnShowStudentResult.setBounds(165, 98, 89, 23);
+		panel_Register.add(btnShowStudentResult);
+		
+		textField = new JTextField();
+		textField.setBounds(186, 19, 96, 20);
+		panel_Register.add(textField);
+		textField.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(186, 54, 96, 20);
+		panel_Register.add(textField_1);
+		textField_1.setColumns(10);
 		
 		/*JButton btnRegisterResu = new JButton("Show  student result");
 		btnRegisterResu.addActionListener(new ActionListener() {

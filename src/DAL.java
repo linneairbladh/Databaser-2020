@@ -58,8 +58,8 @@ public class DAL {
 		if (resultset.next()) {
 			ssn = resultset.getString(1);
 			String name = resultset.getString(2);
-			String email = resultset.getString(3);
-			s = new Student(ssn, name, email);
+			String address = resultset.getString(3);
+			s = new Student(ssn, name, address);
 			conn.close();
 			return s;
 		}
@@ -71,39 +71,7 @@ public class DAL {
 
 
     ///////// Metoder
-    
-  //Lägg till student!
-  	public void addStudent(String ssn, String studentName, String address) throws SQLException {
-  		String sqlString = "INSERT INTO Student VALUES( '" + ssn + "', '" + studentName + "', '" + address + "');";
-  		runExecuteUpdate(sqlString);
-  		conn.close();
-  	}
-  	
-    //Lägg till kurs! 
-	public void addCourse(String courseCode, String courseName, int credits) throws SQLException {
-        String sqlString = "INSERT INTO Course VALUES ( '" + courseCode + "', '" + courseName + "', " + credits + ");";
-        runExecuteUpdate(sqlString);
-        conn.close();
-            
-    }
-	
-	//Hitta student!
-	public Student findStudent(String ssn) throws SQLException {
-		Student student;
-		String sqlString = "SELECT * FROM Student WHERE ssn = '" + ssn + "'";
-		ResultSet resultset = runExecuteQuery(sqlString);
-		if (resultset.next()) {
-			ssn = resultset.getString(1);
-			String name = resultset.getString(2);
-			String email = resultset.getString(3);
-			student = new Student(ssn, name, email);
-			conn.close();
-			return student;
-		}
-		return null;
-		
-		
-	}
+ 
 	
 	
 	//Hitta kurs!

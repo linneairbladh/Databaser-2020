@@ -88,11 +88,7 @@ public class Controller {
 	 	return this.dataAccessLayer.addHasStudied(s3);	
 	}
 	
-	
-	//Hitta en student och dess information
-	public Student getStudent (String ssn) throws SQLException {
-		return this.dataAccessLayer.getStudent(ssn);
-	}
+
 	
 	/*
 	//Hitta en kurs och dess information 
