@@ -194,7 +194,7 @@ public class UniversityApplication {
 					if(s == null) {
 						textArea_Student.setText("Unable to find a student with the given SSN, check spelling ETC");
 					} else {
-						textArea_Student.setText(s.getSsn() + " " + "Was found");
+						textArea_Student.setText(s.getStudentName() + " " + "Was found");
 					}
 				} catch (SQLException e1) {
 					textArea_Student.setText("An error occured please try again");
@@ -435,8 +435,11 @@ public class UniversityApplication {
 		panel_Course.add(button_ShowAllResults);
 		
 		JButton button_findCourse = new JButton("Find Course");
+		
 		button_findCourse.setBounds(268, 74, 113, 23);
 		panel_Course.add(button_findCourse);
+		
+		
 		
 		JButton button_RegStudent = new JButton("Register student on course");
 		button_RegStudent.setBounds(231, 180, 188, 23);
