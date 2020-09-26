@@ -515,9 +515,9 @@ public class UniversityApplication {
 			    String grade = comboBoxGrade.getSelectedItem().toString();
 			   
 			    try {
-					Student student = controller.findStudent(studentSsn);
+					Student student = Controller.findStudent(studentSsn);
 				
-			    Student student1 = controller.findCurrentlyStudyingStudent(studentSsn);
+			    Student student1 = Controller.findCurrentlyStudyingStudent(studentSsn);
 			    Course  course = controller.findCourse(courseCode);
 			    
 			    
