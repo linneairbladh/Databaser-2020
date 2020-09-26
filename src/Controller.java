@@ -40,11 +40,14 @@ public class Controller {
 	    public Course findCourse(String courseCode) throws SQLException {
 	    	return dataAccessLayer.findCourse(courseCode);
 	    }
-
 	
     //Hitta student!
 	    public static Student findStudent(String ssn) throws SQLException {
 	    	return dataAccessLayer.findStudent(ssn);
+	    }
+	    
+	    public static Student findCurrentlyStudyingStudent(String ssn) throws SQLException {
+	    	return dataAccessLayer.findCurrentlyStudyingStudent(ssn);
 	    }
 	
 	//Visar alla studenter genom ArrayList
@@ -57,14 +60,23 @@ public class Controller {
 	    	return this.dataAccessLayer.getAllCourses();	
 	    }	
 		
-	 //Visar alla resultat på en kurs
+	 //Visar alla resultat på en studen
 	   public static ArrayList<HasStudied> showResult(String ssn, String courseCode) throws SQLException {
 			return  dataAccessLayer.ShowAllCourseResult(ssn, courseCode);
 		}
 		
-	  //Visar alla resultat för en student. 
+	  //Visar alla resultat för en kurs. 
 		public static ArrayList<HasStudied> showAllStudentResult (String courseCode) throws SQLException {
 			return  dataAccessLayer.ShowAllStudentResult(courseCode);
+		}
+
+		
+		public static String courseNotFound(String string) {
+			return dataAccessLayer.courseNotFound(string);
+		}
+
+		public String studentNotFound(String string) {
+			return dataAccessLayer.studentNotFound(string);
 		}
 	
 	

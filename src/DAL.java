@@ -68,11 +68,11 @@ public class DAL {
 	public Student findStudent(String ssn) throws SQLException {
 		Student s;
 		String sqlString = "SELECT * FROM Student WHERE ssn = '" + ssn + "'";
-		ResultSet resultset = runExecuteQuery(sqlString);
-		if (resultset.next()) {
-			ssn = resultset.getString(1);
-			String name = resultset.getString(2);
-			String email = resultset.getString(3);
+		ResultSet resultSet = runExecuteQuery(sqlString);
+		if (resultSet.next()) {
+			ssn = resultSet.getString(1);
+			String name = resultSet.getString(2);
+			String email = resultSet.getString(3);
 			s = new Student(ssn, name, email);
 			conn.close();
 			return s;
@@ -81,6 +81,25 @@ public class DAL {
 		
 		
 	}
+	
+	public Student findCurrentlyStudyingStudent(String ssn) throws SQLException {
+		Student stud;
+		   String sqlString = "SELECT * FROM Studies WHERE ssn = '" + ssn + "';";
+				   ResultSet resultSet = runExecuteQuery(sqlString);
+		   if (resultSet.next()) {
+			   ssn = resultSet.getString(1);
+			   String name = resultSet.getString(2);
+			   String address = resultSet.getString(3);
+			   
+			    stud = new Student (ssn, name, address);
+					  
+					   conn.close();
+					   return stud;
+		   }
+		   return null;
+		
+	}
+	
 	
 	
 	//Hitta kurs!
@@ -204,9 +223,16 @@ public class DAL {
 	
 	//Om en student inte finns!
 	public String studentNotFound(String str) {
-		String sNotExistMessage = "The student was not founf";
-		return sNotExistMessage;
+		String studentNotExistMessage = "The student was not found";
+		return studentNotExistMessage;
 	}
+	
+	//Om en kurs inte finns!
+	public String courseNotFound(String str) {
+		String courseNotExistMessage = "The course was not found";
+		return courseNotExistMessage;
+	}
+
 	
 	
 			
