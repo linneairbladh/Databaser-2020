@@ -65,21 +65,9 @@ public class Controller {
 
 
 	
-	//Lägg till student
-	/*public boolean addStudent (String studentName, String ssn, String adress) throws SQLException {
-		Student s1 = new Student (studentName, ssn, adress);
-	 	return this.dataAccessLayer.addStudent(s1);	
-	}
 
-	/*
-	//Lägg till kurs
-	public boolean addCourse (String courseName, String courseCode,int credit) throws SQLException {
-		Course c1 = new Course (courseName, courseCode, credit);
-	 	return this.dataAccessLayer.addCourse(c1);	
 
-	}*/
-
-	}
+	
 
 
 
@@ -176,5 +164,10 @@ public class Controller {
 	
 */
 	}
+
+	
+
+
+
 
 
