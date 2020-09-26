@@ -186,7 +186,24 @@ public class UniversityApplication {
 		JButton btnFindStudent = new JButton("Find Student");
 		btnFindStudent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+			String ssn = textField_ssn.getText();
+			if(!ssn.isEmpty()) {
+				try {
+					Student s = Controller.findStudent(ssn);
+						
+					if(s == null) {
+						textArea_Student.setText("Unable to find a student with the given SSN, check spelling ETC");
+					} else {
+						textArea_Student.setText(s.getSsn() + " " + "Was found");
+					}
+				} catch (SQLException e1) {
+					textArea_Student.setText("An error occured please try again");
+				}
 			}
+			
+			
+			
+			}	
 		});
 		btnFindStudent.setBounds(257, 119, 113, 23);
 		panel_Student.setLayout(null);
@@ -403,44 +420,7 @@ public class UniversityApplication {
 		separator.setBounds(59, 142, 329, 7);
 		panel_Course.add(separator);
 		
-		JButton button_AddCourse = new JButton("Add Course");
-        button_AddCourse.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            
-                String courseName = textField_courseName.getText();
-                String courseCode = textField_courseCode.getText();
-                //String credits  = textField_courseCredits.getText();
-        
-                if(courseCode.isEmpty() || courseName.isEmpty() || textField_courseCredits.getText().isEmpty()) {
-                    textArea_Course.setText("Please type in all fields");
-                }else {
-                    
-                    try {
-                        try {
-                            
-                            Integer credits = Integer.parseInt(textField_courseCredits.getText());
-                            Controller.addCourse(courseCode, courseName, credits);
-                            textArea_Course.setText("Course added");
-                            
-                            
-                        }catch (SQLException sql){
-                            textArea_Course.setText("ErrorMessage");
-                        }    
-                        
-                        
-                        
-                    }catch (NumberFormatException ne) {
-                        textArea_Course.setText("Only numbers is allowed");
-                    }
-                    
-                }
-                textField_courseName.setText(" ");
-                textField_courseCode.setText(" ");
-                textField_courseCredits.setText(" ");
-
-            }
-                    
-        });
+		
         button_AddCourse.setBounds(268, 35, 113, 23);	
         panel_Course.add(button_AddCourse); 
 

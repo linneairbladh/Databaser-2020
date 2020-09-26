@@ -72,8 +72,8 @@ public class DAL {
 		if (resultset.next()) {
 			ssn = resultset.getString(1);
 			String name = resultset.getString(2);
-			String email = resultset.getString(3);
-			s = new Student(ssn, name, email);
+			String address = resultset.getString(3);
+			s = new Student(ssn, name, address);
 			conn.close();
 			return s;
 		}
@@ -82,6 +82,12 @@ public class DAL {
 		
 	}
 	
+
+
+    ///////// Metoder
+ 
+	
+
 	
 	//Hitta kurs!
     public Course findCourse(String courseCode) throws SQLException {
