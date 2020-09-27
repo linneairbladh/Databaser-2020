@@ -10,6 +10,7 @@ import java.util.List;
 public class Controller {
 	
 	static DAL dataAccessLayer = new DAL();
+	static ErrorHandlingSQL error = new ErrorHandlingSQL();
     
     public Controller() {
     
@@ -37,7 +38,7 @@ public class Controller {
 	    }
     
     //Hitta kurs!
-	    public Course findCourse(String courseCode) throws SQLException {
+	    public static Course findCourse(String courseCode) throws SQLException {
 	    	return dataAccessLayer.findCourse(courseCode);
 	    }
 	
@@ -59,65 +60,30 @@ public class Controller {
 	    public List <Course> getAllCourses () throws SQLException {
 	    	return this.dataAccessLayer.getAllCourses();	
 	    }	
-		
-
-
-	 //Visar alla resultat på en kurs
-
-	 //Visar alla resultat på en studen
+				
+		  //Visar alla resultat för en kurs. 
+			public static ArrayList<HasStudied> showAllStudentResult (String courseCode) throws SQLException {
+				return  dataAccessLayer.ShowAllStudentResult(courseCode);
+			}
+ 	
+	 //Visar alla resultat på en student
 
 	   public static ArrayList<HasStudied> showResult(String ssn, String courseCode) throws SQLException {
 			return  dataAccessLayer.ShowAllCourseResult(ssn, courseCode);
 		}
-
-
 	
-
-
 	
-
-
-
-
 	
-	//Registrera kurs på student
-	public boolean addStudies (String ssn, String courseCode) throws SQLException {
-		Studies s2 = new Studies (ssn, courseCode);
-	 	return this.dataAccessLayer.addStudies(s2);	
-	}
-
-	//Registrera avklarad kurs på student
-	public boolean addHasStudied (String ssn, String courseCode, String grade) throws SQLException {
-		HasStudied s3 = new HasStudied (ssn, courseCode, grade);
-	 	return this.dataAccessLayer.addHasStudied(s3);	
-	}
-	
-
-	
-	/*
-	//Hitta en kurs och dess information 
-	public Course getCourse (String courseCode) throws SQLException {
-		return this.dataAccessLayer.getCourse(courseCode);
-	}*/
-	
-	//Visar en kurs för en studet
-	public Studies getStudies (String courseCode, String ssn) throws SQLException {
-			return this.dataAccessLayer.getStudies(courseCode, ssn);
-	}
-
-		
-	  //Visar alla resultat för en kurs. 
-		public static ArrayList<HasStudied> showAllStudentResult (String courseCode) throws SQLException {
-			return  dataAccessLayer.ShowAllStudentResult(courseCode);
-		}
-
-		
 		public static String courseNotFound(String string) {
 			return dataAccessLayer.courseNotFound(string);
 		}
 
-		public String studentNotFound(String string) {
+		public static String studentNotFound(String string) {
 			return dataAccessLayer.studentNotFound(string);
+		}
+		
+		public static String ErrorHandling (int failureCode, String prefix) {
+			return  error.MessageFailureCode(failureCode, prefix);
 		}
 	
 	

@@ -76,29 +76,14 @@ public class DAL {
 			String address = resultset.getString(3);
 			s = new Student(ssn, name, address);
 
-		ResultSet resultSet = runExecuteQuery(sqlString);
-		if (resultSet.next()) {
-			ssn = resultSet.getString(1);
-			String name = resultSet.getString(2);
-			String email = resultSet.getString(3);
-			s = new Student(ssn, name, email);
-
 			conn.close();
 			return s;
 		}
 		return null;
 		
-		
-	}
+		}
+
 	
-
-
-
-    ///////// Metoder
- 
-	
-
-
 	public Student findCurrentlyStudyingStudent(String ssn) throws SQLException {
 		Student stud;
 		   String sqlString = "SELECT * FROM Studies WHERE ssn = '" + ssn + "';";
@@ -117,8 +102,6 @@ public class DAL {
 		
 	}
 	
-	
-
 	
 	//Hitta kurs!
     public Course findCourse(String courseCode) throws SQLException {
