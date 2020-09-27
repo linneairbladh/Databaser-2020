@@ -30,7 +30,7 @@ public class Controller {
     }
     
     //Hitta kurs!
-    public Course findCourse(String courseCode) throws SQLException {
+    public static Course findCourse(String courseCode) throws SQLException {
         return dataAccessLayer.findCourse(courseCode);
     }
 

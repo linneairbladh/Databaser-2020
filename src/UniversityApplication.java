@@ -195,7 +195,7 @@ public class UniversityApplication {
 					if(s == null) {
 						textArea_Student.setText("Unable to find a student with the given SSN, check spelling ETC");
 					} else {
-						textArea_Student.setText(s.getStudentName() + " " + "Was found");
+						textArea_Student.setText("Result of input : "+"" + "\nSSN: " + s.getAddress()+ "\nStudentAdress: " + s.getSsn() + "\nStudentName: " + s.getStudentName());
 					}
 				} catch (SQLException e1) {
 					textArea_Student.setText("An error occured please try again");
@@ -405,11 +405,11 @@ public class UniversityApplication {
 		textField_courseCredits.setColumns(10);
 		
 		JLabel lblNewLabel_CourseCode = new JLabel("Course code *");
-		lblNewLabel_CourseCode.setBounds(10, 39, 93, 14);
+		lblNewLabel_CourseCode.setBounds(10, 67, 93, 14);
 		panel_Course.add(lblNewLabel_CourseCode);
 		
 		JLabel lblNewLabel_CourseName = new JLabel("Course name *");
-		lblNewLabel_CourseName.setBounds(10, 67, 93, 14);
+		lblNewLabel_CourseName.setBounds(10, 39, 93, 14);
 		panel_Course.add(lblNewLabel_CourseName);
 		
 		textField_courseCode = new JTextField();
@@ -445,6 +445,19 @@ public class UniversityApplication {
 		panel_Course.add(button_ShowAllResults);
 		
 		JButton button_findCourse = new JButton("Find Course");
+		button_findCourse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			String courseCode = textField_courseName.getText();
+			try {
+				Course c = Controller.findCourse(courseCode);
+				if(c !=null) {
+					textArea_Course.setText("Result of input : "+"" + "\nCourseCode : " + c.getCourseCode() + ", \nCourseName : " + c.getCourseName()+ "\nCredits : " + c.getCredits());
+				}
+			} catch (SQLException sql) {
+				textArea_Course.setText("An error has occured");
+			}
+			}	
+			});
 		
 		button_findCourse.setBounds(268, 74, 113, 23);
 		panel_Course.add(button_findCourse);

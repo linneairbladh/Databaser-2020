@@ -76,15 +76,14 @@ public class DAL {
 	
 	//Hitta kurs!
     public Course findCourse(String courseCode) throws SQLException {
-        Course c;
     	String sqlString = "SELECT * FROM Course WHERE courseCode = '" + courseCode + "';";
         ResultSet rs = runExecuteQuery(sqlString);
         if (rs.next()) {
             courseCode = rs.getString(1);
             String courseName = rs.getString(2);
             int credits = rs.getInt(3);
-            c = new Course(courseCode, courseName, credits);
-   
+            Course c = new Course(courseCode, courseName, credits);            
+            sql.close();
             conn.close();      
             return c;
         
@@ -123,38 +122,7 @@ public class DAL {
 			}
 			
 
-			
-
-			
-
-			// add new course
-
-			public boolean addCourse(Course c) throws SQLException{
-				String courseCode = c.getCourseCode();
-				String courseName = c.getCourseName();
-				int credits = c.getCredits();
-				
-				
-				Connection conn = null;
-				PreparedStatement sql = null; 
-			
-			try {
-				conn = Sqlcon.getConnection();
-				sql = conn.prepareStatement("INSERT INTO Course VALUES(?, ?, ?)");
-				sql.setString(1, courseCode);
-				sql.setString(2, courseName);
-				sql.setInt(3, credits);
-				
-				int row = sql.executeUpdate();
-				if (row == 1) {
-					return true;
-				}
-					return false;
-			} finally {
-				Sqlcon.closeSqlCon(conn, sql);
-			}
-
-			}
+		
 			
 			// find course tied to specific courseCode
 			public Course getCourse(String courseCode) throws SQLException{
