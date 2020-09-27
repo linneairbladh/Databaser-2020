@@ -677,34 +677,6 @@ public class UniversityApplication {
 		label_3.setBounds(50, 281, 322, 14);
 		panel_Register.add(label_3);
 		
-		/*JButton btnRegisterResu = new JButton("Show  student result");
-		btnRegisterResu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			
-				String ssn = comboBoxStudentSSN.getSelectedItem().toString();
-				String ccode = comboBoxCourseCode.getSelectedItem().toString();
-				
-				HasStudied hs = controller.getHasStudied(ssn, ccode);
-				
-				if(hs==null) {
-					 textArea_Register.setText("The student has not studied this course.");					 
-				}
-				for (HasStudied hasStudied : controller.getHasStudied(ssn, ccode)) {
-					textArea_Register.setText("Hello");
-				}
-			
-			}
-		});
-		btnRegisterResu.setBounds(84, 96, 226, 23);
-		panel_Register.add(btnRegisterResu);
-		
-		*/
-		//SLUT PÅ FLIK REGISTER 
-		
-		//ALLT PÅ FLIK ASSIGNMENT 2
-		JPanel panel_Assignment2 = new JPanel();
-		tabbedPane.addTab("Assignment 2", null, panel_Assignment2, null);
-		
 		//SLUT PÅ FLIK ASSIGNMENT 2
 	}
 }
