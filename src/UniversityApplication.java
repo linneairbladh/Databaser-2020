@@ -46,6 +46,7 @@ public class UniversityApplication {
 	private JTextField textField_studentSSN2;
 	private JTextField textField;
 	private JTextField textField_1;
+	private JTextField textField_studentFind;
 
 
 	/**
@@ -158,35 +159,35 @@ public class UniversityApplication {
 		
 		textField_ssn = new JTextField();
 		textField_ssn.setColumns(10);
-		textField_ssn.setBounds(124, 63, 96, 20);
+		textField_ssn.setBounds(124, 10, 96, 20);
 		panel_Student.add(textField_ssn);
 		
 		JLabel labelStudentSSN = new JLabel("Student SSN *");
-		labelStudentSSN.setBounds(22, 66, 82, 14);
+		labelStudentSSN.setBounds(25, 44, 82, 14);
 		panel_Student.add(labelStudentSSN);
 		
 		textField_StudentName = new JTextField();
 		textField_StudentName.setColumns(10);
-		textField_StudentName.setBounds(124, 94, 96, 20);
+		textField_StudentName.setBounds(124, 41, 96, 20);
 		panel_Student.add(textField_StudentName);
 		
 		JLabel labelStudentName = new JLabel("Student name *");
-		labelStudentName.setBounds(22, 97, 89, 14);
+		labelStudentName.setBounds(18, 83, 89, 14);
 		panel_Student.add(labelStudentName);
 		
 		JLabel lblStudentAddress = new JLabel("Student address *");
-		lblStudentAddress.setBounds(22, 133, 105, 19);
+		lblStudentAddress.setBounds(9, 11, 105, 19);
 		panel_Student.add(lblStudentAddress);
 		
 		textField_StudentAddress = new JTextField();
 		textField_StudentAddress.setColumns(10);
-		textField_StudentAddress.setBounds(124, 132, 96, 20);
+		textField_StudentAddress.setBounds(124, 80, 96, 20);
 		panel_Student.add(textField_StudentAddress);
 		
 		JButton btnFindStudent = new JButton("Find Student");
 		btnFindStudent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			String ssn = textField_ssn.getText();
+			String ssn = textField_studentFind.getText();
 			if(!ssn.isEmpty()) {
 				try {
 					Student s = Controller.findStudent(ssn);
@@ -205,7 +206,7 @@ public class UniversityApplication {
 			
 			}	
 		});
-		btnFindStudent.setBounds(257, 119, 113, 23);
+		btnFindStudent.setBounds(257, 144, 113, 23);
 		panel_Student.setLayout(null);
 		panel_Student.add(btnFindStudent);
 		
@@ -311,8 +312,17 @@ public class UniversityApplication {
 
 	            }
 		});
-		btnAddStudent.setBounds(257, 76, 113, 23);
+		btnAddStudent.setBounds(257, 40, 113, 23);
 		panel_Student.add(btnAddStudent);
+		
+		textField_studentFind = new JTextField();
+		textField_studentFind.setBounds(124, 145, 96, 20);
+		panel_Student.add(textField_studentFind);
+		textField_studentFind.setColumns(10);
+		
+		JLabel lblNewLabel = new JLabel("Insert SSN in the box below to find Student");
+		lblNewLabel.setBounds(25, 125, 255, 14);
+		panel_Student.add(lblNewLabel);
 		
 		//SLUT PÅ FLIK STUDENT
 		
