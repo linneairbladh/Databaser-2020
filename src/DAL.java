@@ -71,9 +71,9 @@ public class DAL {
 
 		ResultSet resultset = runExecuteQuery(sqlString);
 		if (resultset.next()) {
-			ssn = resultset.getString(1);
-			String name = resultset.getString(2);
-			String address = resultset.getString(3);
+			ssn = resultset.getString(2);
+			String name = resultset.getString(3);
+			String address = resultset.getString(1);
 			s = new Student(ssn, name, address);
 
 			conn.close();
@@ -105,14 +105,15 @@ public class DAL {
 	
 	//Hitta kurs!
     public Course findCourse(String courseCode) throws SQLException {
-        String sqlString = "SELECT * FROM Course WHERE courseCode = '" + courseCode + "';";
+        Course c;
+    	String sqlString = "SELECT * FROM Course WHERE courseCode = '" + courseCode + "';";
         ResultSet rs = runExecuteQuery(sqlString);
         if (rs.next()) {
             courseCode = rs.getString(1);
             String courseName = rs.getString(2);
             int credits = rs.getInt(3);
-            Course c = new Course(courseCode, courseName, credits);
-            sql.close();
+            c = new Course(courseCode, courseName, credits);
+   
             conn.close();      
             return c;
         
