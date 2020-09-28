@@ -2,114 +2,92 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
+
+
 public class Controller {
-	private DAL dataAccessLayer;
-	private UniversityApplication universityApplication;
 	
+	static DAL dataAccessLayer = new DAL();
+	static ErrorHandlingSQL error = new ErrorHandlingSQL();
+    
+    public Controller() {
+    
+    }
+
+	//Lägger till student på kurs
+	   public static void addStudentOnCourse (String ssn, String courseCode) throws SQLException {
+	        dataAccessLayer.addStudentOnCourse(ssn, courseCode);      
+	    }
+	   
+	 //Lägger till student på kurs
+	   public static void addStudentOnFinishedCourse (String ssn, String courseCode, String grade) throws SQLException {
+	        dataAccessLayer.addStudentOnFinishedCourse(ssn, courseCode, grade);     
+	    }
+	   
+	 
+	   //Lägg till student!
+	    public static void addStudent (String ssn, String studentName, String address) throws SQLException {
+	    	dataAccessLayer.addStudent(ssn, studentName, address);
+		} 
+	//Lägg till kurs!
+	    public static void addCourse (String courseName, String courseCode,int credits) throws SQLException {
+	    	dataAccessLayer.addCourse(courseCode, courseName, credits);
+             
+	    }
+    
+    //Hitta kurs!
+	    public static Course findCourse(String courseCode) throws SQLException {
+	    	return dataAccessLayer.findCourse(courseCode);
+	    }
 	
-	public Controller(DAL dataAccessLayer, UniversityApplication universityApplication) {
-		this.dataAccessLayer = dataAccessLayer;
-		this.universityApplication = universityApplication;
-	}
+    //Hitta student!
+	    public static Student findStudent(String ssn) throws SQLException {
+	    	return dataAccessLayer.findStudent(ssn);
+	    }
+	    
+	    public static Student findCurrentlyStudyingStudent(String ssn) throws SQLException {
+	    	return dataAccessLayer.findCurrentlyStudyingStudent(ssn);
+	    }
 	
-//	//Visar alla studenter genom ArrayList
-//	public List <Student> getAllStudents() throws SQLException {
-//		return this.dataAccessLayer.getAllStudents();
-//	}
+	//Visar alla studenter genom ArrayList
+	    public List <Student> getAllStudents() throws SQLException {
+	    	return this.dataAccessLayer.getAllStudents();
+	    }
 	
 	//Visar alla kurser genom ArrayList
-	public List <Course> getAllCourses () throws SQLException {
-		return this.dataAccessLayer.getAllCourses();	
-	}	
+	    public List <Course> getAllCourses () throws SQLException {
+	    	return this.dataAccessLayer.getAllCourses();	
+	    }	
+				
+		  //Visar alla resultat för en kurs. 
+			public static ArrayList<HasStudied> showAllStudentResult (String courseCode) throws SQLException {
+				return  dataAccessLayer.ShowAllStudentResult(courseCode);
+			}
+ 	
+	 //Visar alla resultat på en student
+
+	   public static ArrayList<HasStudied> showResult(String ssn, String courseCode) throws SQLException {
+			return  dataAccessLayer.ShowAllCourseResult(ssn, courseCode);
+		}
+	
+	
+	
+		public static String courseNotFound(String string) {
+			return dataAccessLayer.courseNotFound(string);
+		}
+
+		public static String studentNotFound(String string) {
+			return dataAccessLayer.studentNotFound(string);
+		}
 		
+		public static String ErrorHandling (int failureCode, String prefix) {
+			return  error.MessageFailureCode(failureCode, prefix);
+		}
 	
-	//Lägg till student
-	public boolean addStudent (String studentName, String ssn, String adress) throws SQLException {
-		Student s1 = new Student (studentName, ssn, adress);
-	 	return this.dataAccessLayer.addStudent(s1);	
-	}
-
-	//Lägg till kurs
-	public boolean addCourse (String courseName, String courseCode,int credit) throws SQLException {
-		Course c1 = new Course (courseName, courseCode, credit);
-	 	return this.dataAccessLayer.addCourse(c1);	
-	}
-	
-	//Registrera kurs på student
-	public boolean addStudies (String ssn, String courseCode) throws SQLException {
-		Studies s2 = new Studies (ssn, courseCode);
-	 	return this.dataAccessLayer.addStudies(s2);	
-	}
-
-	//Registrera avklarad kurs på student
-	public boolean addHasStudied (String ssn, String courseCode, String grade) throws SQLException {
-		HasStudied s3 = new HasStudied (ssn, courseCode, grade);
-	 	return this.dataAccessLayer.addHasStudied(s3);	
-	}
-	
-	
-	//Hitta en student och dess information
-	public Student getStudent (String ssn) throws SQLException {
-		return this.dataAccessLayer.getStudent(ssn);
-	}
-	
-	//Hitta en kurs och dess information 
-	public Course getCourse (String courseCode) throws SQLException {
-		return this.dataAccessLayer.getCourse(courseCode);
-	}
 	
 
-	//Visar en kurs för en studet
-	public Studies getStudies (String courseCode, String ssn) throws SQLException {
-			return this.dataAccessLayer.getStudies(courseCode, ssn);
-	}
-		
-	//Visar en student och dess betyg på avklarad student
-	public HasStudied getHasStudied(String ssn, String courseCode) throws SQLException {
-			return this.dataAccessLayer.getHasStudied (courseCode, ssn);
-	}
-	
-	//Visa alla akutella studenter
-	public List <Studies> getAllStudies(String ssn, String courseCode) throws SQLException {
-		return this.dataAccessLayer.getAllStudies(courseCode);
-	}
-	
-	//Visar alla avslutade kurser
-	public List <HasStudied> getAllHasStudied(String ssn, String courseCode) throws SQLException {
-		return this.dataAccessLayer.getAllHasStudied(courseCode);
-	}
-	
-
-	public ResultSet findCourse (String courseCode) throws SQLException, ClassNotFoundException {
-		return this.dataAccessLayer.findCourse(courseCode);
-	}
-	
-//	//Visar en kurs för en studet
-//	public Studies getStudies (String courseCode, String ssn) throws SQLException {
-//			return this.dataAccessLayer.getStudies(courseCode, ssn);
-//	}
-//		
-//	//Visar en student och dess betyg på avklarad student
-//	public HasStudied getHasStudied(String courseCode, String ssn) throws SQLException {
-//			return this.dataAccessLayer.getHasStudied (courseCode, ssn);
-//	}
-//	
-//	//Visa alla akutella studenter
-//	public List <Studies> getAllStudies(String ssn, String courseCode) throws SQLException {
-//		return this.dataAccessLayer.getAllStudies();
-//	}
-//	
-//	//Visar alla avslutade kurser
-//	public List <HasStudied> getAllHasStudied(String ssn, String courseCode) throws SQLException {
-//		return this.dataAccessLayer.getAllHasStudied();	
-//	}
-//	
-
-	
-	
-}
 	
 	/*public void declareEvents() {
 		universityApplication.getButton_FindCourse().addActionListener(new ActionListener() {
@@ -166,21 +144,12 @@ public class Controller {
 		this.universityApplication = universityApplication;
 	}
 	
-	//metod för att lägga till kurser
-	public void addallcourses(String CourseCode, String CourseName, String Credits) { //action event e 
-		String cCourseCode = universityApplication.getTextField_courseCode().getText();
-		String cCourseName = universityApplication.getTextField_courseName().getText();
-		String cCredits = universityApplication.getTextField_courseCredits().getText();
+*/
+	}
+
 	
-		try {
-			dataAccessLayer.InsertCourse(cCourseCode, cCourseName, cCredits);
-		} catch(SQLException sqlException) {
-	}
-	}
 
 
 
 
 
-
-}*/

@@ -13,13 +13,14 @@ public class Course {
 	public Course() {
 	}
 
+	//Constructor för Course 
 	public Course(String courseCode, String courseName, int credits) {
 	this.courseCode = courseCode;
 	this.courseName = courseName;
 	this.credits = credits;
-}
+	}
 
-	
+	//Constructor för Course 
 	public String getCourseCode() {
 		return courseCode;
 	}
@@ -52,7 +53,7 @@ public class Course {
 		String password = "password";
 		Connection con = DriverManager.getConnection(url,user,password);
 		
-		String query = "SELECT * FROM HasStudied";
+		String query = "SELECT * FROM Student";
 		
 		PreparedStatement ps = con.prepareStatement(query);
 		
