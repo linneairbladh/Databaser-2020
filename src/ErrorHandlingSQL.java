@@ -17,7 +17,7 @@ public class ErrorHandlingSQL {
 	}
 	
 	if (failureCode == 0) {
-		code = "The course has already been read.";
+		code = "Connection problems, check your Wi-fi.";
 	}
 			return code;
 	}
