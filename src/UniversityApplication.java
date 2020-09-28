@@ -503,7 +503,7 @@ public class UniversityApplication {
 
 				 } else {
 					 try {
-						 Student student = Controller.findStudent(ssn);
+						 Student student = controller.findStudent(ssn);
 						 Course course = controller.findCourse(courseCode);
 						 
 						 if (student == null) {
@@ -516,7 +516,7 @@ public class UniversityApplication {
 							 
 						 }else {
 							 Controller.addStudentOnCourse(ssn, courseCode);
-							 textArea_Register.setText("Student with ssn" + ssn + "was added");
+							 textArea_Register.setText("Student with SSN: " + ssn + " was added");
 						 }
 					 
 					 }catch (SQLException sql) {
@@ -544,9 +544,9 @@ public class UniversityApplication {
 			    String grade = comboBoxGrade.getSelectedItem().toString();
 			   
 			    try {
-					Student student = Controller.findStudent(studentSsn);
+					Student student = controller.findStudent(studentSsn);
 				
-			    Student student1 = Controller.findCurrentlyStudyingStudent(studentSsn);
+			    Student student1 = controller.findCurrentlyStudyingStudent(studentSsn);
 			    Course  course = controller.findCourse(courseCode);
 			    
 			    
