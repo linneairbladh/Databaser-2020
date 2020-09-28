@@ -198,43 +198,7 @@ public class UniversityApplication {
 			JButton button_ShowStudentResult = new JButton("Show student result");
 			button_ShowStudentResult.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					
-					String ssn =textField_StudentSSNResult.getText();
-					String courseCode = textField_courseCodeResult.getText();
-					
-					
-					if(ssn.isEmpty() || courseCode.isEmpty()) {
-						textArea_Student.setText("Please type in all fields");
-					}else {
-						try {
-							Student student = controller.findStudent(ssn);
-							Course course = controller.findCourse(courseCode);
-							
-							
-							if(student == null || course == null) {
-								textArea_Student.setText("The student does not exist");
-							}else {
-								ArrayList<HasStudied> hasstudiedlist = controller.showResult(ssn, courseCode);
-								if (hasstudiedlist.isEmpty()) {
-									textArea_Student.setText("Student with SSN: " + student.getSsn() + "has not examined from the course");
-								}else {
-									String sr = "";
-									for (HasStudied x : hasstudiedlist) {
-										sr = sr + x.toString() + "\n";
-										
-									}
-									textArea_Student.setText(sr);
-									
-								}
-							}
-						}catch (SQLException sql) {
-							textArea_Student.setText("ErrorMessage");
-						}
-					}
-					textField_StudentSSNResult.setText("");
-					textField_courseCodeResult.setText("");
-					}
-				
+				}
 			});
 			button_ShowStudentResult.setBounds(257, 238, 146, 23);
 			panel_Student.add(button_ShowStudentResult);
