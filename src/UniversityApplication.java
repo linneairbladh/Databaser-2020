@@ -389,7 +389,7 @@ public class UniversityApplication {
 		        					textArea_Course.setText("No students has finished this course.");
 		        			} else {
 		        				for (HasStudied hs : courseResultList) {
-		        					textArea_Course.setText(hs.getGrade());
+		        					textArea_Course.setText("Student: " + hs.getStudentSsn() + " got grade: " + hs.getGrade());
 		        				}
 		        			}
 		        				
@@ -422,7 +422,7 @@ public class UniversityApplication {
 		        								
 		        								if ( c != null) {
 		        									textArea_Course.setText
-		        									("Course with code: " + " " + c.getCourseCode()  + " Name: " + c.getCourseName() + " and Credits: " + c.getCredits() + " " + "found");
+		        									("Course with code: " + " " + c.getCourseCode()  + " Name: " + c.getCourseName() + " and Credits: " + c.getCredits() + " " + " was found");
 		        								
 		        								}else {
 		        									String courseNotFound = controller.courseNotFound(courseCode);
@@ -617,3 +617,4 @@ public class UniversityApplication {
 		//SLUT PÅ FLIK ASSIGNMENT 2
 	}
 }
+	
