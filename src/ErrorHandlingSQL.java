@@ -21,6 +21,6 @@ public class ErrorHandlingSQL {
 	}
 			return code;
 	}
-	
+	//Ser om tern
 	
 }
