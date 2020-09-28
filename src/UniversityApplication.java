@@ -45,13 +45,13 @@ public class UniversityApplication {
 	private JButton BtnRegisterNewStudent;
 	private JTextField textField_StudentName;
 	private JTextField textField_StudentAddress;
-	private JTextField textField_courseCodeRegister;
-	private JTextField textField_studentSSN2;
-	private JTextField textField;
-	private JTextField textField_1;
 	private JTextField textField_studentFind;
 	private JTextField textField_findCourse;
 	private JTextField textField_showResult;
+	private JTextField textField_courseCodeResult;
+	private JTextField textField_StudentSSNResult;
+	private JTextField textField_courseCodeRegister;
+	private JTextField textField_studentSSNRegister;
 
 
 	/**
@@ -103,36 +103,38 @@ public class UniversityApplication {
 			
 			
 			JTextArea textArea_Student = new JTextArea();
-			textArea_Student.setBounds(22, 262, 373, 141);
+			textArea_Student.setEditable(false);
+			textArea_Student.setBounds(21, 313, 373, 101);
 			panel_Student.add(textArea_Student);
 			
 			textField_ssn = new JTextField();
 			textField_ssn.setColumns(10);
-			textField_ssn.setBounds(124, 45, 96, 20);
+			textField_ssn.setBounds(124, 18, 96, 20);
 			panel_Student.add(textField_ssn);
 			
 			JLabel labelStudentSSN = new JLabel("Student SSN *");
-			labelStudentSSN.setBounds(22, 79, 82, 14);
+			labelStudentSSN.setBounds(22, 52, 82, 14);
 			panel_Student.add(labelStudentSSN);
 			
 			textField_StudentName = new JTextField();
 			textField_StudentName.setColumns(10);
-			textField_StudentName.setBounds(124, 76, 96, 20);
+			textField_StudentName.setBounds(124, 49, 96, 20);
 			panel_Student.add(textField_StudentName);
 			
 			JLabel labelStudentName = new JLabel("Student name *");
-			labelStudentName.setBounds(22, 118, 89, 14);
+			labelStudentName.setBounds(22, 91, 89, 14);
 			panel_Student.add(labelStudentName);
 			
 			JLabel lblStudentAddress = new JLabel("Student address *");
-			lblStudentAddress.setBounds(22, 46, 105, 19);
+			lblStudentAddress.setBounds(22, 19, 105, 19);
 			panel_Student.add(lblStudentAddress);
 			
 			textField_StudentAddress = new JTextField();
 			textField_StudentAddress.setColumns(10);
-			textField_StudentAddress.setBounds(124, 115, 96, 20);
+			textField_StudentAddress.setBounds(124, 88, 96, 20);
 			panel_Student.add(textField_StudentAddress);
 			
+			//Knapp för find student
 			JButton btnFindStudent = new JButton("Find Student");
 			btnFindStudent.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -155,10 +157,11 @@ public class UniversityApplication {
 				
 				}	
 			});
-			btnFindStudent.setBounds(257, 191, 113, 23);
+			btnFindStudent.setBounds(257, 164, 113, 23);
 			panel_Student.setLayout(null);
 			panel_Student.add(btnFindStudent);
 			
+			//Knapp för add student
 			JButton btnAddStudent = new JButton("Add Student");
 			btnAddStudent.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -188,28 +191,58 @@ public class UniversityApplication {
 
 	            }
 			});
-			btnAddStudent.setBounds(257, 40, 113, 23);
+			btnAddStudent.setBounds(257, 13, 113, 23);
 			panel_Student.add(btnAddStudent);
 			
+			//Knapp för att visa en students resultat
+			JButton button_ShowStudentResult = new JButton("Show student result");
+			button_ShowStudentResult.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
+			button_ShowStudentResult.setBounds(257, 238, 146, 23);
+			panel_Student.add(button_ShowStudentResult);
 
 			JLabel lblFieldsMarkedWith = new JLabel("Fields marked with (*) are mandatory to fill in.");
 			lblFieldsMarkedWith.setFont(new Font("Tahoma", Font.BOLD, 11));
 			lblFieldsMarkedWith.setForeground(new Color(178, 34, 34));
-			lblFieldsMarkedWith.setBounds(22, 240, 322, 14);
+			lblFieldsMarkedWith.setBounds(21, 298, 322, 14);
 			panel_Student.add(lblFieldsMarkedWith);
 			
 					textField_studentFind = new JTextField();
-					textField_studentFind.setBounds(124, 192, 96, 20);
+					textField_studentFind.setBounds(124, 165, 96, 20);
 					panel_Student.add(textField_studentFind);
 					textField_studentFind.setColumns(10);
 					
 					JLabel lblNewLabel = new JLabel("Insert SSN in the box below to find Student");
-					lblNewLabel.setBounds(25, 172, 255, 14);
+					lblNewLabel.setBounds(25, 145, 255, 14);
 					panel_Student.add(lblNewLabel);
 					
 					JSeparator separator_4 = new JSeparator();
-					separator_4.setBounds(41, 154, 329, 7);
+					separator_4.setBounds(41, 127, 329, 7);
 					panel_Student.add(separator_4);
+					
+					textField_courseCodeResult = new JTextField();
+					textField_courseCodeResult.setColumns(10);
+					textField_courseCodeResult.setBounds(120, 257, 124, 20);
+					panel_Student.add(textField_courseCodeResult);
+					
+					JLabel label_4 = new JLabel("Course code * ");
+					label_4.setBounds(18, 260, 85, 14);
+					panel_Student.add(label_4);
+					
+					JLabel label_5 = new JLabel("Student SSN *");
+					label_5.setBounds(18, 225, 85, 14);
+					panel_Student.add(label_5);
+					
+					textField_StudentSSNResult = new JTextField();
+					textField_StudentSSNResult.setColumns(10);
+					textField_StudentSSNResult.setBounds(120, 222, 124, 20);
+					panel_Student.add(textField_StudentSSNResult);
+					
+					JSeparator separator_5 = new JSeparator();
+					separator_5.setBounds(41, 198, 329, 7);
+					panel_Student.add(separator_5);
 		
 		JPanel panel_Course = new JPanel();
 		tabbedPane.addTab("Course", null, panel_Course, null);
@@ -220,60 +253,43 @@ public class UniversityApplication {
 				
 				//ALLT PÅ FLIK COURSE
 				
-				JTextArea textArea_Course = new JTextArea();
-				textArea_Course.setBounds(31, 315, 357, 101);
-				panel_Course.add(textArea_Course);
-				
-
-				JLabel label = new JLabel("Course code *");
-				label.setBounds(10, 230, 93, 14);
-				panel_Course.add(label);
-				
-				textField_courseCodeRegister = new JTextField();
-				textField_courseCodeRegister.setColumns(10);
-				textField_courseCodeRegister.setBounds(108, 226, 96, 20);
-				panel_Course.add(textField_courseCodeRegister);
-				
-				textField_studentSSN2 = new JTextField();
-				textField_studentSSN2.setColumns(10);
-				textField_studentSSN2.setBounds(108, 257, 96, 20);
-				panel_Course.add(textField_studentSSN2);
-				
-				JLabel label_1 = new JLabel("Student SSN *");
-				label_1.setBounds(10, 260, 82, 14);
-				panel_Course.add(label_1);
+		JTextArea textArea_Course = new JTextArea();
+		textArea_Course.setEditable(false);
+		textArea_Course.setBounds(31, 315, 357, 101);
+		panel_Course.add(textArea_Course);
 				
 		textField_courseCredits = new JTextField();
-		textField_courseCredits.setBounds(108, 71, 96, 20);
+		textField_courseCredits.setBounds(120, 91, 96, 20);
 		panel_Course.add(textField_courseCredits);
 		textField_courseCredits.setColumns(10);
 		
 		JLabel lblNewLabel_CourseCode = new JLabel("Course code *");
-		lblNewLabel_CourseCode.setBounds(10, 15, 93, 14);
+		lblNewLabel_CourseCode.setBounds(22, 35, 93, 14);
 		panel_Course.add(lblNewLabel_CourseCode);
 		
 		JLabel lblNewLabel_CourseName = new JLabel("Course name *");
-		lblNewLabel_CourseName.setBounds(10, 43, 93, 14);
+		lblNewLabel_CourseName.setBounds(22, 63, 93, 14);
 		panel_Course.add(lblNewLabel_CourseName);
 		
 		textField_courseCode = new JTextField();
-		textField_courseCode.setBounds(108, 12, 96, 20);
+		textField_courseCode.setBounds(120, 32, 96, 20);
 		panel_Course.add(textField_courseCode);
 		textField_courseCode.setColumns(10);
 		
 		textField_courseName = new JTextField();
-		textField_courseName.setBounds(108, 40, 96, 20);
+		textField_courseName.setBounds(120, 60, 96, 20);
 		panel_Course.add(textField_courseName);
 		textField_courseName.setColumns(10);
 		
 		JLabel lblCourseCredits = new JLabel("Course credits *");
-		lblCourseCredits.setBounds(10, 71, 93, 14);
+		lblCourseCredits.setBounds(22, 91, 93, 14);
 		panel_Course.add(lblCourseCredits);
 		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(59, 150, 329, 7);
+		separator.setBounds(71, 198, 329, 7);
 		panel_Course.add(separator);
 		
+		//Knapp för Add Course
 		JButton button_AddCourse_1 = new JButton("Add Course");
 		button_AddCourse_1.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
@@ -312,11 +328,11 @@ public class UniversityApplication {
 		           
 		});
 		
-		        button_AddCourse_1.setBounds(275, 11, 113, 23);	
+		        button_AddCourse_1.setBounds(287, 31, 113, 23);	
 		        panel_Course.add(button_AddCourse_1); 
 		        
 		        
-		        		
+		        		//Knapp show all results, för en kurs
 		        		JButton button_ShowAllResults = new JButton("Show all results");
 		        		button_ShowAllResults.addActionListener(new ActionListener() {
 		        			public void actionPerformed(ActionEvent e) {
@@ -349,9 +365,11 @@ public class UniversityApplication {
 		        			}
 		        			}
 		        		});
-		        		button_ShowAllResults.setBounds(275, 120, 113, 23);
+		        		button_ShowAllResults.setBounds(287, 250, 113, 23);
 		        		panel_Course.add(button_ShowAllResults);
 		        		
+		        		
+		        		//Knapp Find Course
 		        		JButton button_findCourse = new JButton("Find Course");
 		        		
 		        				button_findCourse.addActionListener(new ActionListener() {
@@ -383,49 +401,8 @@ public class UniversityApplication {
 		        					}
 		        				});
 		        				
-		        						button_findCourse.setBounds(275, 178, 113, 23);
+		        						button_findCourse.setBounds(287, 154, 113, 23);
 		        						panel_Course.add(button_findCourse);
-		        						
-		        						
-		        						
-		        						JButton button_RegStudent = new JButton("Register student on course");
-		        						button_RegStudent.addActionListener(new ActionListener() {
-		        							public void actionPerformed(ActionEvent e) {
-		        								
-		        								String ssn = textField_StudentSSN2.getText();
-		        								String courseCode = textField_courseCodeRegister.getText();
-		        								
-		        								 if(courseCode.isEmpty() || ssn.isEmpty()) {
-	                    textArea_Course.setText("Please type in all fields");
-	                    	
-		        								 } else {
-		        									 try {
-		        										 Student student = Controller.findStudent(ssn);
-		        										 Course course = controller.findCourse(courseCode);
-		        										 
-		        										 if (student == null) {
-		        											 String studentNotFound = controller.studentNotFound(ssn);
-		        											 textArea_Course.setText(studentNotFound);
-		        										
-		        										 } else if (course == null) {
-		        											 String courseNotFound = Controller.courseNotFound(courseCode);
-		        											 textArea_Course.setText(courseNotFound);
-		        											 
-		        										 }else {
-		        											 Controller.addStudentOnCourse(ssn, courseCode);
-		        											 textArea_Course.setText("Student with ssn" + ssn + "was added");
-		        										 }
-		        									 
-		        									 }catch (SQLException sql) {
-		        											 textArea_Course.setText(controller.ErrorHandling(sql.getErrorCode(), ""));
-		        										 }
-		        										 
-		        										 
-		        									 }
-		        							}
-		        						});
-		        						button_RegStudent.setBounds(230, 239, 175, 23);
-		        						panel_Course.add(button_RegStudent);
 		        						
 		        						JLabel label_2 = new JLabel("Fields marked with (*) are mandatory to fill in.");
 		        						label_2.setForeground(new Color(178, 34, 34));
@@ -433,30 +410,26 @@ public class UniversityApplication {
 		        						label_2.setBounds(31, 301, 322, 14);
 		        						panel_Course.add(label_2);
 		        						
-		        						JSeparator separator_2 = new JSeparator();
-		        						separator_2.setBounds(59, 212, 329, 7);
-		        						panel_Course.add(separator_2);
-		        						
 		        						JLabel lblInsertCourseCode = new JLabel("Insert course code in the box below to find course.");
-		        						lblInsertCourseCode.setBounds(10, 162, 255, 14);
+		        						lblInsertCourseCode.setBounds(22, 138, 255, 14);
 		        						panel_Course.add(lblInsertCourseCode);
 		        						
 		        						textField_findCourse = new JTextField();
 		        						textField_findCourse.setColumns(10);
-		        						textField_findCourse.setBounds(108, 179, 96, 20);
+		        						textField_findCourse.setBounds(120, 155, 96, 20);
 		        						panel_Course.add(textField_findCourse);
 		        						
 		        						JSeparator separator_3 = new JSeparator();
-		        						separator_3.setBounds(59, 102, 329, 7);
+		        						separator_3.setBounds(71, 122, 329, 7);
 		        						panel_Course.add(separator_3);
 		        						
 		        						JLabel lblInsertCourseCode_1 = new JLabel("Insert course code in the box below to show course result");
-		        						lblInsertCourseCode_1.setBounds(10, 102, 365, 14);
+		        						lblInsertCourseCode_1.setBounds(22, 225, 365, 14);
 		        						panel_Course.add(lblInsertCourseCode_1);
 		        						
 		        						textField_showResult = new JTextField();
 		        						textField_showResult.setColumns(10);
-		        						textField_showResult.setBounds(108, 119, 96, 20);
+		        						textField_showResult.setBounds(120, 249, 96, 20);
 		        						panel_Course.add(textField_showResult);
 				
 		JPanel panel_Register = new JPanel();
@@ -473,44 +446,7 @@ public class UniversityApplication {
 		comboBoxGrade.addItem("F");
 		comboBoxGrade.setBounds(261, 194, 49, 22);
 		panel_Register.add(comboBoxGrade);
-				
-
-		/*JComboBox comboBoxStudentSSN = new JComboBox();
-		comboBoxStudentSSN.setBounds(186, 18, 124, 22);
-		try {
-			for (Student student: controller.getAllStudents()) {
-				comboBoxStudentSSN.addItem(student.getSsn());
-			}
-				
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
-
-		panel_Register.add(comboBoxStudentSSN);
-
-		JComboBox<String> comboBox = new JComboBox<String>();
-		comboBox.setBounds(320, 18, 30, 22);
-		panel_Register.add(comboBox);
-		
-		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(320, 53, 30, 22);
-		panel_Register.add(comboBox_1);
-		
-
-		JComboBox comboBoxCourseCode = new JComboBox();
-		comboBoxCourseCode.setBounds(261, 51, 49, 22);
-		try {
-		for (Course course: controller.getAllCourses()) {
-			comboBoxCourseCode.addItem(course.getCourseCode());
-		}
-			
-	} catch (SQLException e1) {
-		e1.printStackTrace();
-	}
-		panel_Register.add(comboBoxCourseCode);
-		*/
-		
+						
 	
 		/*JButton btnAddStudent = new JButton("Add Student");
 		btnAddStudent.addActionListener(new ActionListener() {
@@ -589,12 +525,51 @@ public class UniversityApplication {
 		//ALLT PÅ FLIK REGISTER
 		
 		JTextArea textArea_Register = new JTextArea();
+		textArea_Register.setEditable(false);
 		textArea_Register.setBounds(50, 302, 289, 114);
 		panel_Register.add(textArea_Register);
 		
-		JButton btnShowStudentResult = new JButton("Show student result");
-		btnShowStudentResult.setBounds(84, 82, 226, 23);
-		panel_Register.add(btnShowStudentResult);
+		JButton button_RegisterStudentCourse = new JButton("Register student on course");
+		button_RegisterStudentCourse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				String ssn = textField_studentSSNRegister.getText();
+				String courseCode = textField_courseCodeRegister.getText();
+				
+				 if(courseCode.isEmpty() || ssn.isEmpty()) {
+					 textArea_Register.setText("Please type in all fields");
+
+				 } else {
+					 try {
+						 Student student = Controller.findStudent(ssn);
+						 Course course = controller.findCourse(courseCode);
+						 
+						 if (student == null) {
+							 String studentNotFound = controller.studentNotFound(ssn);
+							 textArea_Register.setText(studentNotFound);
+						
+						 } else if (course == null) {
+							 String courseNotFound = Controller.courseNotFound(courseCode);
+							 textArea_Register.setText(courseNotFound);
+							 
+						 }else {
+							 Controller.addStudentOnCourse(ssn, courseCode);
+							 textArea_Register.setText("Student with ssn" + ssn + "was added");
+						 }
+					 
+					 }catch (SQLException sql) {
+							 textArea_Register.setText(controller.ErrorHandling(sql.getErrorCode(), ""));
+						 }
+						 
+						 
+					 }
+			}
+				
+			
+		});
+		button_RegisterStudentCourse.setBounds(84, 83, 226, 23);
+		panel_Register.add(button_RegisterStudentCourse);
+		
 		
 		JButton btnRegisterStudent_1 = new JButton("Register result");
 		btnRegisterStudent_1.addActionListener(new ActionListener() {
@@ -628,7 +603,7 @@ public class UniversityApplication {
 			
 		
 		textField_StudentSSN2 = new JTextField();
-		textField_StudentSSN2.setBounds(186, 129, 124, 20);
+		textField_StudentSSN2.setBounds(214, 129, 96, 20);
 		panel_Register.add(textField_StudentSSN2);
 		textField_StudentSSN2.setColumns(10);
 		
@@ -645,27 +620,9 @@ public class UniversityApplication {
 		panel_Register.add(lblCourseCode);
 		
 		textField_courseCode2 = new JTextField();
-		textField_courseCode2.setBounds(186, 163, 124, 20);
+		textField_courseCode2.setBounds(214, 163, 96, 20);
 		panel_Register.add(textField_courseCode2);
 		textField_courseCode2.setColumns(10);
-		
-		JLabel lblStudentSsn = new JLabel("Student SSN *");
-		lblStudentSsn.setBounds(84, 22, 85, 14);
-		panel_Register.add(lblStudentSsn);
-		
-		JLabel lblCourseCode_1 = new JLabel("Course code * ");
-		lblCourseCode_1.setBounds(84, 57, 85, 14);
-		panel_Register.add(lblCourseCode_1);
-		
-		textField = new JTextField();
-		textField.setBounds(186, 19, 124, 20);
-		panel_Register.add(textField);
-		textField.setColumns(10);
-		
-		textField_1 = new JTextField();
-		textField_1.setBounds(186, 54, 124, 20);
-		panel_Register.add(textField_1);
-		textField_1.setColumns(10);
 		
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(32, 116, 354, 2);
@@ -676,6 +633,25 @@ public class UniversityApplication {
 		label_3.setFont(new Font("Tahoma", Font.BOLD, 11));
 		label_3.setBounds(50, 281, 322, 14);
 		panel_Register.add(label_3);
+		
+		
+		textField_courseCodeRegister = new JTextField();
+		textField_courseCodeRegister.setColumns(10);
+		textField_courseCodeRegister.setBounds(214, 12, 96, 20);
+		panel_Register.add(textField_courseCodeRegister);
+		
+		JLabel label_6 = new JLabel("Course code *");
+		label_6.setBounds(84, 15, 93, 14);
+		panel_Register.add(label_6);
+		
+		JLabel label_7 = new JLabel("Student SSN *");
+		label_7.setBounds(84, 45, 82, 14);
+		panel_Register.add(label_7);
+		
+		textField_studentSSNRegister = new JTextField();
+		textField_studentSSNRegister.setColumns(10);
+		textField_studentSSNRegister.setBounds(214, 42, 96, 20);
+		panel_Register.add(textField_studentSSNRegister);
 		
 		//SLUT PÅ FLIK ASSIGNMENT 2
 	}
