@@ -61,17 +61,16 @@ public class Controller {
 	    	return this.dataAccessLayer.getAllCourses();	
 	    }	
 				
-		  //Visar alla resultat för en kurs. 
-			public static ArrayList<HasStudied> showAllStudentResult (String courseCode) throws SQLException {
-				return  dataAccessLayer.ShowAllStudentResult(courseCode);
-			}
+	//Visar alla resultat för en kurs. 
+		public static ArrayList<HasStudied> showAllStudentResult (String courseCode) throws SQLException {
+			return  dataAccessLayer.ShowAllStudentResult(courseCode);
+		}
  	
 	 //Visar alla resultat på en student
 
 	   public static ArrayList<HasStudied> showResult(String ssn, String courseCode) throws SQLException {
 			return  dataAccessLayer.ShowAllCourseResult(ssn, courseCode);
 		}
-	
 	
 	
 		public static String courseNotFound(String string) {

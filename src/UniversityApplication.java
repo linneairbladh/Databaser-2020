@@ -113,7 +113,7 @@ public class UniversityApplication {
 			panel_Student.add(textField_ssn);
 			
 			JLabel labelStudentSSN = new JLabel("Student SSN *");
-			labelStudentSSN.setBounds(22, 52, 82, 14);
+			labelStudentSSN.setBounds(21, 21, 82, 14);
 			panel_Student.add(labelStudentSSN);
 			
 			textField_StudentName = new JTextField();
@@ -122,11 +122,11 @@ public class UniversityApplication {
 			panel_Student.add(textField_StudentName);
 			
 			JLabel labelStudentName = new JLabel("Student name *");
-			labelStudentName.setBounds(22, 91, 89, 14);
+			labelStudentName.setBounds(21, 52, 89, 14);
 			panel_Student.add(labelStudentName);
 			
 			JLabel lblStudentAddress = new JLabel("Student address *");
-			lblStudentAddress.setBounds(22, 19, 105, 19);
+			lblStudentAddress.setBounds(21, 89, 105, 19);
 			panel_Student.add(lblStudentAddress);
 			
 			textField_StudentAddress = new JTextField();
@@ -141,12 +141,12 @@ public class UniversityApplication {
 				String ssn = textField_studentFind.getText();
 				if(!ssn.isEmpty()) {
 					try {
-						Student s = Controller.findStudent(ssn);
+						Student s = controller.findStudent(ssn);
 							
 						if(s == null) {
 							textArea_Student.setText("Unable to find a student with the given SSN, check spelling ETC");
 						} else {
-							textArea_Student.setText(s.getStudentName() + " " + "with adress" + s.getAddress() + " was found");
+							textArea_Student.setText(s.getStudentName() + " " + " with adress " + s.getAddress() + " was found");
 						}
 					} catch (SQLException sql) {
 						textArea_Student.setText(controller.ErrorHandling(sql.getErrorCode(), ""));
@@ -176,7 +176,7 @@ public class UniversityApplication {
 	                    
 	                    try {
 	                      
-	                            Controller.addStudent(name, address, ssn);
+	                            Controller.addStudent(ssn, name, address);
 	                            textArea_Student.setText("Student added");
 	                            
 	                        }catch (SQLException sql){
@@ -228,7 +228,7 @@ public class UniversityApplication {
 								}
 							}
 						}catch (SQLException sql) {
-							textArea_Student.setText("ErrorMessage");
+							textArea_Student.setText(controller.ErrorHandling(sql.getErrorCode(), ""));
 						}
 					}
 					textField_StudentSSNResult.setText("");
@@ -544,8 +544,7 @@ public class UniversityApplication {
 			    String grade = comboBoxGrade.getSelectedItem().toString();
 			   
 			    try {
-					Student student = controller.findStudent(studentSsn);
-				
+				Student student = controller.findStudent(studentSsn);
 			    Student student1 = controller.findCurrentlyStudyingStudent(studentSsn);
 			    Course  course = controller.findCourse(courseCode);
 			    
