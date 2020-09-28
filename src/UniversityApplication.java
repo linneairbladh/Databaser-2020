@@ -368,12 +368,12 @@ public class UniversityApplication {
 		        panel_Course.add(button_AddCourse_1); 
 		        
 		        
-		        		//Knapp show all results, för en kurs
-		        		JButton button_ShowAllResults = new JButton("Show all results");
-		        		button_ShowAllResults.addActionListener(new ActionListener() {
-		        			public void actionPerformed(ActionEvent e) {
+		        //Knapp show all results, för en kurs
+		        JButton button_ShowAllResults = new JButton("Show all results");
+		        button_ShowAllResults.addActionListener(new ActionListener() {
+		        	public void actionPerformed(ActionEvent e) {
 		        				
-		        				String courseCode = textField_showResult.getText();
+		        	String courseCode = textField_showResult.getText();
 		        			if (courseCode.isEmpty()) {
 		        				textArea_Course.setText("Please fill in course code.");
 		        			}else {
@@ -384,12 +384,12 @@ public class UniversityApplication {
 		        					String courseNotFound = controller.courseNotFound(courseCode);
 		        					textArea_Course.setText(courseNotFound);
 		        			}else {
-		        				ArrayList <HasStudied> courseResultList = Controller.showAllStudentResult(courseCode);
+		        				ArrayList <HasStudied> courseResultList = controller.showAllStudentResult(courseCode);
 		        			if (courseResultList.isEmpty()) {
 		        					textArea_Course.setText("No students has finished this course.");
 		        			} else {
 		        				for (HasStudied hs : courseResultList) {
-		        					textArea_Course.setText(hs.getGrade() + hs.getCourseCode());
+		        					textArea_Course.setText(hs.getGrade());
 		        				}
 		        			}
 		        				
