@@ -52,13 +52,13 @@ public class Controller {
 	    }
 	
 	//Visar alla studenter genom ArrayList
-	    public List <Student> getAllStudents() throws SQLException {
-	    	return this.dataAccessLayer.getAllStudents();
+	    public static ArrayList <Student> getAllStudents() throws SQLException {
+	    	return dataAccessLayer.getAllStudents();
 	    }
 	
 	//Visar alla kurser genom ArrayList
-	    public List <Course> getAllCourses () throws SQLException {
-	    	return this.dataAccessLayer.getAllCourses();	
+	    public static ArrayList <Course> getAllCourses () throws SQLException {
+	    	return dataAccessLayer.getAllCourses();	
 	    }	
 				
 	//Visar alla resultat för en kurs. 
