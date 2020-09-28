@@ -46,7 +46,8 @@ public class DAL {
 	public void addCourse(String courseCode, String courseName, int credits) throws SQLException {
         String sqlString = "INSERT INTO Course VALUES ( '" + courseCode + "', '" + courseName + "', " + credits + ");";
         runExecuteUpdate(sqlString);
-        conn.close();
+        //sql.close();
+        conn.close(); 
             
     }
 	
@@ -71,10 +72,10 @@ public class DAL {
 
 		ResultSet resultset = runExecuteQuery(sqlString);
 		if (resultset.next()) {
-			ssn = resultset.getString(2);
-			String name = resultset.getString(3);
-			String address = resultset.getString(1);
-			s = new Student(ssn, name, address);
+			ssn = resultset.getString("ssn");
+			String studentName = resultset.getString("studentName");
+			String address = resultset.getString("address");
+			s = new Student(ssn, studentName, address);
 
 			conn.close();
 			return s;
@@ -89,9 +90,9 @@ public class DAL {
 		   String sqlString = "SELECT * FROM Studies WHERE ssn = '" + ssn + "';";
 				   ResultSet resultSet = runExecuteQuery(sqlString);
 		   if (resultSet.next()) {
-			   ssn = resultSet.getString(1);
-			   String name = resultSet.getString(2);
-			   String address = resultSet.getString(3);
+			   ssn = resultSet.getString(2);
+			   String name = resultSet.getString(3);
+			   String address = resultSet.getString(1);
 			   
 			    stud = new Student (ssn, name, address);
 					  
