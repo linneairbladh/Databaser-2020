@@ -90,9 +90,9 @@ public class DAL {
 		   String sqlString = "SELECT * FROM Studies WHERE ssn = '" + ssn + "';";
 				   ResultSet resultSet = runExecuteQuery(sqlString);
 		   if (resultSet.next()) {
-			   ssn = resultSet.getString(2);
-			   String name = resultSet.getString(3);
-			   String address = resultSet.getString(1);
+			   ssn = resultSet.getString("ssn");
+			   String name = resultSet.getString("studentName");
+			   String address = resultSet.getString("address");
 			   
 			    stud = new Student (ssn, name, address);
 					  
@@ -110,9 +110,9 @@ public class DAL {
     	String sqlString = "SELECT * FROM Course WHERE courseCode = '" + courseCode + "';";
         ResultSet rs = runExecuteQuery(sqlString);
         if (rs.next()) {
-            courseCode = rs.getString(1);
-            String courseName = rs.getString(2);
-            int credits = rs.getInt(3);
+            courseCode = rs.getString("courseCode");
+            String courseName = rs.getString("courseName");
+            int credits = rs.getInt("credits");
             c = new Course(courseCode, courseName, credits);
    
             conn.close();      
@@ -130,51 +130,51 @@ public class DAL {
 		
 		ResultSet rs = runExecuteQuery(sqlString);
 		while (rs.next()) {
-			String courseCode = rs.getString(1);
-			String courseName = rs.getString(2);
-			int credits = rs.getInt(3);
+			String courseCode = rs.getString("courseCode");
+			String courseName = rs.getString("courseName");
+			int credits = rs.getInt("credits");
 					
 			Course course = new Course(courseCode, courseName, credits);
 			courseList.add(course);
-	}
-	  sql.close();
-      conn.close();      
-      return courseList;
+		}
+		  sql.close();
+	      conn.close();      
+	      return courseList;
 	
-}
+	}
 	
 	//Hittar alla studenter!
 	public ArrayList<Student> getAllStudents() throws SQLException{
 		ArrayList <Student> studentList = new ArrayList <Student>(); 
 		String sqlString = "SELECT * FROM Student";
 	
-	ResultSet rs = runExecuteQuery(sqlString);
-	while (rs.next()) {
-		String ssn = rs.getString(1);
-		String studentName = rs.getString(2);
-		String address = rs.getString(3);
+		ResultSet rs = runExecuteQuery(sqlString);
+		while (rs.next()) {
+			String ssn = rs.getString("ssn");
+			String studentName = rs.getString("studentName");
+			String address = rs.getString("address");
 				
-		Student student = new Student(ssn, studentName, address);
-		studentList.add(student);
-	}
+			Student student = new Student(ssn, studentName, address);
+			studentList.add(student);
+		}
 		sql.close();
 		conn.close();      
 		return studentList;
 
-}
+	}
 
-		//Hittar en students betyg för en kurs!
+	//Hittar en students betyg för en kurs!
 	public HasStudied ShowStudentResult (String ssn, String courseCode, String grade) throws SQLException{
 		
 		HasStudied hs = null;
-		String sqlString = "SELECT * FROM HasStudied WHERE coursCode = ' " + courseCode + "' AND ssn = '" + ssn + "';";
+		String sqlString = "SELECT * FROM hasStudied WHERE courseCode = ' " + courseCode + "' AND ssn = '" + ssn + "';";
 		ResultSet rs = runExecuteQuery(sqlString);
 		
 		if (rs.next()) {
 			
-			 courseCode = rs.getString(1);
-			 ssn = rs.getString(2);
-			 grade = rs.getString(3);
+			 ssn = rs.getString("ssn"); 
+			 courseCode = rs.getString("courseCode");
+			 grade = rs.getString("grade");
 			 hs = new HasStudied(ssn, courseCode, grade);	
 		}
 		
@@ -186,41 +186,41 @@ public class DAL {
 	//Lista på alla kursers resultat!
 	public ArrayList <HasStudied> ShowAllCourseResult (String ssn, String courseCode) throws SQLException {
 		ArrayList <HasStudied> courseResultList = new ArrayList <HasStudied>();
-		String sqlString = "SELECT * FROM HasStudied WHERE ssn = '" + ssn + "' AND courseID = '" + courseCode + "';";
+		String sqlString = "SELECT * FROM hasStudied WHERE ssn = '" + ssn + "' AND courseCode = '" + courseCode + "';";
 		
 		ResultSet rs = runExecuteQuery(sqlString);
 		
 		while (rs.next()) {
-			String ssn1 = rs.getString(1);
-			String courseCode1 = rs.getString(2);
-			String grade = rs.getString(3);
+			String ssn1 = rs.getString("ssn");
+			String courseCode1 = rs.getString("courseCode");
+			String grade = rs.getString("grade");
 					
 			HasStudied hs = new HasStudied(ssn1, courseCode1, grade);
 			courseResultList.add(hs);
-	}
-	  sql.close();
-      conn.close();      
-      return courseResultList;
 		}
+		  sql.close();
+	      conn.close();      
+	      return courseResultList;
+	}
 	
 	// Lista på alla studenters resultat!
 	public ArrayList <HasStudied> ShowAllStudentResult (String courseCode) throws SQLException {
 		ArrayList <HasStudied> studentResultList = new ArrayList <HasStudied>();
-		String sqlString = "SELECT * FROM HasStudied WHERE  courseID = '" + courseCode + "';";
+		String sqlString = "SELECT * FROM hasStudied WHERE  courseCode = '" + courseCode + "';";
 		
 		ResultSet rs = runExecuteQuery(sqlString);
 		
 		while (rs.next()) {
-			String ssn1 = rs.getString(1);
-			String courseCode1 = rs.getString(2);
-			String grade = rs.getString(3);
+			String studentSsn = rs.getString("ssn");
+			String specCourseCode = rs.getString("courseCode");
+			String grade = rs.getString("grade");
 					
-			HasStudied hs = new HasStudied(ssn1, courseCode1, grade);
+			HasStudied hs = new HasStudied(studentSsn, specCourseCode, grade);
 			studentResultList.add(hs);
 		}
       conn.close();      
       return studentResultList;
-		}
+	}
 		
 	
 	
@@ -241,6 +241,4 @@ public class DAL {
 			
 
 			
-}		
-
-	
+}	
