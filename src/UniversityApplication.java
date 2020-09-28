@@ -113,7 +113,7 @@ public class UniversityApplication {
 			panel_Student.add(textField_ssn);
 			
 			JLabel labelStudentSSN = new JLabel("Student SSN *");
-			labelStudentSSN.setBounds(22, 52, 82, 14);
+			labelStudentSSN.setBounds(21, 21, 82, 14);
 			panel_Student.add(labelStudentSSN);
 			
 			textField_StudentName = new JTextField();
@@ -122,11 +122,11 @@ public class UniversityApplication {
 			panel_Student.add(textField_StudentName);
 			
 			JLabel labelStudentName = new JLabel("Student name *");
-			labelStudentName.setBounds(22, 91, 89, 14);
+			labelStudentName.setBounds(21, 52, 89, 14);
 			panel_Student.add(labelStudentName);
 			
 			JLabel lblStudentAddress = new JLabel("Student address *");
-			lblStudentAddress.setBounds(22, 19, 105, 19);
+			lblStudentAddress.setBounds(21, 89, 105, 19);
 			panel_Student.add(lblStudentAddress);
 			
 			textField_StudentAddress = new JTextField();
@@ -141,12 +141,12 @@ public class UniversityApplication {
 				String ssn = textField_studentFind.getText();
 				if(!ssn.isEmpty()) {
 					try {
-						Student s = Controller.findStudent(ssn);
+						Student s = controller.findStudent(ssn);
 							
 						if(s == null) {
 							textArea_Student.setText("Unable to find a student with the given SSN, check spelling ETC");
 						} else {
-							textArea_Student.setText(s.getStudentName() + " " + "with adress" + s.getAddress() + " was found");
+							textArea_Student.setText(s.getStudentName() + " " + " with adress " + s.getAddress() + " was found");
 						}
 					} catch (SQLException sql) {
 						textArea_Student.setText(controller.ErrorHandling(sql.getErrorCode(), ""));
@@ -176,7 +176,7 @@ public class UniversityApplication {
 	                    
 	                    try {
 	                      
-	                            Controller.addStudent(name, address, ssn);
+	                            Controller.addStudent(ssn, name, address);
 	                            textArea_Student.setText("Student added");
 	                            
 	                        }catch (SQLException sql){
@@ -228,7 +228,7 @@ public class UniversityApplication {
 								}
 							}
 						}catch (SQLException sql) {
-							textArea_Student.setText("ErrorMessage");
+							textArea_Student.setText(controller.ErrorHandling(sql.getErrorCode(), ""));
 						}
 					}
 					textField_StudentSSNResult.setText("");
@@ -483,80 +483,6 @@ public class UniversityApplication {
 		comboBoxGrade.setBounds(261, 194, 49, 22);
 		panel_Register.add(comboBoxGrade);
 						
-	
-		/*JButton btnAddStudent = new JButton("Add Student");
-		btnAddStudent.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				
-				
-				
-				String ssn = textField_ssn.getText();
-
-				if (textField_ssn.getText().isEmpty()) {
-					textArea_Student.setText("Fill in SSN.");
-				} else {
-					try {
-						if (controller.getStudent(ssn) != null) {
-							textArea_Student.setText("Studen with this SSN already exists!");
-							textField_ssn.setText("");
-						} else {
-							controller.addStudent(ssn, name, address); 
-							textArea_Student.setText(name + "was added");
-							textField_StudentName.setText("");
-							textField_StudentAddress.setText("");
-							textField_ssn.setText("");
-						}
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-				
-					}	
-					}}
-
-				String studentName = textField_StudentName.getText();
-				String address  = textField_StudentAddress.getText();
-		
-				if(ssn.isEmpty() || studentName.isEmpty() || address.isEmpty()) {
-					textArea_Student.setText("Please type in all fields");
-				}else {
-					
-					try {
-						try {
-							
-							
-							controller.addStudent(ssn, studentName, address);
-							textArea_Student.setText("Course added");
-							
-							
-						}catch (SQLException sql){
-							textArea_Student.setText("ErrorMessage");
-						}	
-						
-						
-						
-					}catch (NumberFormatException ne) {
-						textArea_Student.setText("Only numbers is allowed");
-					}
-					
-				}
-				textField_courseName.setText(" ");
-				textField_courseCode.setText(" ");
-				textField_courseCredits.setText(" ");
-
-	}
-					
-			
-
-		});
-						
-				
-		
-		btnAddStudent.setBounds(257, 76, 113, 23);
-		panel_Student.add(btnAddStudent);
-		*/
-		
-	
 		
 		//ALLT PÅ FLIK REGISTER
 		
@@ -577,7 +503,7 @@ public class UniversityApplication {
 
 				 } else {
 					 try {
-						 Student student = Controller.findStudent(ssn);
+						 Student student = controller.findStudent(ssn);
 						 Course course = controller.findCourse(courseCode);
 						 
 						 if (student == null) {
@@ -590,7 +516,7 @@ public class UniversityApplication {
 							 
 						 }else {
 							 Controller.addStudentOnCourse(ssn, courseCode);
-							 textArea_Register.setText("Student with ssn" + ssn + "was added");
+							 textArea_Register.setText("Student with SSN: " + ssn + " was added");
 						 }
 					 
 					 }catch (SQLException sql) {
@@ -618,9 +544,8 @@ public class UniversityApplication {
 			    String grade = comboBoxGrade.getSelectedItem().toString();
 			   
 			    try {
-					Student student = Controller.findStudent(studentSsn);
-				
-			    Student student1 = Controller.findCurrentlyStudyingStudent(studentSsn);
+				Student student = controller.findStudent(studentSsn);
+			    Student student1 = controller.findCurrentlyStudyingStudent(studentSsn);
 			    Course  course = controller.findCourse(courseCode);
 			    
 			    
