@@ -146,10 +146,10 @@ public class UniversityApplication {
 						if(s == null) {
 							textArea_Student.setText("Unable to find a student with the given SSN, check spelling ETC");
 						} else {
-							textArea_Student.setText(s.getStudentName() + " " + "Was found");
+							textArea_Student.setText(s.getStudentName() + " " + "with adress" + s.getAddress() + " was found");
 						}
-					} catch (SQLException e1) {
-						textArea_Student.setText("An error occured please try again");
+					} catch (SQLException sql) {
+						textArea_Student.setText(controller.ErrorHandling(sql.getErrorCode(), ""));
 					}
 				}
 				
@@ -180,7 +180,7 @@ public class UniversityApplication {
 	                            textArea_Student.setText("Student added");
 	                            
 	                        }catch (SQLException sql){
-	                            textArea_Student.setText("ErrorMessage");
+	                        	textArea_Student.setText(controller.ErrorHandling(sql.getErrorCode(), ""));
 	                        }    
 	                        
 	                    
@@ -198,7 +198,43 @@ public class UniversityApplication {
 			JButton button_ShowStudentResult = new JButton("Show student result");
 			button_ShowStudentResult.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-				}
+					
+					String ssn =textField_StudentSSNResult.getText();
+					String courseCode = textField_courseCodeResult.getText();
+					
+					
+					if(ssn.isEmpty() || courseCode.isEmpty()) {
+						textArea_Student.setText("Please type in all fields");
+					}else {
+						try {
+							Student student = controller.findStudent(ssn);
+							Course course = controller.findCourse(courseCode);
+							
+							
+							if(student == null || course == null) {
+								textArea_Student.setText("The student does not exist");
+							}else {
+								ArrayList<HasStudied> hasstudiedlist = controller.showResult(ssn, courseCode);
+								if (hasstudiedlist.isEmpty()) {
+									textArea_Student.setText("Student with SSN: " + student.getSsn() + "has not examined from the course");
+								}else {
+									String sr = "";
+									for (HasStudied x : hasstudiedlist) {
+										sr = sr + x.toString() + "\n";
+										
+									}
+									textArea_Student.setText(sr);
+									
+								}
+							}
+						}catch (SQLException sql) {
+							textArea_Student.setText("ErrorMessage");
+						}
+					}
+					textField_StudentSSNResult.setText("");
+					textField_courseCodeResult.setText("");
+					}
+				
 			});
 			button_ShowStudentResult.setBounds(257, 238, 146, 23);
 			panel_Student.add(button_ShowStudentResult);
@@ -296,9 +332,9 @@ public class UniversityApplication {
 		    
 		        String courseName = textField_courseName.getText();
 		        String courseCode = textField_courseCode.getText();
-		        //String credits  = textField_courseCredits.getText();
+		        String credits  = textField_courseCredits.getText();
        
-		        if(courseCode.isEmpty() || courseName.isEmpty() || textField_courseCredits.getText().isEmpty()) {
+		        if(courseCode.isEmpty() || courseName.isEmpty() || credits.isEmpty()) {
 		            textArea_Course.setText("Please type in all fields");
 		        }else {
 		            
@@ -311,7 +347,7 @@ public class UniversityApplication {
 		                    
 		                    
 		                }catch (SQLException sql){
-		                    textArea_Course.setText("ErrorMessage");
+		                    textArea_Course.setText(Controller.ErrorHandling(sql.getErrorCode(), ""));
 		                }    
 		                                        
 		               
@@ -348,7 +384,7 @@ public class UniversityApplication {
 		        					String courseNotFound = controller.courseNotFound(courseCode);
 		        					textArea_Course.setText(courseNotFound);
 		        			}else {
-		        				ArrayList <HasStudied> courseResultList = controller.showAllStudentResult(courseCode);
+		        				ArrayList <HasStudied> courseResultList = Controller.showAllStudentResult(courseCode);
 		        			if (courseResultList.isEmpty()) {
 		        					textArea_Course.setText("No students has finished this course.");
 		        			} else {
@@ -360,7 +396,7 @@ public class UniversityApplication {
 		        			}
 		        			
 		        			}catch (SQLException sql) {
-		        				textArea_Course.setText(controller.ErrorHandling(sql.getErrorCode(), ""));
+		        				textArea_Course.setText(Controller.ErrorHandling(sql.getErrorCode(), ""));
 		        			}
 		        			}
 		        			}
@@ -592,8 +628,8 @@ public class UniversityApplication {
 					textArea_Course.setText("Please type in all fields");
 
 			   }
-			    } catch (SQLException e1) {
-					e1.printStackTrace();
+			    } catch (SQLException sql) {
+			    	textArea_Register.setText(controller.ErrorHandling(sql.getErrorCode(), ""));
 				}
 			}
 				
