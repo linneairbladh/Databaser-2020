@@ -146,7 +146,7 @@ public class UniversityApplication {
 						if(s == null) {
 							textArea_Student.setText("Unable to find a student with the given SSN, check spelling ETC");
 						} else {
-							textArea_Student.setText(s.getStudentName() + " " + " with adress " + s.getAddress() + " was found");
+							textArea_Student.setText("SSN: " + s.getSsn() + "\nStudentname: " + s.getStudentName() + "\nStudent Address: " + s.getAddress());
 						}
 					} catch (SQLException sql) {
 						textArea_Student.setText(controller.ErrorHandling(sql.getErrorCode(), ""));
@@ -422,7 +422,8 @@ public class UniversityApplication {
 		        								
 		        								if ( c != null) {
 		        									textArea_Course.setText
-		        									("Course with code: " + " " + c.getCourseCode()  + " Name: " + c.getCourseName() + " and Credits: " + c.getCredits() + " " + " was found");
+
+		        									("CourseCode: " + " " + c.getCourseCode()  + " \nName: " + c.getCourseName() + " \nCredits: " + c.getCredits());
 		        								
 		        								}else {
 		        									String courseNotFound = controller.courseNotFound(courseCode);
