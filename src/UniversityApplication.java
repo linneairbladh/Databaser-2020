@@ -361,6 +361,11 @@ public class UniversityApplication {
 					JSeparator separator_5 = new JSeparator();
 					separator_5.setBounds(41, 198, 329, 7);
 					panel_Student.add(separator_5);
+					
+					JLabel lblxxxx = new JLabel("SSN Format: 000000-XXXX");
+					lblxxxx.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 10));
+					lblxxxx.setBounds(58, 0, 162, 14);
+					panel_Student.add(lblxxxx);
 		
 		JPanel panel_Course = new JPanel();
 		tabbedPane.addTab("Course", null, panel_Course, null);
@@ -643,7 +648,7 @@ public class UniversityApplication {
 
 			    }
 			    } catch (SQLException sql) {
-			    	textArea_Register.setText(controller.ErrorHandling(sql.getErrorCode(), ""));
+			    	sql.printStackTrace();
 				}
 			}
 				
