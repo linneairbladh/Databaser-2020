@@ -297,7 +297,7 @@ public class UniversityApplication {
 							}else {
 								ArrayList<HasStudied> hasstudiedlist = controller.showResult(ssn, courseCode);
 								if (hasstudiedlist.isEmpty()) {
-									textArea_Student.setText("Student with SSN: " + student.getSsn() + "has not examined from the course");
+									textArea_Student.setText("Student with SSN: " + student.getSsn() + " has not examined from the course");
 								}else {
 									String sr = "";
 									for (HasStudied x : hasstudiedlist) {
