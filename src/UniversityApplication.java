@@ -91,6 +91,7 @@ public class UniversityApplication {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 494);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -100,33 +101,33 @@ public class UniversityApplication {
 		tabbedPane.setBounds(0, 0, 434, 455);
 		frame.getContentPane().add(tabbedPane);;
 			
-			JPanel panel_Overview = new JPanel();
-			tabbedPane.addTab("Overview", null, panel_Overview, null);
-			panel_Overview.setLayout(null);
+		JPanel panel_Overview = new JPanel();
+		tabbedPane.addTab("Overview", null, panel_Overview, null);
+		panel_Overview.setLayout(null);
 			
 			
-			table_Course = new JTable(new DefaultTableModel(new String[] { "Course code", "Course name" }, 0));						
-			JScrollPane courseScrollPane = new JScrollPane(table_Course);
-			courseScrollPane.setBounds(41, 86, 345, 114);
-			panel_Overview.add(courseScrollPane);
+		table_Course = new JTable(new DefaultTableModel(new String[] { "Course code", "Course name" }, 0));						
+		JScrollPane courseScrollPane = new JScrollPane(table_Course);
+		courseScrollPane.setBounds(41, 86, 345, 114);
+		panel_Overview.add(courseScrollPane);
 			
-			table_Student = new JTable(new DefaultTableModel(new String[] { "SSN", "Student name", "Address" }, 0));		
-			JScrollPane studentScrollPane = new JScrollPane(table_Student);
-			studentScrollPane.setBounds(41, 281, 345, 114);
-			panel_Overview.add(studentScrollPane);
+		table_Student = new JTable(new DefaultTableModel(new String[] { "SSN", "Student name", "Address" }, 0));		
+		JScrollPane studentScrollPane = new JScrollPane(table_Student);
+		studentScrollPane.setBounds(41, 281, 345, 114);
+		panel_Overview.add(studentScrollPane);
 
 			
-			//Knapp för att visa alla kurser
-			JButton btnShowAllCourses = new JButton("Show all courses");
-			btnShowAllCourses.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					try {
+		//Button - Show all Courses
+		JButton btnShowAllCourses = new JButton("Show all courses");
+		btnShowAllCourses.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
 
-						DefaultTableModel courseTable = (DefaultTableModel) table_Course.getModel();
-						courseTable.setRowCount(0);
-						for (Course c : controller.getAllCourses()) {
-							courseTable.addRow(new String[] { c.getCourseCode(), c.getCourseName() });
-						}
+					DefaultTableModel courseTable = (DefaultTableModel) table_Course.getModel();
+					courseTable.setRowCount(0);
+					for (Course c : controller.getAllCourses()) {
+						courseTable.addRow(new String[] { c.getCourseCode(), c.getCourseName() });
+					}
 						
 					} catch (Exception e1) {
 						e1.printStackTrace();
@@ -139,7 +140,7 @@ public class UniversityApplication {
 			btnShowAllCourses.setBounds(125, 52, 163, 23);
 			panel_Overview.add(btnShowAllCourses);
 			
-			//Knapp för att visa alla studenter
+			//Button Show All Student
 			JButton btnShowAllStudents = new JButton("Show all students");
 			btnShowAllStudents.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -212,7 +213,7 @@ public class UniversityApplication {
 			textField_StudentAddress.setBounds(124, 88, 96, 20);
 			panel_Student.add(textField_StudentAddress);
 			
-			//Knapp för find student
+			//Button - Find Student
 			JButton btnFindStudent = new JButton("Find Student");
 			btnFindStudent.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -242,7 +243,7 @@ public class UniversityApplication {
 			panel_Student.setLayout(null);
 			panel_Student.add(btnFindStudent);
 			
-			//Knapp för add student
+			//Button - Add Student
 			JButton btnAddStudent = new JButton("Add Student");
 			btnAddStudent.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -275,7 +276,7 @@ public class UniversityApplication {
 			btnAddStudent.setBounds(257, 13, 113, 23);
 			panel_Student.add(btnAddStudent);
 			
-			//Knapp för att visa en students resultat
+			//Button - Show Student Result
 			JButton button_ShowStudentResult = new JButton("Show student result");
 			button_ShowStudentResult.setFont(new Font("Tahoma", Font.BOLD, 10));
 			button_ShowStudentResult.addActionListener(new ActionListener() {
@@ -412,7 +413,7 @@ public class UniversityApplication {
 		separator.setBounds(71, 198, 329, 7);
 		panel_Course.add(separator);
 		
-		//Knapp för Add Course
+		//Button - Add Course
 		JButton button_AddCourse_1 = new JButton("Add Course");
 		button_AddCourse_1.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
@@ -452,7 +453,7 @@ public class UniversityApplication {
 	    panel_Course.add(button_AddCourse_1); 
 	    
 	    
-	    //Knapp show all results, för en kurs
+	    //Button - Show All Results for Course
 	    JButton button_ShowAllResults = new JButton("Show all results");
 	    button_ShowAllResults.setFont(new Font("Tahoma", Font.BOLD, 10));
 	    button_ShowAllResults.addActionListener(new ActionListener() {
@@ -493,7 +494,7 @@ public class UniversityApplication {
 	    		panel_Course.add(button_ShowAllResults);
 		        		
 		        		
-		//Knapp Find Course
+		//Button - Find Course
 		JButton button_findCourse = new JButton("Find Course");
 		
 				button_findCourse.addActionListener(new ActionListener() {
@@ -579,6 +580,7 @@ public class UniversityApplication {
 		textArea_Register.setBounds(50, 302, 289, 114);
 		panel_Register.add(textArea_Register);
 		
+		//Button - Register Student on Course
 		JButton button_RegisterStudentCourse = new JButton("Register student on course");
 		button_RegisterStudentCourse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -705,7 +707,5 @@ public class UniversityApplication {
 		textField_studentSSNRegister.setBounds(214, 42, 96, 20);
 		panel_Register.add(textField_studentSSNRegister);
 	
-		
-		//SLUT PÅ FLIK ASSIGNMENT 2
 	}
 }
