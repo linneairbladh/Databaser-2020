@@ -255,7 +255,7 @@ public class UniversityApplication {
 	                    try {
 	                      
 	                            Controller.addStudent(ssn, name, address);
-	                            textArea_Student.setText("Student added");
+	                            textArea_Student.setText("Following student added; " +" \nStudentSSN :" + ssn + " \nStudent :" + name + " \nStudentAdress :" + address );
 	                            
 	                        }catch (SQLException sql){
 	                        	textArea_Student.setText(controller.ErrorHandling(sql.getErrorCode(), ""));
@@ -594,7 +594,7 @@ public class UniversityApplication {
 							 
 						 }else {
 							 Controller.addStudentOnCourse(ssn, courseCode);
-							 textArea_Register.setText("Student with SSN: " + ssn + " was added");
+							 textArea_Register.setText("StudentName: " + student.getStudentName() + "\nStudentSSN: " + student.getSsn() + "\nWas registred on course: " + course.getCourseName());
 						 }
 					 
 					 }catch (SQLException sql) {
