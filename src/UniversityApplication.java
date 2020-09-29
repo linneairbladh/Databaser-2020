@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JPanel;
 import java.awt.FlowLayout;
 import java.awt.BorderLayout;
@@ -26,6 +27,8 @@ import javax.swing.JTextArea;
 import javax.swing.JFormattedTextField;
 import java.awt.Color;
 import java.awt.Font;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
 
 public class UniversityApplication {
 
@@ -52,6 +55,8 @@ public class UniversityApplication {
 	private JTextField textField_StudentSSNResult;
 	private JTextField textField_courseCodeRegister;
 	private JTextField textField_studentSSNRegister;
+	private JTable table_Course;
+	private JTable table_Student;
 
 
 	/**
@@ -93,7 +98,80 @@ public class UniversityApplication {
 	
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(0, 0, 434, 455);
-		frame.getContentPane().add(tabbedPane);
+		frame.getContentPane().add(tabbedPane);;
+			
+			JPanel panel_Overview = new JPanel();
+			tabbedPane.addTab("Overview", null, panel_Overview, null);
+			panel_Overview.setLayout(null);
+			
+			
+			table_Course = new JTable(new DefaultTableModel(new String[] { "Course code", "Course name" }, 0));						
+			JScrollPane courseScrollPane = new JScrollPane(table_Course);
+			courseScrollPane.setBounds(41, 86, 345, 114);
+			panel_Overview.add(courseScrollPane);
+			
+			table_Student = new JTable(new DefaultTableModel(new String[] { "SSN", "Student name", "Address" }, 0));		
+			JScrollPane studentScrollPane = new JScrollPane(table_Student);
+			studentScrollPane.setBounds(41, 281, 345, 114);
+			panel_Overview.add(studentScrollPane);
+
+			
+			//Knapp för att visa alla kurser
+			JButton btnShowAllCourses = new JButton("Show all courses");
+			btnShowAllCourses.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					try {
+
+						DefaultTableModel courseTable = (DefaultTableModel) table_Course.getModel();
+						courseTable.setRowCount(0);
+						for (Course c : controller.getAllCourses()) {
+							courseTable.addRow(new String[] { c.getCourseCode(), c.getCourseName() });
+						}
+						
+					} catch (Exception e1) {
+						e1.printStackTrace();
+
+					}
+
+					
+				}
+			});
+			btnShowAllCourses.setBounds(125, 52, 163, 23);
+			panel_Overview.add(btnShowAllCourses);
+			
+			//Knapp för att visa alla studenter
+			JButton btnShowAllStudents = new JButton("Show all students");
+			btnShowAllStudents.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					try {
+
+						DefaultTableModel studentTable = (DefaultTableModel) table_Student.getModel();
+						studentTable.setRowCount(0);
+						for (Student s : controller.getAllStudents()) {
+							studentTable.addRow(new String[] { s.getSsn(), s.getStudentName(), s.getAddress() });
+						}
+						
+					} catch (Exception e1) {
+						e1.printStackTrace();
+
+					}
+
+				}
+			});
+			btnShowAllStudents.setBounds(125, 247, 163, 23);
+			panel_Overview.add(btnShowAllStudents);
+			
+//			table_Course = new JTable(new DefaultTableModel(new String[] { "Course code", "Course name" }, 0));						
+//			JScrollPane courseScrollPane = new JScrollPane(table_Course);
+//			courseScrollPane.setBounds(104, 86, 212, 114);
+//			panel_Overview.add(courseScrollPane);
+			
+			
+//			table_Student = new JTable(new DefaultTableModel(new String[] { "SSN", "Student name" }, 0));		
+//			JScrollPane studentScrollPane = new JScrollPane(table_Student);
+//			studentScrollPane.setBounds(247, 304, 80, 44);
+//			panel_Overview.add(studentScrollPane);
+			
 		
 			//fliken student
 			JPanel panel_Student = new JPanel();
@@ -614,6 +692,7 @@ public class UniversityApplication {
 		textField_studentSSNRegister.setColumns(10);
 		textField_studentSSNRegister.setBounds(214, 42, 96, 20);
 		panel_Register.add(textField_studentSSNRegister);
+	
 		
 		//SLUT PÅ FLIK ASSIGNMENT 2
 	}
