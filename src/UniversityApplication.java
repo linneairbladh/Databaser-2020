@@ -217,6 +217,9 @@ public class UniversityApplication {
 			btnFindStudent.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 				String ssn = textField_studentFind.getText();
+				if(ssn.isEmpty()){
+					textArea_Student.setText("Please type in all fields");
+				}
 				if(!ssn.isEmpty()) {
 					try {
 						Student s = controller.findStudent(ssn);
