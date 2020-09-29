@@ -271,7 +271,7 @@ public class UniversityApplication {
 							
 							
 							if(student == null || course == null) {
-								textArea_Student.setText("The student does not exist");
+								textArea_Student.setText("That student or course does not exist");
 							}else {
 								ArrayList<HasStudied> hasstudiedlist = Controller.showResult(ssn, courseCode);
 								if (hasstudiedlist.isEmpty()) {
