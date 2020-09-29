@@ -642,7 +642,7 @@ public class UniversityApplication {
 
 			    }
 			    } catch (SQLException sql) {
-			    	sql.printStackTrace();
+			    	textArea_Register.setText(controller.ErrorHandling(sql.getErrorCode(), ""));
 				}
 			}
 				
