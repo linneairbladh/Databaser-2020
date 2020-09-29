@@ -419,8 +419,7 @@ public class UniversityApplication {
 		        if(courseCode.isEmpty() || courseName.isEmpty() || credits.isEmpty()) {
 		            textArea_Course.setText("Please type in all fields");
 		        }else {
-		            
-		            try {
+		    
 		                try {
 		                    
 		                    Integer credit = Integer.parseInt(textField_courseCredits.getText());
@@ -430,68 +429,66 @@ public class UniversityApplication {
 		                    
 		                }catch (SQLException sql){
 		                    textArea_Course.setText(Controller.ErrorHandling(sql.getErrorCode(), ""));
-		                }    
-		                                        
-		               
-		            }catch (NumberFormatException ne) {
-		                textArea_Course.setText("Only numbers is allowed");
+		   
+			            }catch (NumberFormatException ne) {
+			                textArea_Course.setText("Only numbers is allowed");
 		            }
 		            
 		        }
-		        textField_courseName.setText(" ");
-		        textField_courseCode.setText(" ");
-		        textField_courseCredits.setText(" ");
+		        textField_courseName.setText("");
+		        textField_courseCode.setText("");
+		        textField_courseCredits.setText("");
 
 		    }
 		           
 		});
 		
-		        button_AddCourse_1.setBounds(287, 31, 113, 23);	
-		        panel_Course.add(button_AddCourse_1); 
-		        
-		        
-		        //Knapp show all results, för en kurs
-		        JButton button_ShowAllResults = new JButton("Show all results");
-		        button_ShowAllResults.setFont(new Font("Tahoma", Font.BOLD, 10));
-		        button_ShowAllResults.addActionListener(new ActionListener() {
-		        	public void actionPerformed(ActionEvent e) {
-		        				
-		        	String courseCode = textField_showResult.getText();
-		        			if (courseCode.isEmpty()) {
-		        				textArea_Course.setText("Please fill in course code.");
-		        			}else {
-		        				try {
-		        					Course course = controller.findCourse(courseCode);
-		        				
-		        				if (course == null ) {
-		        					String courseNotFound = controller.courseNotFound(courseCode);
-		        					textArea_Course.setText(courseNotFound);
-		        			}else {
-		        				ArrayList <HasStudied> courseResultList = controller.showAllStudentResult(courseCode);
-		        			if (courseResultList.isEmpty()) {
-		        					textArea_Course.setText("No students has finished this course.");
-		        			} else {
-
-		        				for (HasStudied hs : courseResultList) {
-
-		        					textArea_Course.setText("Student : " + hs.getStudentSsn() + " course : " + hs.getCourseCode() + " grade : " + hs.getGrade());
-
-
-		        					textArea_Course.append("Student: " + hs.getStudentSsn() + " grade: " + hs.getGrade() + "\n");
-
-		        				}
-		        			}
-		        				
-		        			}
-		        			
-		        			}catch (SQLException sql) {
-		        				textArea_Course.setText(Controller.ErrorHandling(sql.getErrorCode(), ""));
-		        			}
-		        			}
-		        			}
-		        		});
-		        		button_ShowAllResults.setBounds(267, 248, 133, 23);
-		        		panel_Course.add(button_ShowAllResults);
+	    button_AddCourse_1.setBounds(287, 31, 113, 23);	
+	    panel_Course.add(button_AddCourse_1); 
+	    
+	    
+	    //Knapp show all results, för en kurs
+	    JButton button_ShowAllResults = new JButton("Show all results");
+	    button_ShowAllResults.setFont(new Font("Tahoma", Font.BOLD, 10));
+	    button_ShowAllResults.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent e) {
+	    				
+	    	String courseCode = textField_showResult.getText();
+	    			if (courseCode.isEmpty()) {
+	    				textArea_Course.setText("Please fill in course code.");
+	    			}else {
+	    				try {
+	    					Course course = controller.findCourse(courseCode);
+	    				
+	    				if (course == null ) {
+	    					String courseNotFound = controller.courseNotFound(courseCode);
+	    					textArea_Course.setText(courseNotFound);
+	    			}else {
+	    				ArrayList <HasStudied> courseResultList = controller.showAllStudentResult(courseCode);
+	    			if (courseResultList.isEmpty()) {
+	    					textArea_Course.setText("No students has finished this course.");
+	    			} else {
+	
+	    				for (HasStudied hs : courseResultList) {
+	
+	    					textArea_Course.setText("Student : " + hs.getStudentSsn() + " course : " + hs.getCourseCode() + " grade : " + hs.getGrade());
+	
+	
+	    					textArea_Course.append("Student: " + hs.getStudentSsn() + " grade: " + hs.getGrade() + "\n");
+	
+	    				}
+	    			}
+	    				
+	    			}
+	    			
+	    			}catch (SQLException sql) {
+	    				textArea_Course.setText(Controller.ErrorHandling(sql.getErrorCode(), ""));
+	    			}
+	    			}
+	    			}
+	    		});
+	    		button_ShowAllResults.setBounds(267, 248, 133, 23);
+	    		panel_Course.add(button_ShowAllResults);
 		        		
 		        		
 		        		//Knapp Find Course
