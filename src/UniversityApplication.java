@@ -433,7 +433,7 @@ public class UniversityApplication {
 	    button_ShowAllResults.setFont(new Font("Tahoma", Font.BOLD, 10));
 	    button_ShowAllResults.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
-	    				
+	    	textArea_Course.setText("");			
 	    	String courseCode = textField_showResult.getText();
 	    			if (courseCode.isEmpty()) {
 	    				textArea_Course.setText("Please fill in course code.");
