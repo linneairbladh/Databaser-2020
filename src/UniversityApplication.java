@@ -607,16 +607,15 @@ public class UniversityApplication {
 				String ssn = textField_StudentSSN2.getText();
 				String courseCode = textField_courseCode2.getText();
 			    String grade = comboBoxGrade.getSelectedItem().toString();
-			   
+			    
+			    if(courseCode.isEmpty() || ssn.isEmpty() || grade.isBlank()) {
+					textArea_Register.setText("Please type in all fields");
+			    } else {
 			    try {
 				Student student = Controller.findStudent(ssn);
 			    Course  course = Controller.findCourse(courseCode);
 			    
-			    
-			    if(courseCode.isEmpty() || ssn.isEmpty() || grade.isBlank()) {
-					textArea_Register.setText("Please type in all fields");
-
-			   }  if (student == null) {
+			     if (student == null) {
 					 String studentNotFound = Controller.studentNotFound(ssn);
 					 textArea_Register.setText(studentNotFound);
 				
@@ -633,7 +632,7 @@ public class UniversityApplication {
 			    	textArea_Register.setText(Controller.ErrorHandling(sql.getErrorCode(), ""));
 				}
 			}
-				
+			}
 			});
 		btnRegisterStudent_1.setBounds(84, 227, 226, 23);
 		panel_Register.add(btnRegisterStudent_1);
