@@ -471,8 +471,10 @@ public class UniversityApplication {
 		        			if (courseResultList.isEmpty()) {
 		        					textArea_Course.setText("No students has finished this course.");
 		        			} else {
+
 		        				for (HasStudied hs : courseResultList) {
 		        					textArea_Course.setText("Student : " + hs.getStudentSsn() + " course : " + hs.getCourseCode() + " grade : " + hs.getGrade());
+
 		        				}
 		        			}
 		        				
@@ -622,20 +624,24 @@ public class UniversityApplication {
 				
 				
 				
-				String studentSsn = textField_StudentSSN2.getText();
+				String ssn = textField_StudentSSN2.getText();
 				String courseCode = textField_courseCode2.getText();
 			    String grade = comboBoxGrade.getSelectedItem().toString();
 			   
 			    try {
-				Student student = controller.findStudent(studentSsn);
-			    Student student1 = controller.findCurrentlyStudyingStudent(studentSsn);
+				Student student = controller.findStudent(ssn);
+			    Student student1 = controller.findCurrentlyStudyingStudent(ssn);
 			    Course  course = controller.findCourse(courseCode);
 			    
 			    
-			    if(courseCode.isEmpty() || studentSsn.isEmpty() || grade.isBlank()) {
-					textArea_Course.setText("Please type in all fields");
+			    if(courseCode.isEmpty() || ssn.isEmpty() || grade.isBlank()) {
+					textArea_Register.setText("Please type in all fields");
 
 			   }
+			    else {	controller.addStudentOnFinishedCourse(ssn, courseCode, grade);
+			    	textArea_Register.setText("The following student was added; " + "\nSSN: " + student.getSsn() + "\nStudentname: " + student.getStudentName() + "\nTo course: " + "\nCourseCode: " + course.getCourseCode() + "\nCourseName: " + course.getCourseName());
+
+			    }
 			    } catch (SQLException sql) {
 			    	textArea_Register.setText(controller.ErrorHandling(sql.getErrorCode(), ""));
 				}
