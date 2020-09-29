@@ -473,7 +473,11 @@ public class UniversityApplication {
 		        			} else {
 
 		        				for (HasStudied hs : courseResultList) {
+
 		        					textArea_Course.setText("Student : " + hs.getStudentSsn() + " course : " + hs.getCourseCode() + " grade : " + hs.getGrade());
+
+
+		        					textArea_Course.append("Student: " + hs.getStudentSsn() + " grade: " + hs.getGrade() + "\n");
 
 		        				}
 		        			}
