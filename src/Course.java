@@ -9,6 +9,9 @@ public class Course {
 	private String courseCode; 
 	private String courseName;
 	private int credits;
+	
+	public Course() {
+	}
 
 	//Constructor för Course 
 	public Course(String courseCode, String courseName, int credits) {
