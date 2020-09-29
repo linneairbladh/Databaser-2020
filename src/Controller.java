@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Controller {
 	
 	static DAL dataAccessLayer = new DAL();
-	static ErrorHandlingSQL error = new ErrorHandlingSQL();
+	
     
 	//Constructor
     public Controller() {
@@ -79,7 +79,7 @@ public class Controller {
 	
 	//Errorhandling
 	public static String ErrorHandling (int failureCode, String prefix)  {
-			return  error.MessageFailureCode(failureCode, prefix);
+			return ErrorHandlingSQL.MessageFailureCode(failureCode, prefix);
 	}
 
 }
