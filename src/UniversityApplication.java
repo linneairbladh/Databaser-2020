@@ -631,7 +631,6 @@ public class UniversityApplication {
 			   
 			    try {
 				Student student = controller.findStudent(ssn);
-			    Student student1 = controller.findCurrentlyStudyingStudent(ssn);
 			    Course  course = controller.findCourse(courseCode);
 			    
 			    
@@ -640,7 +639,7 @@ public class UniversityApplication {
 
 			   }
 			    else {	controller.addStudentOnFinishedCourse(ssn, courseCode, grade);
-			    	textArea_Register.setText("The following student was added; " + "\nSSN: " + student.getSsn() + "\nStudentname: " + student.getStudentName() + "\nTo course: " + "\nCourseCode: " + course.getCourseCode() + "\nCourseName: " + course.getCourseName());
+			    	textArea_Register.setText("The results for following student was added; " + "\nSSN: " + student.getSsn() + "\nStudentname: " + student.getStudentName() + "\nFor course: " + "\nCourseCode: " + course.getCourseCode() + "\nCourseName: " + course.getCourseName());
 
 			    }
 			    } catch (SQLException sql) {
