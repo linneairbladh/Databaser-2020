@@ -266,9 +266,9 @@ public class UniversityApplication {
 	                        
 	                    
 	                }
-					 	textField_StudentName.setText(" ");
-					 	textField_StudentAddress.setText(" ");
-					 	textField_ssn.setText(" ");
+					 	textField_StudentName.setText("");
+					 	textField_StudentAddress.setText("");
+					 	textField_ssn.setText("");
 
 	            }
 			});
@@ -277,6 +277,7 @@ public class UniversityApplication {
 			
 			//Knapp för att visa en students resultat
 			JButton button_ShowStudentResult = new JButton("Show student result");
+			button_ShowStudentResult.setFont(new Font("Tahoma", Font.BOLD, 10));
 			button_ShowStudentResult.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
@@ -317,7 +318,7 @@ public class UniversityApplication {
 					}
 				
 			});
-			button_ShowStudentResult.setBounds(257, 238, 146, 23);
+			button_ShowStudentResult.setBounds(257, 238, 162, 23);
 			panel_Student.add(button_ShowStudentResult);
 
 			JLabel lblFieldsMarkedWith = new JLabel("Fields marked with (*) are mandatory to fill in.");
@@ -451,6 +452,7 @@ public class UniversityApplication {
 		        
 		        //Knapp show all results, för en kurs
 		        JButton button_ShowAllResults = new JButton("Show all results");
+		        button_ShowAllResults.setFont(new Font("Tahoma", Font.BOLD, 10));
 		        button_ShowAllResults.addActionListener(new ActionListener() {
 		        	public void actionPerformed(ActionEvent e) {
 		        				
@@ -469,8 +471,14 @@ public class UniversityApplication {
 		        			if (courseResultList.isEmpty()) {
 		        					textArea_Course.setText("No students has finished this course.");
 		        			} else {
+
 		        				for (HasStudied hs : courseResultList) {
+
 		        					textArea_Course.setText("Student : " + hs.getStudentSsn() + " course : " + hs.getCourseCode() + " grade : " + hs.getGrade());
+
+
+		        					textArea_Course.append("Student: " + hs.getStudentSsn() + " grade: " + hs.getGrade() + "\n");
+
 		        				}
 		        			}
 		        				
@@ -482,7 +490,7 @@ public class UniversityApplication {
 		        			}
 		        			}
 		        		});
-		        		button_ShowAllResults.setBounds(287, 250, 113, 23);
+		        		button_ShowAllResults.setBounds(267, 248, 133, 23);
 		        		panel_Course.add(button_ShowAllResults);
 		        		
 		        		
@@ -620,20 +628,24 @@ public class UniversityApplication {
 				
 				
 				
-				String studentSsn = textField_StudentSSN2.getText();
+				String ssn = textField_StudentSSN2.getText();
 				String courseCode = textField_courseCode2.getText();
 			    String grade = comboBoxGrade.getSelectedItem().toString();
 			   
 			    try {
-				Student student = controller.findStudent(studentSsn);
-			    Student student1 = controller.findCurrentlyStudyingStudent(studentSsn);
+				Student student = controller.findStudent(ssn);
+			    Student student1 = controller.findCurrentlyStudyingStudent(ssn);
 			    Course  course = controller.findCourse(courseCode);
 			    
 			    
-			    if(courseCode.isEmpty() || studentSsn.isEmpty() || grade.isBlank()) {
-					textArea_Course.setText("Please type in all fields");
+			    if(courseCode.isEmpty() || ssn.isEmpty() || grade.isBlank()) {
+					textArea_Register.setText("Please type in all fields");
 
 			   }
+			    else {	controller.addStudentOnFinishedCourse(ssn, courseCode, grade);
+			    	textArea_Register.setText("The following student was added; " + "\nSSN: " + student.getSsn() + "\nStudentname: " + student.getStudentName() + "\nTo course: " + "\nCourseCode: " + course.getCourseCode() + "\nCourseName: " + course.getCourseName());
+
+			    }
 			    } catch (SQLException sql) {
 			    	textArea_Register.setText(controller.ErrorHandling(sql.getErrorCode(), ""));
 				}

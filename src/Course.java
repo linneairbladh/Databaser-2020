@@ -53,7 +53,7 @@ public class Course {
 		String password = "password";
 		Connection con = DriverManager.getConnection(url,user,password);
 		
-		String query = "SELECT * FROM Student";
+		String query = "SELECT * FROM HasStudied";
 		
 		PreparedStatement ps = con.prepareStatement(query);
 		
