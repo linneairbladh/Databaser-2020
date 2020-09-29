@@ -85,10 +85,7 @@ public class Controller {
 			return  error.MessageFailureCode(failureCode, prefix);
 		}
 
-		public static void removeStudentFromStudies(String ssn, String courseCode) throws SQLException {
-			 dataAccessLayer.removeStudentFromStudies(ssn, courseCode);
-			
-		}
+		
 	
 	
 
