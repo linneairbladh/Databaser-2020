@@ -266,9 +266,9 @@ public class UniversityApplication {
 	                        
 	                    
 	                }
-					 	textField_StudentName.setText(" ");
-					 	textField_StudentAddress.setText(" ");
-					 	textField_ssn.setText(" ");
+					 	textField_StudentName.setText("");
+					 	textField_StudentAddress.setText("");
+					 	textField_ssn.setText("");
 
 	            }
 			});
