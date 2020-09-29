@@ -73,16 +73,21 @@ public class Controller {
 		}
 	
 	
-		public static String courseNotFound(String string) {
+		public static String courseNotFound(String string) throws SQLException{
 			return dataAccessLayer.courseNotFound(string);
 		}
 
-		public static String studentNotFound(String string) {
+		public static String studentNotFound(String string) throws SQLException {
 			return dataAccessLayer.studentNotFound(string);
 		}
 		
-		public static String ErrorHandling (int failureCode, String prefix) {
+		public static String ErrorHandling (int failureCode, String prefix)  {
 			return  error.MessageFailureCode(failureCode, prefix);
+		}
+
+		public static void removeStudentFromStudies(String ssn, String courseCode) throws SQLException {
+			 dataAccessLayer.removeStudentFromStudies(ssn, courseCode);
+			
 		}
 	
 	
