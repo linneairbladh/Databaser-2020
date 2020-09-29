@@ -625,7 +625,7 @@ public class UniversityApplication {
 			    
 			    
 				 } else {	Controller.addStudentOnFinishedCourse(ssn, courseCode, grade);
-			    	textArea_Register.setText("The results for following student was added; " + "\nSSN: " + student.getSsn() + "\nStudentname: " + student.getStudentName() + "\nFor course: " + "\nCourseCode: " + course.getCourseCode() + "\nCourseName: " + course.getCourseName());
+			    	textArea_Register.setText("The result [" + grade + "] for following student was added; " + "\nSSN: " + student.getSsn() + "\nStudentname: " + student.getStudentName() + "\nFor course: " + "\nCourseCode: " + course.getCourseCode() + "\nCourseName: " + course.getCourseName());
 
 			    }
 			    } catch (SQLException sql) {
