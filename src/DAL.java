@@ -198,7 +198,7 @@ public class DAL {
 			HasStudied hs = new HasStudied(ssn1, courseCode1, grade);
 			courseResultList.add(hs);
 		}
-		  sql.close();
+		  //sql.close();
 	      conn.close();      
 	      return courseResultList;
 	}
