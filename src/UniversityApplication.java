@@ -469,7 +469,7 @@ public class UniversityApplication {
 		        					textArea_Course.setText("No students has finished this course.");
 		        			} else {
 		        				for (HasStudied hs : courseResultList) {
-		        					textArea_Course.setText("Student : " + hs.getStudentSsn() + " course : " + hs.getCourseCode() + " grade : " + hs.getGrade());
+		        					textArea_Course.append("Student: " + hs.getStudentSsn() + " grade: " + hs.getGrade() + "\n");
 		        				}
 		        			}
 		        				
