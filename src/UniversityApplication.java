@@ -321,51 +321,51 @@ public class UniversityApplication {
 			button_ShowStudentResult.setBounds(257, 238, 162, 23);
 			panel_Student.add(button_ShowStudentResult);
 
-			JLabel lblFieldsMarkedWith = new JLabel("Fields marked with (*) are mandatory to fill in.");
-			lblFieldsMarkedWith.setFont(new Font("Tahoma", Font.BOLD, 11));
-			lblFieldsMarkedWith.setForeground(new Color(178, 34, 34));
-			lblFieldsMarkedWith.setBounds(21, 298, 322, 14);
-			panel_Student.add(lblFieldsMarkedWith);
+		JLabel lblFieldsMarkedWith = new JLabel("Fields marked with (*) are mandatory to fill in.");
+		lblFieldsMarkedWith.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblFieldsMarkedWith.setForeground(new Color(178, 34, 34));
+		lblFieldsMarkedWith.setBounds(21, 298, 322, 14);
+		panel_Student.add(lblFieldsMarkedWith);
 			
-					textField_studentFind = new JTextField();
-					textField_studentFind.setBounds(124, 165, 96, 20);
-					panel_Student.add(textField_studentFind);
-					textField_studentFind.setColumns(10);
-					
-					JLabel lblNewLabel = new JLabel("Insert SSN in the box below to find Student");
-					lblNewLabel.setBounds(25, 145, 255, 14);
-					panel_Student.add(lblNewLabel);
-					
-					JSeparator separator_4 = new JSeparator();
-					separator_4.setBounds(41, 127, 329, 7);
-					panel_Student.add(separator_4);
-					
-					textField_courseCodeResult = new JTextField();
-					textField_courseCodeResult.setColumns(10);
-					textField_courseCodeResult.setBounds(120, 257, 124, 20);
-					panel_Student.add(textField_courseCodeResult);
-					
-					JLabel label_4 = new JLabel("Course code * ");
-					label_4.setBounds(18, 260, 85, 14);
-					panel_Student.add(label_4);
-					
-					JLabel label_5 = new JLabel("Student SSN *");
-					label_5.setBounds(18, 225, 85, 14);
-					panel_Student.add(label_5);
-					
-					textField_StudentSSNResult = new JTextField();
-					textField_StudentSSNResult.setColumns(10);
-					textField_StudentSSNResult.setBounds(120, 222, 124, 20);
-					panel_Student.add(textField_StudentSSNResult);
-					
-					JSeparator separator_5 = new JSeparator();
-					separator_5.setBounds(41, 198, 329, 7);
-					panel_Student.add(separator_5);
-					
-					JLabel lblxxxx = new JLabel("SSN Format: 000000-XXXX");
-					lblxxxx.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 10));
-					lblxxxx.setBounds(58, 0, 162, 14);
-					panel_Student.add(lblxxxx);
+		textField_studentFind = new JTextField();
+		textField_studentFind.setBounds(124, 165, 96, 20);
+		panel_Student.add(textField_studentFind);
+		textField_studentFind.setColumns(10);
+		
+		JLabel lblNewLabel = new JLabel("Insert SSN in the box below to find Student");
+		lblNewLabel.setBounds(25, 145, 255, 14);
+		panel_Student.add(lblNewLabel);
+		
+		JSeparator separator_4 = new JSeparator();
+		separator_4.setBounds(41, 127, 329, 7);
+		panel_Student.add(separator_4);
+		
+		textField_courseCodeResult = new JTextField();
+		textField_courseCodeResult.setColumns(10);
+		textField_courseCodeResult.setBounds(120, 257, 124, 20);
+		panel_Student.add(textField_courseCodeResult);
+		
+		JLabel label_4 = new JLabel("Course code * ");
+		label_4.setBounds(18, 260, 85, 14);
+		panel_Student.add(label_4);
+		
+		JLabel label_5 = new JLabel("Student SSN *");
+		label_5.setBounds(18, 225, 85, 14);
+		panel_Student.add(label_5);
+		
+		textField_StudentSSNResult = new JTextField();
+		textField_StudentSSNResult.setColumns(10);
+		textField_StudentSSNResult.setBounds(120, 222, 124, 20);
+		panel_Student.add(textField_StudentSSNResult);
+		
+		JSeparator separator_5 = new JSeparator();
+		separator_5.setBounds(41, 198, 329, 7);
+		panel_Student.add(separator_5);
+		
+		JLabel lblxxxx = new JLabel("SSN Format: 000000-XXXX");
+		lblxxxx.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 10));
+		lblxxxx.setBounds(58, 0, 162, 14);
+		panel_Student.add(lblxxxx);
 		
 		JPanel panel_Course = new JPanel();
 		tabbedPane.addTab("Course", null, panel_Course, null);
@@ -496,68 +496,68 @@ public class UniversityApplication {
 	    		panel_Course.add(button_ShowAllResults);
 		        		
 		        		
-		        		//Knapp Find Course
-		        		JButton button_findCourse = new JButton("Find Course");
-		        		
-		        				button_findCourse.addActionListener(new ActionListener() {
-		        					public void actionPerformed(ActionEvent e) {
-		        						
-		        						String courseCode = textField_findCourse.getText();
-		        						
-		        						if(courseCode.isEmpty()) {
-		        							textArea_Course.setText("Please fill in course code.");
-		        						}else {
-		        							
-		        							try {
-		        								Course c = controller.findCourse(courseCode);
-		        								
-		        								if ( c != null) {
-		        									textArea_Course.setText
-		        									("The following Course found; " + "\nCourseCode: " + " " + c.getCourseCode()  + " \nName: " + c.getCourseName() + " \nCredits: " + c.getCredits());
-		        								
-		        								}else {
-		        									String courseNotFound = controller.courseNotFound(courseCode);
-		        									textArea_Course.setText(courseNotFound);
-		        								}
-		        									
-		        							} catch (SQLException sql) {
-		        								textArea_Course.setText(controller.ErrorHandling(sql.getErrorCode(), ""));
-		        							}
-		        						}
-		        										
-		        					}
-		        				});
+		//Knapp Find Course
+		JButton button_findCourse = new JButton("Find Course");
+		
+				button_findCourse.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+						String courseCode = textField_findCourse.getText();
+						
+						if(courseCode.isEmpty()) {
+							textArea_Course.setText("Please fill in course code.");
+						}else {
+							
+							try {
+								Course c = controller.findCourse(courseCode);
+								
+								if ( c != null) {
+									textArea_Course.setText
+									("The following Course found; " + "\nCourseCode: " + " " + c.getCourseCode()  + " \nName: " + c.getCourseName() + " \nCredits: " + c.getCredits());
+								
+								}else {
+									String courseNotFound = controller.courseNotFound(courseCode);
+									textArea_Course.setText(courseNotFound);
+								}
+									
+							} catch (SQLException sql) {
+								textArea_Course.setText(controller.ErrorHandling(sql.getErrorCode(), ""));
+							}
+						}
+										
+					}
+				});
 		        				
-		        						button_findCourse.setBounds(287, 154, 113, 23);
-		        						panel_Course.add(button_findCourse);
-		        						
-		        						JLabel label_2 = new JLabel("Fields marked with (*) are mandatory to fill in.");
-		        						label_2.setForeground(new Color(178, 34, 34));
-		        						label_2.setFont(new Font("Tahoma", Font.BOLD, 11));
-		        						label_2.setBounds(31, 301, 322, 14);
-		        						panel_Course.add(label_2);
-		        						
-		        						JLabel lblInsertCourseCode = new JLabel("Insert course code in the box below to find course.");
-		        						lblInsertCourseCode.setBounds(22, 138, 255, 14);
-		        						panel_Course.add(lblInsertCourseCode);
-		        						
-		        						textField_findCourse = new JTextField();
-		        						textField_findCourse.setColumns(10);
-		        						textField_findCourse.setBounds(120, 155, 96, 20);
-		        						panel_Course.add(textField_findCourse);
-		        						
-		        						JSeparator separator_3 = new JSeparator();
-		        						separator_3.setBounds(71, 122, 329, 7);
-		        						panel_Course.add(separator_3);
-		        						
-		        						JLabel lblInsertCourseCode_1 = new JLabel("Insert course code in the box below to show course result");
-		        						lblInsertCourseCode_1.setBounds(22, 225, 365, 14);
-		        						panel_Course.add(lblInsertCourseCode_1);
-		        						
-		        						textField_showResult = new JTextField();
-		        						textField_showResult.setColumns(10);
-		        						textField_showResult.setBounds(120, 249, 96, 20);
-		        						panel_Course.add(textField_showResult);
+		button_findCourse.setBounds(287, 154, 113, 23);
+		panel_Course.add(button_findCourse);
+		
+		JLabel label_2 = new JLabel("Fields marked with (*) are mandatory to fill in.");
+		label_2.setForeground(new Color(178, 34, 34));
+		label_2.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_2.setBounds(31, 301, 322, 14);
+		panel_Course.add(label_2);
+		
+		JLabel lblInsertCourseCode = new JLabel("Insert course code in the box below to find course.");
+		lblInsertCourseCode.setBounds(22, 138, 255, 14);
+		panel_Course.add(lblInsertCourseCode);
+		
+		textField_findCourse = new JTextField();
+		textField_findCourse.setColumns(10);
+		textField_findCourse.setBounds(120, 155, 96, 20);
+		panel_Course.add(textField_findCourse);
+		
+		JSeparator separator_3 = new JSeparator();
+		separator_3.setBounds(71, 122, 329, 7);
+		panel_Course.add(separator_3);
+		
+		JLabel lblInsertCourseCode_1 = new JLabel("Insert course code in the box below to show course result");
+		lblInsertCourseCode_1.setBounds(22, 225, 365, 14);
+		panel_Course.add(lblInsertCourseCode_1);
+		
+		textField_showResult = new JTextField();
+		textField_showResult.setColumns(10);
+		textField_showResult.setBounds(120, 249, 96, 20);
+		panel_Course.add(textField_showResult);
 				
 		JPanel panel_Register = new JPanel();
 		tabbedPane.addTab("Register", null, panel_Register, null);
