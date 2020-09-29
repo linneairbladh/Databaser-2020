@@ -12,9 +12,9 @@ public class Controller {
 	static DAL dataAccessLayer = new DAL();
 	static ErrorHandlingSQL error = new ErrorHandlingSQL();
     
-    public Controller() {
+    //public Controller() {
     
-    }
+   // }
 
 	//Lägger till student på kurs
 	   public static void addStudentOnCourse (String ssn, String courseCode) throws SQLException {
