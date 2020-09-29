@@ -224,7 +224,7 @@ public class UniversityApplication {
 						if(s == null) {
 							textArea_Student.setText("Unable to find a student with the given SSN, check spelling ETC");
 						} else {
-							textArea_Student.setText("SSN: " + s.getSsn() + "\nStudentname: " + s.getStudentName() + "\nStudent Address: " + s.getAddress());
+							textArea_Student.setText("The following student found; " + "\nSSN: " + s.getSsn() + "\nStudentname: " + s.getStudentName() + "\nStudent Address: " + s.getAddress());
 						}
 					} catch (SQLException sql) {
 						textArea_Student.setText(controller.ErrorHandling(sql.getErrorCode(), ""));
@@ -467,7 +467,7 @@ public class UniversityApplication {
 		        					textArea_Course.setText("No students has finished this course.");
 		        			} else {
 		        				for (HasStudied hs : courseResultList) {
-		        					textArea_Course.setText(hs.getGrade());
+		        					textArea_Course.setText("Student : " + hs.getStudentSsn() + " course : " + hs.getCourseCode() + " grade : " + hs.getGrade());
 		        				}
 		        			}
 		        				
@@ -500,7 +500,7 @@ public class UniversityApplication {
 		        								
 		        								if ( c != null) {
 		        									textArea_Course.setText
-		        									("CourseCode: " + " " + c.getCourseCode()  + " \nName: " + c.getCourseName() + " \nCredits: " + c.getCredits());
+		        									("The following Course found; " + "\nCourseCode: " + " " + c.getCourseCode()  + " \nName: " + c.getCourseName() + " \nCredits: " + c.getCredits());
 		        								
 		        								}else {
 		        									String courseNotFound = controller.courseNotFound(courseCode);
