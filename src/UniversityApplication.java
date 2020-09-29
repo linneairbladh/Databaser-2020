@@ -277,6 +277,7 @@ public class UniversityApplication {
 			
 			//Knapp för att visa en students resultat
 			JButton button_ShowStudentResult = new JButton("Show student result");
+			button_ShowStudentResult.setFont(new Font("Tahoma", Font.BOLD, 10));
 			button_ShowStudentResult.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
@@ -317,7 +318,7 @@ public class UniversityApplication {
 					}
 				
 			});
-			button_ShowStudentResult.setBounds(257, 238, 146, 23);
+			button_ShowStudentResult.setBounds(257, 238, 162, 23);
 			panel_Student.add(button_ShowStudentResult);
 
 			JLabel lblFieldsMarkedWith = new JLabel("Fields marked with (*) are mandatory to fill in.");
@@ -451,6 +452,7 @@ public class UniversityApplication {
 		        
 		        //Knapp show all results, för en kurs
 		        JButton button_ShowAllResults = new JButton("Show all results");
+		        button_ShowAllResults.setFont(new Font("Tahoma", Font.BOLD, 10));
 		        button_ShowAllResults.addActionListener(new ActionListener() {
 		        	public void actionPerformed(ActionEvent e) {
 		        				
@@ -482,7 +484,7 @@ public class UniversityApplication {
 		        			}
 		        			}
 		        		});
-		        		button_ShowAllResults.setBounds(287, 250, 113, 23);
+		        		button_ShowAllResults.setBounds(267, 248, 133, 23);
 		        		panel_Course.add(button_ShowAllResults);
 		        		
 		        		

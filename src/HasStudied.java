@@ -1,10 +1,20 @@
+import java.util.ArrayList;
 
 public class HasStudied {
 
 	private String studentSsn;
 	private String courseCode; 
 	private String grade;
+	private ArrayList<HasStudied> showResult = new ArrayList<HasStudied>();
 	
+	public ArrayList<HasStudied> getShowResult() {
+		return showResult;
+	}
+
+	public void setShowResult(ArrayList<HasStudied> showResult) {
+		this.showResult = showResult;
+	}
+
 	//Constructor för HasStudied
 	public HasStudied (String studentSsn, String courseCode, String grade) {
 		this.studentSsn = studentSsn;
