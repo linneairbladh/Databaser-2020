@@ -1,7 +1,7 @@
 
 public class Course {
 
-	// Course Attributes
+	//Course Attributes
 	private String courseCode; 
 	private String courseName;
 	private int credits;

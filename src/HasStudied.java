@@ -2,27 +2,21 @@ import java.util.ArrayList;
 
 public class HasStudied {
 
+	//Attributes and ArrayList
 	private String studentSsn;
 	private String courseCode; 
 	private String grade;
 	private ArrayList<HasStudied> showResult = new ArrayList<HasStudied>();
 	
-	public ArrayList<HasStudied> getShowResult() {
-		return showResult;
-	}
 
-	public void setShowResult(ArrayList<HasStudied> showResult) {
-		this.showResult = showResult;
-	}
-
-	//Constructor för HasStudied
+	//Constructor
 	public HasStudied (String studentSsn, String courseCode, String grade) {
 		this.studentSsn = studentSsn;
 		this.courseCode = courseCode;
 		this.grade = grade;
 	}
 
-	//Set & Get 
+	//Setters and Getters
 	public String getStudentSsn() {
 		return studentSsn;
 	}
@@ -45,6 +39,14 @@ public class HasStudied {
 
 	public void setGrade(String grade) {
 		this.grade = grade;
+	}
+	
+	public ArrayList<HasStudied> getShowResult() {
+		return showResult;
+	}
+
+	public void setShowResult(ArrayList<HasStudied> showResult) {
+		this.showResult = showResult;
 	}
 
 }
