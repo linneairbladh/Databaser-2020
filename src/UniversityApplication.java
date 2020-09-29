@@ -258,7 +258,7 @@ public class UniversityApplication {
 	                    try {
 	                      
 	                            Controller.addStudent(ssn, name, address);
-	                            textArea_Student.setText("Following student added " +" \nStudentSSN: " + ssn + " \nStudent: " + name + " \nStudentAdress: " + address );
+	                            textArea_Student.setText("Following student added; " +" \nStudentSSN :" + ssn + " \nStudent :" + name + " \nStudentAdress :" + address );
 	                            
 	                        }catch (SQLException sql){
 	                        	textArea_Student.setText(controller.ErrorHandling(sql.getErrorCode(), ""));
@@ -300,11 +300,12 @@ public class UniversityApplication {
 								if (hasstudiedlist.isEmpty()) {
 									textArea_Student.setText("Student with SSN: " + student.getSsn() + " has not examined from the course");
 								}else {
-							
+									String sr = "";
 									for (HasStudied x : hasstudiedlist) {
-										textArea_Student.setText("Student with SSN: " + x.getStudentSsn() + " got grade: " + x.getGrade() + " on course: " +  x.getCourseCode());
+										sr = sr + x.toString() + "\n";
 										
 									}
+									textArea_Student.setText(sr);
 									
 								}
 							}
