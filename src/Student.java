@@ -1,16 +1,19 @@
 
 public class Student {
 	
+	//Attributes
 	private String ssn;
 	private String studentName;
 	private String address;
 	
+	//Constructor
 	public Student (String ssn, String studentName, String address ) {
 	this.ssn = ssn;
 	this.studentName = studentName;
 	this.address = address;
 	}
 	
+	//Setters and Getters
 	public String getSsn() {
 		return ssn;
 	}
@@ -34,5 +37,4 @@ public class Student {
 		this.address = address;
 	}
 
-	
 }

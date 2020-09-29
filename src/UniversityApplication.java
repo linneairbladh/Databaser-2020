@@ -414,8 +414,8 @@ public class UniversityApplication {
 		button_AddCourse_1.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 		    
-		        String courseName = textField_courseName.getText();
-		        String courseCode = textField_courseCode.getText();
+		    	String courseCode = textField_courseCode.getText();
+		    	String courseName = textField_courseName.getText();
 		        String credits  = textField_courseCredits.getText();
        
 		        if(courseCode.isEmpty() || courseName.isEmpty() || credits.isEmpty()) {

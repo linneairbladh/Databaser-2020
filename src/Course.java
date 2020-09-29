@@ -1,26 +1,19 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class Course {
 
+	//Course Attributes
 	private String courseCode; 
 	private String courseName;
 	private int credits;
 	
-	public Course() {
-	}
-
-	//Constructor för Course 
+	//Constructor 
 	public Course(String courseCode, String courseName, int credits) {
 	this.courseCode = courseCode;
 	this.courseName = courseName;
 	this.credits = credits;
 	}
 
-	//Constructor för Course 
+	//Setters and getters
 	public String getCourseCode() {
 		return courseCode;
 	}
@@ -43,32 +36,6 @@ public class Course {
 
 	public void setCredits(int credits) {
 		this.credits = credits;
-	}
-	
-	public static void main(String[] args) {
-	try {
-		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-		String url = "jdbc:sqlserver://localhost:1433;database=University";
-		String user = "useradmin";
-		String password = "password";
-		Connection con = DriverManager.getConnection(url,user,password);
-		
-		String query = "SELECT * FROM HasStudied";
-		
-		PreparedStatement ps = con.prepareStatement(query);
-		
-		ResultSet rs = ps.executeQuery();
-		
-		while(rs.next()){
-			System.out.println(rs.getString(1));
-		}
-			
-	} catch (ClassNotFoundException | SQLException e) {
-		e.printStackTrace();
-
-	}
-	
-		
 	}
 
 }	
