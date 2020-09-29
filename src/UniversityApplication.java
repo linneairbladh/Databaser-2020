@@ -94,7 +94,7 @@ public class UniversityApplication {
 		panel_Overview.setLayout(null);
 			
 			
-		table_Course = new JTable(new DefaultTableModel(new String[] { "Course code", "Course name" }, 0));						
+		table_Course = new JTable(new DefaultTableModel(new String[] { "Course code", "Course name" }, 0));	
 		JScrollPane courseScrollPane = new JScrollPane(table_Course);
 		courseScrollPane.setBounds(41, 86, 345, 114);
 		panel_Overview.add(courseScrollPane);
@@ -616,13 +616,21 @@ public class UniversityApplication {
 			    if(courseCode.isEmpty() || ssn.isEmpty() || grade.isBlank()) {
 					textArea_Register.setText("Please type in all fields");
 
-			   }
-			    else {	Controller.addStudentOnFinishedCourse(ssn, courseCode, grade);
+			   }  if (student == null) {
+					 String studentNotFound = Controller.studentNotFound(ssn);
+					 textArea_Register.setText(studentNotFound);
+				
+				 } else if (course == null) {
+					 String courseNotFound = Controller.courseNotFound(courseCode);
+					 textArea_Register.setText(courseNotFound);
+			    
+			    
+				 } else {	Controller.addStudentOnFinishedCourse(ssn, courseCode, grade);
 			    	textArea_Register.setText("The results for following student was added; " + "\nSSN: " + student.getSsn() + "\nStudentname: " + student.getStudentName() + "\nFor course: " + "\nCourseCode: " + course.getCourseCode() + "\nCourseName: " + course.getCourseName());
 
 			    }
 			    } catch (SQLException sql) {
-			    	sql.printStackTrace();
+			    	textArea_Register.setText(Controller.ErrorHandling(sql.getErrorCode(), ""));
 				}
 			}
 				
