@@ -424,7 +424,7 @@ public class UniversityApplication {
 		                    
 		                    Integer credit = Integer.parseInt(textField_courseCredits.getText());
 		                    Controller.addCourse(courseCode, courseName, credit);
-		                    textArea_Course.setText("Course added");
+		                    textArea_Course.setText("Following Course added; " + "\nCourseCode: " + courseCode + "\nCourseName :" + courseName + "\nCredits: " + credits);
 		                    
 		                    
 		                }catch (SQLException sql){

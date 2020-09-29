@@ -32,7 +32,7 @@ public class Controller {
 	    	dataAccessLayer.addStudent(ssn, studentName, address);
 		} 
 	//Lägg till kurs!
-	    public static void addCourse (String courseName, String courseCode,int credits) throws SQLException {
+	    public static void addCourse (String courseCode, String courseName,int credits) throws SQLException {
 	    	dataAccessLayer.addCourse(courseCode, courseName, credits);
              
 	    }
