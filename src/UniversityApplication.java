@@ -235,7 +235,7 @@ public class UniversityApplication {
 	                    try {
 	                      
 	                            Controller.addStudent(ssn, name, address);
-	                            textArea_Student.setText("Following student added " +" \nStudentSSN: " + ssn + " \nStudent: " + name + " \nStudentAdress: " + address );
+	                            textArea_Student.setText("Following student added; " +" \nStudentSSN :" + ssn + " \nStudent :" + name + " \nStudentAdress :" + address );
 	                            
 	                        }catch (SQLException sql){
 	                        	textArea_Student.setText(Controller.ErrorHandling(sql.getErrorCode(), ""));
@@ -277,11 +277,12 @@ public class UniversityApplication {
 								if (hasstudiedlist.isEmpty()) {
 									textArea_Student.setText("Student with SSN: " + student.getSsn() + " has not examined from the course");
 								}else {
-							
+									String sr = "";
 									for (HasStudied x : hasstudiedlist) {
-										textArea_Student.setText("Student with SSN: " + x.getStudentSsn() + " got grade: " + x.getGrade() + " on course: " +  x.getCourseCode());
+										sr = sr + x.toString() + "\n";
 										
 									}
+									textArea_Student.setText(sr);
 									
 								}
 							}
@@ -412,7 +413,7 @@ public class UniversityApplication {
 		                    textArea_Course.setText(Controller.ErrorHandling(sql.getErrorCode(), ""));
 		   
 			            }catch (NumberFormatException ne) {
-			                textArea_Course.setText("Only numbers is allowed");
+			                textArea_Course.setText("Only integers are allowed in credits");
 		            }
 		            
 		        }
@@ -644,15 +645,15 @@ public class UniversityApplication {
 		textField_StudentSSN2.setColumns(10);
 		
 		JLabel lblStudentSSN2 = new JLabel("Student SSN *");
-		lblStudentSSN2.setBounds(84, 132, 76, 14);
+		lblStudentSSN2.setBounds(84, 132, 82, 14);
 		panel_Register.add(lblStudentSSN2);
 		
 		JLabel lblGrade = new JLabel("Grade *");
-		lblGrade.setBounds(84, 198, 58, 14);
+		lblGrade.setBounds(84, 198, 85, 14);
 		panel_Register.add(lblGrade);
 		
 		JLabel lblCourseCode = new JLabel("Course code *");
-		lblCourseCode.setBounds(84, 164, 85, 20);
+		lblCourseCode.setBounds(84, 157, 82, 20);
 		panel_Register.add(lblCourseCode);
 		
 		textField_courseCode2 = new JTextField();
