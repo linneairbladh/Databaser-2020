@@ -79,23 +79,6 @@ public class DAL {
 	}
 
 	
-	public Student findCurrentlyStudyingStudent(String ssn) throws SQLException {
-		Student stud;
-		String sqlString = "SELECT * FROM Studies WHERE ssn = '" + ssn + "';";
-		   
-		ResultSet resultSet = runExecuteQuery(sqlString);
-	    if (resultSet.next()) {
-		   ssn = resultSet.getString("ssn");
-		   String name = resultSet.getString("studentName");
-		   String address = resultSet.getString("address");
-		   stud = new Student (ssn, name, address);
-					  
-		   conn.close();
-		   return stud;
-		}
-		return null;
-	}
-	
 	
 	//Find Course
     public Course findCourse(String courseCode) throws SQLException {

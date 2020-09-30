@@ -40,11 +40,6 @@ public class Controller {
     public static Student findStudent(String ssn) throws SQLException {
 	    	return dataAccessLayer.findStudent(ssn);
 	}
-    
-	//Find Currently Studying Students    
-    public static Student findCurrentlyStudyingStudent(String ssn) throws SQLException {
-	    	return dataAccessLayer.findCurrentlyStudyingStudent(ssn);
-	}
 	
 	//Show all Students ArrayList
     public static ArrayList <Student> getAllStudents() throws SQLException {
