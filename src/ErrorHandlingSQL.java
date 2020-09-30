@@ -4,9 +4,6 @@ public class ErrorHandlingSQL {
 	public static String MessageFailureCode (int failureCode, String prefix ) {
 	String code = "Something went wrong.";
 	
-	if (failureCode == 262) {
-		code = "SSN and/or course code can not be found. ";
-	}
 	
 	if (failureCode == 8152) {
 		code = "Too many characters. ";
@@ -17,7 +14,7 @@ public class ErrorHandlingSQL {
 	}
 	
 	if (failureCode == 2627) {
-		code = "This is already registered. ";
+		code = "You cant's insert the same number twice, please try another one. ";
 	}
 	
 	if (failureCode == 0) {

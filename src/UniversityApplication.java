@@ -18,7 +18,7 @@ import java.awt.Font;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 
-public class UniversityApplication {
+public class UniversityApplication extends JFrame {
 
 	private JFrame frame;
 	private Controller controller;
@@ -32,8 +32,11 @@ public class UniversityApplication {
 	private JButton button_AddCourse;
 	private JButton button_FindStudent;
 	private JButton button_FindCourse;
+	private JButton button_ShowStudentResult;
 	private JButton btnRegisterStudent;
 	private JButton BtnRegisterNewStudent;
+	private JButton btnShowAllCourses;
+	private JButton btnShowAllStudents;
 	private JTextField textField_StudentName;
 	private JTextField textField_StudentAddress;
 	private JTextField textField_studentFind;
@@ -45,6 +48,10 @@ public class UniversityApplication {
 	private JTextField textField_studentSSNRegister;
 	private JTable table_Course;
 	private JTable table_Student;
+	private JTextArea textArea_Student; 
+	private JTextArea textArea_Course; 
+	private JTextArea textArea_Register; 
+
 
 
 	/**
@@ -80,6 +87,7 @@ public class UniversityApplication {
 	 */
 	private void initialize() {
 		
+	
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 494);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -107,46 +115,46 @@ public class UniversityApplication {
 			
 		//Button - Show all Courses
 		JButton btnShowAllCourses = new JButton("Show all courses");
-		btnShowAllCourses.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-
-					DefaultTableModel courseTable = (DefaultTableModel) table_Course.getModel();
-					courseTable.setRowCount(0);
-					for (Course c : Controller.getAllCourses()) {
-						courseTable.addRow(new String[] { c.getCourseCode(), c.getCourseName() });
-					}
-						
-					} catch (Exception e1) {
-						e1.printStackTrace();
-
-					}
-
-					
-				}
-			});
+//		btnShowAllCourses.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				try {
+//
+//					DefaultTableModel courseTable = (DefaultTableModel) table_Course.getModel();
+//					courseTable.setRowCount(0);
+//					for (Course c : Controller.getAllCourses()) {
+//						courseTable.addRow(new String[] { c.getCourseCode(), c.getCourseName() });
+//					}
+//						
+//					} catch (Exception e1) {
+//						e1.printStackTrace();
+//
+//					}
+//
+//					
+//				}
+//			});
 			btnShowAllCourses.setBounds(125, 52, 163, 23);
 			panel_Overview.add(btnShowAllCourses);
 			
 			//Button Show All Student
 			JButton btnShowAllStudents = new JButton("Show all students");
-			btnShowAllStudents.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					try {
-
-						DefaultTableModel studentTable = (DefaultTableModel) table_Student.getModel();
-						studentTable.setRowCount(0);
-						for (Student s : Controller.getAllStudents()) {
-							studentTable.addRow(new String[] { s.getSsn(), s.getStudentName(), s.getAddress() });
-						}
-						
-					} catch (Exception e1) {
-						e1.printStackTrace();
-
-					}
-
-				}
-			});
+//			btnShowAllStudents.addActionListener(new ActionListener() {
+//				public void actionPerformed(ActionEvent e) {
+//					try {
+//
+//						DefaultTableModel studentTable = (DefaultTableModel) table_Student.getModel();
+//						studentTable.setRowCount(0);
+//						for (Student s : Controller.getAllStudents()) {
+//							studentTable.addRow(new String[] { s.getSsn(), s.getStudentName(), s.getAddress() });
+//						}
+//						
+//					} catch (Exception e1) {
+//						e1.printStackTrace();
+//
+//					}
+//
+//				}
+//			});
 			btnShowAllStudents.setBounds(125, 247, 163, 23);
 			panel_Overview.add(btnShowAllStudents);
 		
@@ -191,110 +199,110 @@ public class UniversityApplication {
 			
 			//Button - Find Student
 			JButton btnFindStudent = new JButton("Find Student");
-			btnFindStudent.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-				String ssn = textField_studentFind.getText();
-				if(ssn.isEmpty()){
-					textArea_Student.setText("Please type in all fields");
-				}
-				if(!ssn.isEmpty()) {
-					try {
-						Student s = Controller.findStudent(ssn);
-							
-						if(s == null) {
-							textArea_Student.setText("Unable to find a student with the given SSN, check spelling ETC");
-						} else {
-							textArea_Student.setText("The following student found; " + "\nSSN: " + s.getSsn() + "\nStudentname: " + s.getStudentName() + "\nStudent Address: " + s.getAddress());
-						}
-					} catch (SQLException sql) {
-						textArea_Student.setText(Controller.ErrorHandling(sql.getErrorCode(), ""));
-					}
-				}
-				
-				
-				
-				}	
-			});
+//			btnFindStudent.addActionListener(new ActionListener() {
+//				public void actionPerformed(ActionEvent e) {
+//				String ssn = textField_studentFind.getText();
+//				if(ssn.isEmpty()){
+//					textArea_Student.setText("Please type in all fields");
+//				}
+//				if(!ssn.isEmpty()) {
+//					try {
+//						Student s = Controller.findStudent(ssn);
+//							
+//						if(s == null) {
+//							textArea_Student.setText("Unable to find a student with the given SSN, check spelling ETC");
+//						} else {
+//							textArea_Student.setText("The following student found; " + "\nSSN: " + s.getSsn() + "\nStudentname: " + s.getStudentName() + "\nStudent Address: " + s.getAddress());
+//						}
+//					} catch (SQLException sql) {
+//						textArea_Student.setText(Controller.ErrorHandling(sql.getErrorCode(), ""));
+//					}
+//				}
+//				
+//				
+//				
+//				}	
+//			});
 			btnFindStudent.setBounds(257, 164, 113, 23);
 			panel_Student.setLayout(null);
 			panel_Student.add(btnFindStudent);
 			
 			//Button - Add Student
 			JButton btnAddStudent = new JButton("Add Student");
-			btnAddStudent.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					
-					String name = textField_StudentName.getText();
-					String address = textField_StudentAddress.getText();
-					String ssn = textField_ssn.getText();
-					
-					 if(name.isEmpty() || address.isEmpty() || ssn.isEmpty()) {
-						 textArea_Student.setText("Please type in all fields");
-	                }else {
-	                    
-	                    try {
-	                      
-	                            Controller.addStudent(ssn, name, address);
-	                            textArea_Student.setText("Following student added; " +" \nStudentSSN :" + ssn + " \nStudent :" + name + " \nStudentAdress :" + address );
-	                            
-	                        }catch (SQLException sql){
-	                        	textArea_Student.setText(Controller.ErrorHandling(sql.getErrorCode(), ""));
-	                        }    
-	                        
-	                    
-	                }
-					 	textField_StudentName.setText("");
-					 	textField_StudentAddress.setText("");
-					 	textField_ssn.setText("");
+//			btnAddStudent.addActionListener(new ActionListener() {
+//				public void actionPerformed(ActionEvent e) {
+//					
+//					String name = textField_StudentName.getText();
+//					String address = textField_StudentAddress.getText();
+//					String ssn = textField_ssn.getText();
+//					
+//					 if(name.isEmpty() || address.isEmpty() || ssn.isEmpty()) {
+//						 textArea_Student.setText("Please type in all fields");
+//	                }else {
+//	                    
+//	                    try {
+//	                      
+//	                            Controller.addStudent(ssn, name, address);
+//	                            textArea_Student.setText("Following student added; " +" \nStudentSSN :" + ssn + " \nStudent :" + name + " \nStudentAdress :" + address );
+//	                            
+//	                        }catch (SQLException sql){
+//	                        	textArea_Student.setText(Controller.ErrorHandling(sql.getErrorCode(), ""));
+//	                        }    
+//	                        
+//	                    
+//	                }
+//					 	textField_StudentName.setText("");
+//					 	textField_StudentAddress.setText("");
+//					 	textField_ssn.setText("");
 
-	            }
-			});
+//	            }
+//			});
 			btnAddStudent.setBounds(257, 13, 113, 23);
 			panel_Student.add(btnAddStudent);
 			
 			//Button - Show Student Result
 			JButton button_ShowStudentResult = new JButton("Show student result");
 			button_ShowStudentResult.setFont(new Font("Tahoma", Font.BOLD, 10));
-			button_ShowStudentResult.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					
-					String ssn =textField_StudentSSNResult.getText();
-					String courseCode = textField_courseCodeResult.getText();
-					
-					
-					if(ssn.isEmpty() || courseCode.isEmpty()) {
-						textArea_Student.setText("Please type in all fields");
-					}else {
-						try {
-							Student student = Controller.findStudent(ssn);
-							Course course = Controller.findCourse(courseCode);
-							
-							
-							if(student == null || course == null) {
-								textArea_Student.setText("That student or course does not exist");
-							}else {
-								ArrayList<HasStudied> hasstudiedlist = Controller.showResult(ssn, courseCode);
-								if (hasstudiedlist.isEmpty()) {
-									textArea_Student.setText("Student with SSN: " + student.getSsn() + " has not examined from the course");
-								}else {
-									String sr = "";
-									for (HasStudied x : hasstudiedlist) {
-										sr = sr + x.toString() + "\n";
-										
-									}
-									textArea_Student.setText(sr);
-									
-								}
-							}
-						}catch (SQLException sql) {
-							textArea_Student.setText(Controller.ErrorHandling(sql.getErrorCode(), ""));
-						}
-					}
-					textField_StudentSSNResult.setText("");
-					textField_courseCodeResult.setText("");
-					}
-				
-			});
+//			button_ShowStudentResult.addActionListener(new ActionListener() {
+//				public void actionPerformed(ActionEvent e) {
+//					
+//					String ssn =textField_StudentSSNResult.getText();
+//					String courseCode = textField_courseCodeResult.getText();
+//					
+//					
+//					if(ssn.isEmpty() || courseCode.isEmpty()) {
+//						textArea_Student.setText("Please type in all fields");
+//					}else {
+//						try {
+//							Student student = Controller.findStudent(ssn);
+//							Course course = Controller.findCourse(courseCode);
+//							
+//							
+//							if(student == null || course == null) {
+//								textArea_Student.setText("That student or course does not exist");
+//							}else {
+//								ArrayList<HasStudied> hasstudiedlist = Controller.showResult(ssn, courseCode);
+//								if (hasstudiedlist.isEmpty()) {
+//									textArea_Student.setText("Student with SSN: " + student.getSsn() + " has not examined from the course");
+//								}else {
+//									String sr = "";
+//									for (HasStudied x : hasstudiedlist) {
+//										sr = sr + x.toString() + "\n";
+//										
+//									}
+//									textArea_Student.setText(sr);
+//									
+//								}
+//							}
+//						}catch (SQLException sql) {
+//							textArea_Student.setText(Controller.ErrorHandling(sql.getErrorCode(), ""));
+//						}
+//					}
+//					textField_StudentSSNResult.setText("");
+//					textField_courseCodeResult.setText("");
+//					}
+//				
+//			});
 			button_ShowStudentResult.setBounds(257, 238, 162, 23);
 			panel_Student.add(button_ShowStudentResult);
 
@@ -391,39 +399,39 @@ public class UniversityApplication {
 		
 		//Button - Add Course
 		JButton button_AddCourse_1 = new JButton("Add Course");
-		button_AddCourse_1.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-		    
-		    	String courseCode = textField_courseCode.getText();
-		    	String courseName = textField_courseName.getText();
-		        String credits  = textField_courseCredits.getText();
-       
-		        if(courseCode.isEmpty() || courseName.isEmpty() || credits.isEmpty()) {
-		            textArea_Course.setText("Please type in all fields");
-		        }else {
-		    
-		                try {
-		                    
-		                    Integer credit = Integer.parseInt(textField_courseCredits.getText());
-		                    Controller.addCourse(courseCode, courseName, credit);
-		                    textArea_Course.setText("Following Course added; " + "\nCourseCode: " + courseCode + "\nCourseName :" + courseName + "\nCredits: " + credits);
-		                    
-		                    
-		                }catch (SQLException sql){
-		                    textArea_Course.setText(Controller.ErrorHandling(sql.getErrorCode(), ""));
-		   
-			            }catch (NumberFormatException ne) {
-			                textArea_Course.setText("Only integers are allowed in credits");
-		            }
-		            
-		        }
-		        textField_courseName.setText("");
-		        textField_courseCode.setText("");
-		        textField_courseCredits.setText("");
-
-		    }
-		           
-		});
+//		button_AddCourse_1.addActionListener(new ActionListener() {
+//		    public void actionPerformed(ActionEvent e) {
+//		    
+//		    	String courseCode = textField_courseCode.getText();
+//		    	String courseName = textField_courseName.getText();
+//		        String credits  = textField_courseCredits.getText();
+//       
+//		        if(courseCode.isEmpty() || courseName.isEmpty() || credits.isEmpty()) {
+//		            textArea_Course.setText("Please type in all fields");
+//		        }else {
+//		    
+//		                try {
+//		                    
+//		                    Integer credit = Integer.parseInt(textField_courseCredits.getText());
+//		                    Controller.addCourse(courseCode, courseName, credit);
+//		                    textArea_Course.setText("Following Course added; " + "\nCourseCode: " + courseCode + "\nCourseName :" + courseName + "\nCredits: " + credits);
+//		                    
+//		                    
+//		                }catch (SQLException sql){
+//		                    textArea_Course.setText(Controller.ErrorHandling(sql.getErrorCode(), ""));
+//		   
+//			            }catch (NumberFormatException ne) {
+//			                textArea_Course.setText("Only integers are allowed in credits");
+//		            }
+//		            
+//		        }
+//		        textField_courseName.setText("");
+//		        textField_courseCode.setText("");
+//		        textField_courseCredits.setText("");
+//
+//		    }
+//		           
+//		});
 		
 	    button_AddCourse_1.setBounds(287, 31, 113, 23);	
 	    panel_Course.add(button_AddCourse_1); 
@@ -431,77 +439,77 @@ public class UniversityApplication {
 	    
 	    //Button - Show All Results for Course
 	    JButton button_ShowAllResults = new JButton("Show all results");
-	    button_ShowAllResults.setFont(new Font("Tahoma", Font.BOLD, 10));
-	    button_ShowAllResults.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent e) {
-	    	textArea_Course.setText("");			
-	    	String courseCode = textField_showResult.getText();
-	    			if (courseCode.isEmpty()) {
-	    				textArea_Course.setText("Please fill in course code.");
-	    			}else {
-	    				try {
-	    					Course course = Controller.findCourse(courseCode);
-	    				
-	    				if (course == null ) {
-	    					String courseNotFound = Controller.courseNotFound(courseCode);
-	    					textArea_Course.setText(courseNotFound);
-	    			}else {
-	    				ArrayList <HasStudied> courseResultList = Controller.showAllStudentResult(courseCode);
-	    			if (courseResultList.isEmpty()) {
-	    					textArea_Course.setText("No students has finished this course.");
-	    			} else {
-	
-	    				for (HasStudied hs : courseResultList) {
-	
-	    					textArea_Course.append("Student: " + hs.getStudentSsn() + " grade: " + hs.getGrade() + "\n");
-	
-	    				}
-	    			}
-	    				
-	    			}
-	    			
-	    			}catch (SQLException sql) {
-	    				textArea_Course.setText(Controller.ErrorHandling(sql.getErrorCode(), ""));
-	    			}
-	    			}
-	    			}
-	    		});
+//	    button_ShowAllResults.setFont(new Font("Tahoma", Font.BOLD, 10));
+//	    button_ShowAllResults.addActionListener(new ActionListener() {
+//	    	public void actionPerformed(ActionEvent e) {
+//	    	textArea_Course.setText("");			
+//	    	String courseCode = textField_showResult.getText();
+//	    			if (courseCode.isEmpty()) {
+//	    				textArea_Course.setText("Please fill in course code.");
+//	    			}else {
+//	    				try {
+//	    					Course course = Controller.findCourse(courseCode);
+//	    				
+//	    				if (course == null ) {
+//	    					String courseNotFound = Controller.courseNotFound(courseCode);
+//	    					textArea_Course.setText(courseNotFound);
+//	    			}else {
+//	    				ArrayList <HasStudied> courseResultList = Controller.showAllStudentResult(courseCode);
+//	    			if (courseResultList.isEmpty()) {
+//	    					textArea_Course.setText("No students has finished this course.");
+//	    			} else {
+//	
+//	    				for (HasStudied hs : courseResultList) {
+//	
+//	    					textArea_Course.append("Student: " + hs.getStudentSsn() + " grade: " + hs.getGrade() + "\n");
+//	
+//	    				}
+//	    			}
+//	    				
+//	    			}
+//	    			
+//	    			}catch (SQLException sql) {
+//	    				textArea_Course.setText(Controller.ErrorHandling(sql.getErrorCode(), ""));
+//	    			}
+//	    			}
+//	    			}
+//	    		});
 	    		button_ShowAllResults.setBounds(267, 248, 133, 23);
 	    		panel_Course.add(button_ShowAllResults);
 		        		
 		        		
 		//Button - Find Course
 		JButton button_findCourse = new JButton("Find Course");
-		
-				button_findCourse.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						
-						String courseCode = textField_findCourse.getText();
-						
-						if(courseCode.isEmpty()) {
-							textArea_Course.setText("Please fill in course code.");
-						}else {
-							
-							try {
-								Course c = Controller.findCourse(courseCode);
-								
-								if ( c != null) {
-									textArea_Course.setText
-									("The following Course found; " + "\nCourseCode: " + " " + c.getCourseCode()  + " \nName: " + c.getCourseName() + " \nCredits: " + c.getCredits());
-								
-								}else {
-									String courseNotFound = Controller.courseNotFound(courseCode);
-									textArea_Course.setText(courseNotFound);
-								}
-									
-							} catch (SQLException sql) {
-								textArea_Course.setText(Controller.ErrorHandling(sql.getErrorCode(), ""));
-							}
-						}
-										
-					}
-				});
-		        				
+//		
+//				button_findCourse.addActionListener(new ActionListener() {
+//					public void actionPerformed(ActionEvent e) {
+//						
+//						String courseCode = textField_findCourse.getText();
+//						
+//						if(courseCode.isEmpty()) {
+//							textArea_Course.setText("Please fill in course code.");
+//						}else {
+//							
+//							try {
+//								Course c = Controller.findCourse(courseCode);
+//								
+//								if ( c != null) {
+//									textArea_Course.setText
+//									("The following Course found; " + "\nCourseCode: " + " " + c.getCourseCode()  + " \nName: " + c.getCourseName() + " \nCredits: " + c.getCredits());
+//								
+//								}else {
+//									String courseNotFound = Controller.courseNotFound(courseCode);
+//									textArea_Course.setText(courseNotFound);
+//								}
+//									
+//							} catch (SQLException sql) {
+//								textArea_Course.setText(Controller.ErrorHandling(sql.getErrorCode(), ""));
+//							}
+//						}
+//										
+//					}
+//				});
+//		        				
 		button_findCourse.setBounds(287, 154, 113, 23);
 		panel_Course.add(button_findCourse);
 		
@@ -558,83 +566,83 @@ public class UniversityApplication {
 		
 		//Button - Register Student on Course
 		JButton button_RegisterStudentCourse = new JButton("Register student on course");
-		button_RegisterStudentCourse.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				String ssn = textField_studentSSNRegister.getText();
-				String courseCode = textField_courseCodeRegister.getText();
-				
-				 if(courseCode.isEmpty() || ssn.isEmpty()) {
-					 textArea_Register.setText("Please type in all fields");
-
-				 } else {
-					 try {
-						 Student student = Controller.findStudent(ssn);
-						 Course course = Controller.findCourse(courseCode);
-						 
-						 if (student == null) {
-							 String studentNotFound = Controller.studentNotFound(ssn);
-							 textArea_Register.setText(studentNotFound);
-						
-						 } else if (course == null) {
-							 String courseNotFound = Controller.courseNotFound(courseCode);
-							 textArea_Register.setText(courseNotFound);
-							 
-						 }else {
-							 Controller.addStudentOnCourse(ssn, courseCode);
-							 textArea_Register.setText("StudentName: " + student.getStudentName() + "\nStudentSSN: " + student.getSsn() + "\nWas registred on course: " + course.getCourseName());
-						 }
-					 
-					 }catch (SQLException sql) {
-							 textArea_Register.setText(Controller.ErrorHandling(sql.getErrorCode(), ""));
-						 }
-						 
-						 
-					 }
-			}
-				
-			
-		});
+//		button_RegisterStudentCourse.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				
+//				String ssn = textField_studentSSNRegister.getText();
+//				String courseCode = textField_courseCodeRegister.getText();
+//				
+//				 if(courseCode.isEmpty() || ssn.isEmpty()) {
+//					 textArea_Register.setText("Please type in all fields");
+//
+//				 } else {
+//					 try {
+//						 Student student = Controller.findStudent(ssn);
+//						 Course course = Controller.findCourse(courseCode);
+//						 
+//						 if (student == null) {
+//							 String studentNotFound = Controller.studentNotFound(ssn);
+//							 textArea_Register.setText(studentNotFound);
+//						
+//						 } else if (course == null) {
+//							 String courseNotFound = Controller.courseNotFound(courseCode);
+//							 textArea_Register.setText(courseNotFound);
+//							 
+//						 }else {
+//							 Controller.addStudentOnCourse(ssn, courseCode);
+//							 textArea_Register.setText("StudentName: " + student.getStudentName() + "\nStudentSSN: " + student.getSsn() + "\nWas registred on course: " + course.getCourseName());
+//						 }
+//					 
+//					 }catch (SQLException sql) {
+//							 textArea_Register.setText(Controller.ErrorHandling(sql.getErrorCode(), ""));
+//						 }
+//						 
+//						 
+//					 }
+//			}
+//				
+//			
+//		});
 		button_RegisterStudentCourse.setBounds(84, 83, 226, 23);
 		panel_Register.add(button_RegisterStudentCourse);
 		
 		
 		JButton btnRegisterStudent_1 = new JButton("Register result");
-		btnRegisterStudent_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				
-				
-				String ssn = textField_StudentSSN2.getText();
-				String courseCode = textField_courseCode2.getText();
-			    String grade = comboBoxGrade.getSelectedItem().toString();
-			    
-			    if(courseCode.isEmpty() || ssn.isEmpty() || grade.isBlank()) {
-					textArea_Register.setText("Please type in all fields");
-			    } else {
-			    try {
-				Student student = Controller.findStudent(ssn);
-			    Course  course = Controller.findCourse(courseCode);
-			    
-			     if (student == null) {
-					 String studentNotFound = Controller.studentNotFound(ssn);
-					 textArea_Register.setText(studentNotFound);
-				
-				 } else if (course == null) {
-					 String courseNotFound = Controller.courseNotFound(courseCode);
-					 textArea_Register.setText(courseNotFound);
-			    
-			    
-				 } else {	Controller.addStudentOnFinishedCourse(ssn, courseCode, grade);
-			    	textArea_Register.setText("The result [" + grade + "] for following student was added; " + "\nSSN: " + student.getSsn() + "\nStudentname: " + student.getStudentName() + "\nFor course: " + "\nCourseCode: " + course.getCourseCode() + "\nCourseName: " + course.getCourseName());
-
-			    }
-			    } catch (SQLException sql) {
-			    	textArea_Register.setText(Controller.ErrorHandling(sql.getErrorCode(), ""));
-				}
-			}
-			}
-			});
+//		btnRegisterStudent_1.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				
+//				
+//				
+//				String ssn = textField_StudentSSN2.getText();
+//				String courseCode = textField_courseCode2.getText();
+//			    String grade = comboBoxGrade.getSelectedItem().toString();
+//			    
+//			    if(courseCode.isEmpty() || ssn.isEmpty() || grade.isBlank()) {
+//					textArea_Register.setText("Please type in all fields");
+//			    } else {
+//			    try {
+//				Student student = Controller.findStudent(ssn);
+//			    Course  course = Controller.findCourse(courseCode);
+//			    
+//			     if (student == null) {
+//					 String studentNotFound = Controller.studentNotFound(ssn);
+//					 textArea_Register.setText(studentNotFound);
+//				
+//				 } else if (course == null) {
+//					 String courseNotFound = Controller.courseNotFound(courseCode);
+//					 textArea_Register.setText(courseNotFound);
+//			    
+//			    
+//				 } else {	Controller.addStudentOnFinishedCourse(ssn, courseCode, grade);
+//			    	textArea_Register.setText("The result [" + grade + "] for following student was added; " + "\nSSN: " + student.getSsn() + "\nStudentname: " + student.getStudentName() + "\nFor course: " + "\nCourseCode: " + course.getCourseCode() + "\nCourseName: " + course.getCourseName());
+//
+//			    }
+//			    } catch (SQLException sql) {
+//			    	textArea_Register.setText(Controller.ErrorHandling(sql.getErrorCode(), ""));
+//				}
+//			}
+//			}
+//			});
 		btnRegisterStudent_1.setBounds(84, 227, 226, 23);
 		panel_Register.add(btnRegisterStudent_1);
 			
@@ -691,4 +699,254 @@ public class UniversityApplication {
 		panel_Register.add(textField_studentSSNRegister);
 	
 	}
+	// GETTERS FOR CONTROLLER
+
+	public JFrame getFrame() {
+		return frame;
+	}
+
+	public Controller getController() {
+		return controller;
+	}
+
+	public JTextField getTextField_StudentSSN2() {
+		return textField_StudentSSN2;
+	}
+
+	public JTextField getTextField_courseCode2() {
+		return textField_courseCode2;
+	}
+
+	public JTextField getTextField_courseCode() {
+		return textField_courseCode;
+	}
+
+	public JTextField getTextField_courseName() {
+		return textField_courseName;
+	}
+
+	public JTextField getTextField_ssn() {
+		return textField_ssn;
+	}
+
+	public JTextField getTextField_courseCredits() {
+		return textField_courseCredits;
+	}
+
+	public JButton getButton_AddStudent() {
+		return button_AddStudent;
+	}
+
+	public JButton getButton_AddCourse() {
+		return button_AddCourse;
+	}
+
+	public JButton getButton_FindStudent() {
+		return button_FindStudent;
+	}
+
+	public JButton getButton_FindCourse() {
+		return button_FindCourse;
+	}
+
+	public JButton getButton_ShowStudentResult() {
+		return button_ShowStudentResult;
+	}
+
+	public JButton getBtnRegisterStudent() {
+		return btnRegisterStudent;
+	}
+
+	public JButton getBtnRegisterNewStudent() {
+		return BtnRegisterNewStudent;
+	}
+
+	public JButton getBtnShowAllCourses() {
+		return btnShowAllCourses;
+	}
+
+	public JButton getBtnShowAllStudents() {
+		return btnShowAllStudents;
+	}
+
+	public JTextField getTextField_StudentName() {
+		return textField_StudentName;
+	}
+
+	public JTextField getTextField_StudentAddress() {
+		return textField_StudentAddress;
+	}
+
+	public JTextField getTextField_studentFind() {
+		return textField_studentFind;
+	}
+
+	public JTextField getTextField_findCourse() {
+		return textField_findCourse;
+	}
+
+	public JTextField getTextField_showResult() {
+		return textField_showResult;
+	}
+
+	public JTextField getTextField_courseCodeResult() {
+		return textField_courseCodeResult;
+	}
+
+	public JTextField getTextField_StudentSSNResult() {
+		return textField_StudentSSNResult;
+	}
+
+	public JTextField getTextField_courseCodeRegister() {
+		return textField_courseCodeRegister;
+	}
+
+	public JTextField getTextField_studentSSNRegister() {
+		return textField_studentSSNRegister;
+	}
+
+	public JTable getTable_Course() {
+		return table_Course;
+	}
+
+	public JTable getTable_Student() {
+		return table_Student;
+	}
+
+	public JTextArea getTextArea_Student() {
+		return textArea_Student;
+	}
+
+	public JTextArea getTextArea_Course() {
+		return textArea_Course;
+	}
+
+	public JTextArea getTextArea_Register() {
+		return textArea_Register;
+	}
+
+	public void setFrame(JFrame frame) {
+		this.frame = frame;
+	}
+
+	public void setController(Controller controller) {
+		this.controller = controller;
+	}
+
+	public void setTextField_StudentSSN2(JTextField textField_StudentSSN2) {
+		this.textField_StudentSSN2 = textField_StudentSSN2;
+	}
+
+	public void setTextField_courseCode2(JTextField textField_courseCode2) {
+		this.textField_courseCode2 = textField_courseCode2;
+	}
+
+	public void setTextField_courseCode(JTextField textField_courseCode) {
+		this.textField_courseCode = textField_courseCode;
+	}
+
+	public void setTextField_courseName(JTextField textField_courseName) {
+		this.textField_courseName = textField_courseName;
+	}
+
+	public void setTextField_ssn(JTextField textField_ssn) {
+		this.textField_ssn = textField_ssn;
+	}
+
+	public void setTextField_courseCredits(JTextField textField_courseCredits) {
+		this.textField_courseCredits = textField_courseCredits;
+	}
+
+	public void setButton_AddStudent(JButton button_AddStudent) {
+		this.button_AddStudent = button_AddStudent;
+	}
+
+	public void setButton_AddCourse(JButton button_AddCourse) {
+		this.button_AddCourse = button_AddCourse;
+	}
+
+	public void setButton_FindStudent(JButton button_FindStudent) {
+		this.button_FindStudent = button_FindStudent;
+	}
+
+	public void setButton_FindCourse(JButton button_FindCourse) {
+		this.button_FindCourse = button_FindCourse;
+	}
+
+	public void setButton_ShowStudentResult(JButton button_ShowStudentResult) {
+		this.button_ShowStudentResult = button_ShowStudentResult;
+	}
+
+	public void setBtnRegisterStudent(JButton btnRegisterStudent) {
+		this.btnRegisterStudent = btnRegisterStudent;
+	}
+
+	public void setBtnRegisterNewStudent(JButton btnRegisterNewStudent) {
+		BtnRegisterNewStudent = btnRegisterNewStudent;
+	}
+
+	public void setBtnShowAllCourses(JButton btnShowAllCourses) {
+		this.btnShowAllCourses = btnShowAllCourses;
+	}
+
+	public void setBtnShowAllStudents(JButton btnShowAllStudents) {
+		this.btnShowAllStudents = btnShowAllStudents;
+	}
+
+	public void setTextField_StudentName(JTextField textField_StudentName) {
+		this.textField_StudentName = textField_StudentName;
+	}
+
+	public void setTextField_StudentAddress(JTextField textField_StudentAddress) {
+		this.textField_StudentAddress = textField_StudentAddress;
+	}
+
+	public void setTextField_studentFind(JTextField textField_studentFind) {
+		this.textField_studentFind = textField_studentFind;
+	}
+
+	public void setTextField_findCourse(JTextField textField_findCourse) {
+		this.textField_findCourse = textField_findCourse;
+	}
+
+	public void setTextField_showResult(JTextField textField_showResult) {
+		this.textField_showResult = textField_showResult;
+	}
+
+	public void setTextField_courseCodeResult(JTextField textField_courseCodeResult) {
+		this.textField_courseCodeResult = textField_courseCodeResult;
+	}
+
+	public void setTextField_StudentSSNResult(JTextField textField_StudentSSNResult) {
+		this.textField_StudentSSNResult = textField_StudentSSNResult;
+	}
+
+	public void setTextField_courseCodeRegister(JTextField textField_courseCodeRegister) {
+		this.textField_courseCodeRegister = textField_courseCodeRegister;
+	}
+
+	public void setTextField_studentSSNRegister(JTextField textField_studentSSNRegister) {
+		this.textField_studentSSNRegister = textField_studentSSNRegister;
+	}
+
+	public void setTable_Course(JTable table_Course) {
+		this.table_Course = table_Course;
+	}
+
+	public void setTable_Student(JTable table_Student) {
+		this.table_Student = table_Student;
+	}
+
+	public void setTextArea_Student(JTextArea textArea_Student) {
+		this.textArea_Student = textArea_Student;
+	}
+
+	public void setTextArea_Course(JTextArea textArea_Course) {
+		this.textArea_Course = textArea_Course;
+	}
+
+	public void setTextArea_Register(JTextArea textArea_Register) {
+		this.textArea_Register = textArea_Register;
+	}
+
 }
