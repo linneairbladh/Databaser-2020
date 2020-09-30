@@ -10,7 +10,7 @@ public class Main {
 		Controller controller = new Controller (frame, dal, error);
 		
 		frame.setVisible(true); //fattar ej varför fel
-		frame.setController(controller); //fattar ej varför fel
+		//frame.setController(controller); //fattar ej varför fel
 		
 		
 	

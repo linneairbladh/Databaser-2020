@@ -71,7 +71,7 @@ public class Controller {
     	
     	//Knapp Add Student
     	
-    	frame.getButton_AddStudent().addActionListener(new ActionListener() {
+    	frame.getBtnAddStudent().addActionListener(new ActionListener() {
        	 public void actionPerformed(ActionEvent e) {
        		 
        		String name = frame.getTextField_StudentName().getText();
@@ -104,7 +104,7 @@ public class Controller {
     	
     	
     	//Knapp Find Student
-    	frame.getButton_FindStudent().addActionListener(new ActionListener() {
+    	frame.getBtnFindStudent().addActionListener(new ActionListener() {
     	public void actionPerformed(ActionEvent e) {
 			String ssn = frame.getTextField_studentFind().getText();
 					
@@ -132,7 +132,7 @@ public class Controller {
 		});
     	
     	//Knapp Show Student Result
-    	frame.getButton_ShowStudentResult().addActionListener(new ActionListener() {
+    	frame.getBtnShowStudentResult().addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {	
     	
 	
@@ -179,7 +179,7 @@ public class Controller {
   	
     	
     	//Knapp Add Course
-    	frame.getButton_AddCourse().addActionListener(new ActionListener() {
+    	frame.getBtnAddCourse().addActionListener(new ActionListener() {
     	 public void actionPerformed(ActionEvent e) {
  		    
  		    	String courseCode = frame.getTextField_courseCode().getText();
@@ -214,7 +214,7 @@ public class Controller {
  		});
     	
     	//knapp Find Course
-    	frame.getButton_FindCourse().addActionListener(new ActionListener(){
+    	frame.getBtnFindCourse().addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent e) {
     			
     			String courseCode = frame.getTextField_findCourse().getText();

@@ -19,24 +19,31 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 
 public class UniversityApplication extends JFrame {
-
+	
+	Controller controller;
 	private JFrame frame;
-	private Controller controller;
+	
+	//Textfält
 	private JTextField textField_StudentSSN2;
 	private JTextField textField_courseCode2;
 	private JTextField textField_courseCode;
 	private JTextField textField_courseName;
 	private JTextField textField_ssn;
 	private JTextField textField_courseCredits;
-	private JButton button_AddStudent;
-	private JButton button_AddCourse;
-	private JButton button_FindStudent;
-	private JButton button_FindCourse;
-	private JButton button_ShowStudentResult;
-	private JButton btnRegisterStudent;
-	private JButton BtnRegisterNewStudent;
+	
+	//Knappar
+	private JButton btnAddStudent;
+	private JButton btnAddCourse;
+	private JButton btnFindStudent;
+	private JButton btnFindCourse;
+	private JButton btnShowStudentResult;
+	private JButton btnShowAllResults;
+	private JButton btnRegisterResultCourse;
+	private JButton btnRegisterResult;
 	private JButton btnShowAllCourses;
 	private JButton btnShowAllStudents;
+	
+	//Textfält
 	private JTextField textField_StudentName;
 	private JTextField textField_StudentAddress;
 	private JTextField textField_studentFind;
@@ -46,46 +53,21 @@ public class UniversityApplication extends JFrame {
 	private JTextField textField_StudentSSNResult;
 	private JTextField textField_courseCodeRegister;
 	private JTextField textField_studentSSNRegister;
+	
+	//Tabeller 
 	private JTable table_Course;
 	private JTable table_Student;
+	
+	//Textareas
 	private JTextArea textArea_Student; 
 	private JTextArea textArea_Course; 
 	private JTextArea textArea_Register; 
-
-
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					UniversityApplication window = new UniversityApplication();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
 
 	
 	public UniversityApplication(Controller controller) {
 		this.controller = controller; 
 	}
 	public UniversityApplication() {
-		
-		initialize();
-	}
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
 		
 	
 		frame = new JFrame();
@@ -101,7 +83,6 @@ public class UniversityApplication extends JFrame {
 		tabbedPane.addTab("Overview", null, panel_Overview, null);
 		panel_Overview.setLayout(null);
 			
-			
 		table_Course = new JTable(new DefaultTableModel(new String[] { "Course code", "Course name" }, 0));	
 		JScrollPane courseScrollPane = new JScrollPane(table_Course);
 		courseScrollPane.setBounds(41, 86, 345, 114);
@@ -114,7 +95,7 @@ public class UniversityApplication extends JFrame {
 
 			
 		//Button - Show all Courses
-		JButton btnShowAllCourses = new JButton("Show all courses");
+		btnShowAllCourses = new JButton("Show all courses");
 //		btnShowAllCourses.addActionListener(new ActionListener() {
 //			public void actionPerformed(ActionEvent e) {
 //				try {
@@ -137,7 +118,7 @@ public class UniversityApplication extends JFrame {
 			panel_Overview.add(btnShowAllCourses);
 			
 			//Button Show All Student
-			JButton btnShowAllStudents = new JButton("Show all students");
+			btnShowAllStudents = new JButton("Show all students");
 //			btnShowAllStudents.addActionListener(new ActionListener() {
 //				public void actionPerformed(ActionEvent e) {
 //					try {
@@ -198,7 +179,7 @@ public class UniversityApplication extends JFrame {
 			panel_Student.add(textField_StudentAddress);
 			
 			//Button - Find Student
-			JButton btnFindStudent = new JButton("Find Student");
+			btnFindStudent = new JButton("Find Student");
 //			btnFindStudent.addActionListener(new ActionListener() {
 //				public void actionPerformed(ActionEvent e) {
 //				String ssn = textField_studentFind.getText();
@@ -228,42 +209,14 @@ public class UniversityApplication extends JFrame {
 			panel_Student.add(btnFindStudent);
 			
 			//Button - Add Student
-			JButton btnAddStudent = new JButton("Add Student");
-//			btnAddStudent.addActionListener(new ActionListener() {
-//				public void actionPerformed(ActionEvent e) {
-//					
-//					String name = textField_StudentName.getText();
-//					String address = textField_StudentAddress.getText();
-//					String ssn = textField_ssn.getText();
-//					
-//					 if(name.isEmpty() || address.isEmpty() || ssn.isEmpty()) {
-//						 textArea_Student.setText("Please type in all fields");
-//	                }else {
-//	                    
-//	                    try {
-//	                      
-//	                            Controller.addStudent(ssn, name, address);
-//	                            textArea_Student.setText("Following student added; " +" \nStudentSSN :" + ssn + " \nStudent :" + name + " \nStudentAdress :" + address );
-//	                            
-//	                        }catch (SQLException sql){
-//	                        	textArea_Student.setText(Controller.ErrorHandling(sql.getErrorCode(), ""));
-//	                        }    
-//	                        
-//	                    
-//	                }
-//					 	textField_StudentName.setText("");
-//					 	textField_StudentAddress.setText("");
-//					 	textField_ssn.setText("");
-
-//	            }
-//			});
+			btnAddStudent = new JButton("Add Student");
 			btnAddStudent.setBounds(257, 13, 113, 23);
 			panel_Student.add(btnAddStudent);
 			
 			//Button - Show Student Result
-			JButton button_ShowStudentResult = new JButton("Show student result");
-			button_ShowStudentResult.setFont(new Font("Tahoma", Font.BOLD, 10));
-//			button_ShowStudentResult.addActionListener(new ActionListener() {
+			btnShowStudentResult = new JButton("Show student result");
+			btnShowStudentResult.setFont(new Font("Tahoma", Font.BOLD, 10));
+//			btnShowStudentResult.addActionListener(new ActionListener() {
 //				public void actionPerformed(ActionEvent e) {
 //					
 //					String ssn =textField_StudentSSNResult.getText();
@@ -303,8 +256,8 @@ public class UniversityApplication extends JFrame {
 //					}
 //				
 //			});
-			button_ShowStudentResult.setBounds(257, 238, 162, 23);
-			panel_Student.add(button_ShowStudentResult);
+			btnShowStudentResult.setBounds(257, 238, 162, 23);
+			panel_Student.add(btnShowStudentResult);
 
 		JLabel lblFieldsMarkedWith = new JLabel("Fields marked with (*) are mandatory to fill in.");
 		lblFieldsMarkedWith.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -361,7 +314,7 @@ public class UniversityApplication extends JFrame {
 				
 				//ALLT PÅ FLIK COURSE
 				
-		JTextArea textArea_Course = new JTextArea();
+		textArea_Course = new JTextArea();
 		textArea_Course.setEditable(false);
 		textArea_Course.setBounds(31, 315, 357, 101);
 		panel_Course.add(textArea_Course);
@@ -398,10 +351,7 @@ public class UniversityApplication extends JFrame {
 		panel_Course.add(separator);
 		
 		//Button - Add Course
-		JButton button_AddCourse_1 = new JButton("Add Course");
-//		button_AddCourse_1.addActionListener(new ActionListener() {
-//		    public void actionPerformed(ActionEvent e) {
-//		    
+		 btnAddCourse = new JButton("Add Course");  
 //		    	String courseCode = textField_courseCode.getText();
 //		    	String courseName = textField_courseName.getText();
 //		        String credits  = textField_courseCredits.getText();
@@ -433,14 +383,14 @@ public class UniversityApplication extends JFrame {
 //		           
 //		});
 		
-	    button_AddCourse_1.setBounds(287, 31, 113, 23);	
-	    panel_Course.add(button_AddCourse_1); 
+	    btnAddCourse.setBounds(287, 31, 113, 23);	
+	    panel_Course.add(btnAddCourse); 
 	    
 	    
 	    //Button - Show All Results for Course
-	    JButton button_ShowAllResults = new JButton("Show all results");
-//	    button_ShowAllResults.setFont(new Font("Tahoma", Font.BOLD, 10));
-//	    button_ShowAllResults.addActionListener(new ActionListener() {
+	    btnShowAllResults = new JButton("Show all results");
+//	    btnShowAllResults.setFont(new Font("Tahoma", Font.BOLD, 10));
+//	    btnShowAllResults.addActionListener(new ActionListener() {
 //	    	public void actionPerformed(ActionEvent e) {
 //	    	textArea_Course.setText("");			
 //	    	String courseCode = textField_showResult.getText();
@@ -474,14 +424,14 @@ public class UniversityApplication extends JFrame {
 //	    			}
 //	    			}
 //	    		});
-	    		button_ShowAllResults.setBounds(267, 248, 133, 23);
-	    		panel_Course.add(button_ShowAllResults);
+	    		btnShowAllResults.setBounds(267, 248, 133, 23);
+	    		panel_Course.add(btnShowAllResults);
 		        		
 		        		
 		//Button - Find Course
-		JButton button_findCourse = new JButton("Find Course");
+		btnFindCourse = new JButton("Find Course");
 //		
-//				button_findCourse.addActionListener(new ActionListener() {
+//				btnFindCourse.addActionListener(new ActionListener() {
 //					public void actionPerformed(ActionEvent e) {
 //						
 //						String courseCode = textField_findCourse.getText();
@@ -510,8 +460,8 @@ public class UniversityApplication extends JFrame {
 //					}
 //				});
 //		        				
-		button_findCourse.setBounds(287, 154, 113, 23);
-		panel_Course.add(button_findCourse);
+		btnFindCourse.setBounds(287, 154, 113, 23);
+		panel_Course.add(btnFindCourse);
 		
 		JLabel label_2 = new JLabel("Fields marked with (*) are mandatory to fill in.");
 		label_2.setForeground(new Color(178, 34, 34));
@@ -565,8 +515,8 @@ public class UniversityApplication extends JFrame {
 		panel_Register.add(textArea_Register);
 		
 		//Button - Register Student on Course
-		JButton button_RegisterStudentCourse = new JButton("Register student on course");
-//		button_RegisterStudentCourse.addActionListener(new ActionListener() {
+		btnRegisterResultCourse = new JButton("Register student on course");
+//		btnRegisterResultCourse.addActionListener(new ActionListener() {
 //			public void actionPerformed(ActionEvent e) {
 //				
 //				String ssn = textField_studentSSNRegister.getText();
@@ -603,12 +553,12 @@ public class UniversityApplication extends JFrame {
 //				
 //			
 //		});
-		button_RegisterStudentCourse.setBounds(84, 83, 226, 23);
-		panel_Register.add(button_RegisterStudentCourse);
+		btnRegisterResultCourse.setBounds(84, 83, 226, 23);
+		panel_Register.add(btnRegisterResultCourse);
 		
 		
-		JButton btnRegisterStudent_1 = new JButton("Register result");
-//		btnRegisterStudent_1.addActionListener(new ActionListener() {
+		btnRegisterResult = new JButton("Register result");
+//		btnRegisterResult_1.addActionListener(new ActionListener() {
 //			public void actionPerformed(ActionEvent e) {
 //				
 //				
@@ -643,8 +593,8 @@ public class UniversityApplication extends JFrame {
 //			}
 //			}
 //			});
-		btnRegisterStudent_1.setBounds(84, 227, 226, 23);
-		panel_Register.add(btnRegisterStudent_1);
+		btnRegisterResult.setBounds(84, 227, 226, 23);
+		panel_Register.add(btnRegisterResult);
 			
 		
 		textField_StudentSSN2 = new JTextField();
@@ -708,245 +658,187 @@ public class UniversityApplication extends JFrame {
 	public Controller getController() {
 		return controller;
 	}
-
 	public JTextField getTextField_StudentSSN2() {
 		return textField_StudentSSN2;
 	}
-
 	public JTextField getTextField_courseCode2() {
 		return textField_courseCode2;
 	}
-
 	public JTextField getTextField_courseCode() {
 		return textField_courseCode;
 	}
-
 	public JTextField getTextField_courseName() {
 		return textField_courseName;
 	}
-
 	public JTextField getTextField_ssn() {
 		return textField_ssn;
 	}
-
 	public JTextField getTextField_courseCredits() {
 		return textField_courseCredits;
 	}
-
-	public JButton getButton_AddStudent() {
-		return button_AddStudent;
+	public JButton getBtnAddStudent() {
+		return btnAddStudent;
 	}
-
-	public JButton getButton_AddCourse() {
-		return button_AddCourse;
+	public JButton getBtnAddCourse() {
+		return btnAddCourse;
 	}
-
-	public JButton getButton_FindStudent() {
-		return button_FindStudent;
+	public JButton getBtnFindStudent() {
+		return btnFindStudent;
 	}
-
-	public JButton getButton_FindCourse() {
-		return button_FindCourse;
+	public JButton getBtnFindCourse() {
+		return btnFindCourse;
 	}
-
-	public JButton getButton_ShowStudentResult() {
-		return button_ShowStudentResult;
+	public JButton getBtnShowStudentResult() {
+		return btnShowStudentResult;
 	}
-
-	public JButton getBtnRegisterStudent() {
-		return btnRegisterStudent;
+	public JButton getBtnShowAllResults() {
+		return btnShowAllResults;
 	}
-
-	public JButton getBtnRegisterNewStudent() {
-		return BtnRegisterNewStudent;
+	public JButton getbtnRegisterResultCourse() {
+		return btnRegisterResultCourse;
 	}
-
+	public JButton getbtnRegisterResult() {
+		return btnRegisterResult;
+	}
+	
 	public JButton getBtnShowAllCourses() {
 		return btnShowAllCourses;
 	}
-
 	public JButton getBtnShowAllStudents() {
 		return btnShowAllStudents;
 	}
-
 	public JTextField getTextField_StudentName() {
 		return textField_StudentName;
 	}
-
 	public JTextField getTextField_StudentAddress() {
 		return textField_StudentAddress;
 	}
-
 	public JTextField getTextField_studentFind() {
 		return textField_studentFind;
 	}
-
 	public JTextField getTextField_findCourse() {
 		return textField_findCourse;
 	}
-
 	public JTextField getTextField_showResult() {
 		return textField_showResult;
 	}
-
 	public JTextField getTextField_courseCodeResult() {
 		return textField_courseCodeResult;
 	}
-
 	public JTextField getTextField_StudentSSNResult() {
 		return textField_StudentSSNResult;
 	}
-
 	public JTextField getTextField_courseCodeRegister() {
 		return textField_courseCodeRegister;
 	}
-
 	public JTextField getTextField_studentSSNRegister() {
 		return textField_studentSSNRegister;
 	}
-
 	public JTable getTable_Course() {
 		return table_Course;
 	}
-
 	public JTable getTable_Student() {
 		return table_Student;
 	}
-
 	public JTextArea getTextArea_Student() {
 		return textArea_Student;
 	}
-
 	public JTextArea getTextArea_Course() {
 		return textArea_Course;
 	}
-
 	public JTextArea getTextArea_Register() {
 		return textArea_Register;
 	}
-
-	public void setFrame(JFrame frame) {
-		this.frame = frame;
-	}
-
-	public void setController(Controller controller) {
-		this.controller = controller;
-	}
-
 	public void setTextField_StudentSSN2(JTextField textField_StudentSSN2) {
 		this.textField_StudentSSN2 = textField_StudentSSN2;
 	}
-
 	public void setTextField_courseCode2(JTextField textField_courseCode2) {
 		this.textField_courseCode2 = textField_courseCode2;
 	}
-
 	public void setTextField_courseCode(JTextField textField_courseCode) {
 		this.textField_courseCode = textField_courseCode;
 	}
-
 	public void setTextField_courseName(JTextField textField_courseName) {
 		this.textField_courseName = textField_courseName;
 	}
-
 	public void setTextField_ssn(JTextField textField_ssn) {
 		this.textField_ssn = textField_ssn;
 	}
-
 	public void setTextField_courseCredits(JTextField textField_courseCredits) {
 		this.textField_courseCredits = textField_courseCredits;
 	}
-
-	public void setButton_AddStudent(JButton button_AddStudent) {
-		this.button_AddStudent = button_AddStudent;
+	public void setBtnAddStudent(JButton btnAddStudent) {
+		this.btnAddStudent = btnAddStudent;
 	}
-
-	public void setButton_AddCourse(JButton button_AddCourse) {
-		this.button_AddCourse = button_AddCourse;
+	public void setBtnAddCourse(JButton btnAddCourse) {
+		this.btnAddCourse = btnAddCourse;
 	}
-
-	public void setButton_FindStudent(JButton button_FindStudent) {
-		this.button_FindStudent = button_FindStudent;
+	public void setBtnFindStudent(JButton btnFindStudent) {
+		this.btnFindStudent = btnFindStudent;
 	}
-
-	public void setButton_FindCourse(JButton button_FindCourse) {
-		this.button_FindCourse = button_FindCourse;
+	public void setBtnFindCourse(JButton btnFindCourse) {
+		this.btnFindCourse = btnFindCourse;
 	}
-
-	public void setButton_ShowStudentResult(JButton button_ShowStudentResult) {
-		this.button_ShowStudentResult = button_ShowStudentResult;
+	public void setBtnShowStudentResult(JButton btnShowStudentResult) {
+		this.btnShowStudentResult = btnShowStudentResult;
 	}
-
-	public void setBtnRegisterStudent(JButton btnRegisterStudent) {
-		this.btnRegisterStudent = btnRegisterStudent;
+	public void setBtnShowAllResults(JButton btnShowAllResults) {
+		this.btnShowAllResults = btnShowAllResults;
 	}
-
-	public void setBtnRegisterNewStudent(JButton btnRegisterNewStudent) {
-		BtnRegisterNewStudent = btnRegisterNewStudent;
+	public void setbtnRegisterResultCourse(JButton btnRegisterResultCourse) {
+		this.btnRegisterResultCourse = btnRegisterResultCourse;
 	}
-
+	public void setbtnRegisterResult(JButton btnRegisterResult) {
+		this.btnRegisterResult = btnRegisterResult;
+	}
 	public void setBtnShowAllCourses(JButton btnShowAllCourses) {
 		this.btnShowAllCourses = btnShowAllCourses;
 	}
-
 	public void setBtnShowAllStudents(JButton btnShowAllStudents) {
 		this.btnShowAllStudents = btnShowAllStudents;
 	}
-
 	public void setTextField_StudentName(JTextField textField_StudentName) {
 		this.textField_StudentName = textField_StudentName;
 	}
-
 	public void setTextField_StudentAddress(JTextField textField_StudentAddress) {
 		this.textField_StudentAddress = textField_StudentAddress;
 	}
-
 	public void setTextField_studentFind(JTextField textField_studentFind) {
 		this.textField_studentFind = textField_studentFind;
 	}
-
 	public void setTextField_findCourse(JTextField textField_findCourse) {
 		this.textField_findCourse = textField_findCourse;
 	}
-
 	public void setTextField_showResult(JTextField textField_showResult) {
 		this.textField_showResult = textField_showResult;
 	}
-
 	public void setTextField_courseCodeResult(JTextField textField_courseCodeResult) {
 		this.textField_courseCodeResult = textField_courseCodeResult;
 	}
-
 	public void setTextField_StudentSSNResult(JTextField textField_StudentSSNResult) {
 		this.textField_StudentSSNResult = textField_StudentSSNResult;
 	}
-
 	public void setTextField_courseCodeRegister(JTextField textField_courseCodeRegister) {
 		this.textField_courseCodeRegister = textField_courseCodeRegister;
 	}
-
 	public void setTextField_studentSSNRegister(JTextField textField_studentSSNRegister) {
 		this.textField_studentSSNRegister = textField_studentSSNRegister;
 	}
-
 	public void setTable_Course(JTable table_Course) {
 		this.table_Course = table_Course;
 	}
-
 	public void setTable_Student(JTable table_Student) {
 		this.table_Student = table_Student;
 	}
-
 	public void setTextArea_Student(JTextArea textArea_Student) {
 		this.textArea_Student = textArea_Student;
 	}
-
 	public void setTextArea_Course(JTextArea textArea_Course) {
 		this.textArea_Course = textArea_Course;
 	}
-
 	public void setTextArea_Register(JTextArea textArea_Register) {
 		this.textArea_Register = textArea_Register;
 	}
 
+	
 }
