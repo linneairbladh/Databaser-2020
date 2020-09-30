@@ -2,11 +2,11 @@ import java.util.ArrayList;
 
 public class HasStudied {
 
-	//Attributes and ArrayList
+	//Attributes
 	private String studentSsn;
 	private String courseCode; 
 	private String grade;
-	private ArrayList<HasStudied> showResult = new ArrayList<HasStudied>();
+	
 	
 
 	//Constructor
@@ -41,13 +41,7 @@ public class HasStudied {
 		this.grade = grade;
 	}
 	
-	public ArrayList<HasStudied> getShowResult() {
-		return showResult;
-	}
 
-	public void setShowResult(ArrayList<HasStudied> showResult) {
-		this.showResult = showResult;
-	}
 
 }
 

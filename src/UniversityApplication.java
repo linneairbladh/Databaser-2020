@@ -436,7 +436,7 @@ public class UniversityApplication {
 		                    textArea_Course.setText(Controller.ErrorHandling(sql.getErrorCode(), ""));
 		   
 			            }catch (NumberFormatException ne) {
-			                textArea_Course.setText("Only numbers is allowed");
+			                textArea_Course.setText("Only integers are allowed in credits");
 		            }
 		            
 		        }
@@ -660,15 +660,15 @@ public class UniversityApplication {
 		textField_StudentSSN2.setColumns(10);
 		
 		JLabel lblStudentSSN2 = new JLabel("Student SSN *");
-		lblStudentSSN2.setBounds(84, 132, 76, 14);
+		lblStudentSSN2.setBounds(84, 132, 82, 14);
 		panel_Register.add(lblStudentSSN2);
 		
 		JLabel lblGrade = new JLabel("Grade *");
-		lblGrade.setBounds(84, 198, 58, 14);
+		lblGrade.setBounds(84, 198, 85, 14);
 		panel_Register.add(lblGrade);
 		
 		JLabel lblCourseCode = new JLabel("Course code *");
-		lblCourseCode.setBounds(84, 164, 85, 20);
+		lblCourseCode.setBounds(84, 157, 82, 20);
 		panel_Register.add(lblCourseCode);
 		
 		textField_courseCode2 = new JTextField();
