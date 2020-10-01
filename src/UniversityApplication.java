@@ -70,14 +70,14 @@ public class UniversityApplication extends JFrame {
 	public UniversityApplication() {
 		
 	
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 494);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		//frame = new JFrame();
+		this.setBounds(100, 100, 450, 494);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.getContentPane().setLayout(null);
 	
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(0, 0, 434, 455);
-		frame.getContentPane().add(tabbedPane);;
+		this.getContentPane().add(tabbedPane);;
 			
 		JPanel panel_Overview = new JPanel();
 		tabbedPane.addTab("Overview", null, panel_Overview, null);
