@@ -9,8 +9,8 @@ public class Main {
 		ErrorHandlingSQL error = new ErrorHandlingSQL ();
 		Controller controller = new Controller (frame, dal, error);
 		
-		frame.setVisible(true); //fattar ej varför fel
-		//frame.setController(controller); //fattar ej varför fel
+		frame.setVisible(true); 
+		frame.setController(controller); 
 		
 		
 	

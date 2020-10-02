@@ -38,7 +38,7 @@ public class UniversityApplication extends JFrame {
 	private JButton btnFindCourse;
 	private JButton btnShowStudentResult;
 	private JButton btnShowAllResults;
-	private JButton btnRegisterResultCourse;
+	private JButton btnRegisterStudentCourse;
 	private JButton btnRegisterResult;
 	private JButton btnShowAllCourses;
 	private JButton btnShowAllStudents;
@@ -53,6 +53,9 @@ public class UniversityApplication extends JFrame {
 	private JTextField textField_StudentSSNResult;
 	private JTextField textField_courseCodeRegister;
 	private JTextField textField_studentSSNRegister;
+	
+	//ComboBox grade
+	private JComboBox <String> comboBoxGrade;
 	
 	//Tabeller 
 	private JTable table_Course;
@@ -388,7 +391,11 @@ public class UniversityApplication extends JFrame {
 	    
 	    
 	    //Button - Show All Results for Course
-	    btnShowAllResults = new JButton("Show all results");
+	    btnShowAllResults = new JButton("Show all course results");
+	    btnShowAllResults.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent e) {
+	    	}
+	    });
 //	    btnShowAllResults.setFont(new Font("Tahoma", Font.BOLD, 10));
 //	    btnShowAllResults.addActionListener(new ActionListener() {
 //	    	public void actionPerformed(ActionEvent e) {
@@ -496,7 +503,7 @@ public class UniversityApplication extends JFrame {
 		panel_Register.setLayout(null);
 			
 		//Comboboxar		
-		JComboBox <String> comboBoxGrade = new JComboBox <String>();
+		comboBoxGrade = new JComboBox <String>();
 		comboBoxGrade.addItem("A");
 		comboBoxGrade.addItem("B");
 		comboBoxGrade.addItem("C");
@@ -515,8 +522,8 @@ public class UniversityApplication extends JFrame {
 		panel_Register.add(textArea_Register);
 		
 		//Button - Register Student on Course
-		btnRegisterResultCourse = new JButton("Register student on course");
-//		btnRegisterResultCourse.addActionListener(new ActionListener() {
+		btnRegisterStudentCourse = new JButton("Register student on course");
+//		btnRegisterStudentCourse.addActionListener(new ActionListener() {
 //			public void actionPerformed(ActionEvent e) {
 //				
 //				String ssn = textField_studentSSNRegister.getText();
@@ -553,8 +560,8 @@ public class UniversityApplication extends JFrame {
 //				
 //			
 //		});
-		btnRegisterResultCourse.setBounds(84, 83, 226, 23);
-		panel_Register.add(btnRegisterResultCourse);
+		btnRegisterStudentCourse.setBounds(84, 83, 226, 23);
+		panel_Register.add(btnRegisterStudentCourse);
 		
 		
 		btnRegisterResult = new JButton("Register result");
@@ -654,10 +661,6 @@ public class UniversityApplication extends JFrame {
 	public JFrame getFrame() {
 		return frame;
 	}
-
-	public Controller getController() {
-		return controller;
-	}
 	public JTextField getTextField_StudentSSN2() {
 		return textField_StudentSSN2;
 	}
@@ -694,8 +697,8 @@ public class UniversityApplication extends JFrame {
 	public JButton getBtnShowAllResults() {
 		return btnShowAllResults;
 	}
-	public JButton getbtnRegisterResultCourse() {
-		return btnRegisterResultCourse;
+	public JButton getbtnRegisterStudentCourse() {
+		return btnRegisterStudentCourse;
 	}
 	public JButton getbtnRegisterResult() {
 		return btnRegisterResult;
@@ -785,8 +788,8 @@ public class UniversityApplication extends JFrame {
 	public void setBtnShowAllResults(JButton btnShowAllResults) {
 		this.btnShowAllResults = btnShowAllResults;
 	}
-	public void setbtnRegisterResultCourse(JButton btnRegisterResultCourse) {
-		this.btnRegisterResultCourse = btnRegisterResultCourse;
+	public void setbtnRegisterStudentCourse(JButton btnRegisterStudentCourse) {
+		this.btnRegisterStudentCourse = btnRegisterStudentCourse;
 	}
 	public void setbtnRegisterResult(JButton btnRegisterResult) {
 		this.btnRegisterResult = btnRegisterResult;
@@ -839,6 +842,18 @@ public class UniversityApplication extends JFrame {
 	public void setTextArea_Register(JTextArea textArea_Register) {
 		this.textArea_Register = textArea_Register;
 	}
-
+	public JComboBox<String> getComboBoxGrade() {
+		return comboBoxGrade;
+	}
+	public void setComboBoxGrade(JComboBox<String> comboBoxGrade) {
+		this.comboBoxGrade = comboBoxGrade;
+	}
+	public Controller getController() {
+		return controller;
+	}
+	public void setController(Controller controller) {
+		this.controller = controller;
+	}
+	
 	
 }

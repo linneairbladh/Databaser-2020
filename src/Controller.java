@@ -68,7 +68,7 @@ public class Controller {
 				}
 			});
     	
-    	
+    	// FLIK STUDENT
     	//Knapp Add Student
     	
     	frame.getBtnAddStudent().addActionListener(new ActionListener() {
@@ -176,8 +176,9 @@ public class Controller {
 		
 	});
     	
+    	//SLUT PÅ FLIK STUDENT
   	
-    	
+    	// FLIK COURSE
     	//Knapp Add Course
     	frame.getBtnAddCourse().addActionListener(new ActionListener() {
     	 public void actionPerformed(ActionEvent e) {
@@ -198,7 +199,7 @@ public class Controller {
  		                    
  		                    
  		                }catch (SQLException sql){
- 		                	//frame.getTextArea_Course().setText(Controller.ErrorHandling(sql.getErrorCode(), ""));
+ 		                	frame.getTextArea_Course().setText(error.MessageFailureCode(sql.getErrorCode(),""));
  		   
  			            }catch (NumberFormatException ne) {
  			            	frame.getTextArea_Course().setText("Only integers are allowed in credits");
@@ -237,8 +238,7 @@ public class Controller {
 						}
 							
 					} catch (SQLException sql) {
-						frame.getTextArea_Course().setText(sql.getMessage());
-						//frame.getTextArea_Course().setText(dal.ErrorHandling(sql.getErrorCode(), ""));
+						frame.getTextArea_Course().setText(error.MessageFailureCode(sql.getErrorCode(),""));
     			
     			
     		}
@@ -252,6 +252,125 @@ public class Controller {
     	});
     	
     	
+    	//Knapp för att visa alla kursresultat
+    	
+    	  frame.getBtnShowAllResults().addActionListener(new ActionListener() {
+  	    	public void actionPerformed(ActionEvent e) {
+  	    		frame.getTextArea_Course().setText("");			
+  	    	String courseCode = frame.getTextField_showResult().getText();
+  	    			if (courseCode.isEmpty()) {
+  	    				frame.getTextArea_Course().setText("Please fill in course code.");
+  	    			}else {
+  	    				try {
+  	    					Course course = dal.findCourse(courseCode);
+  	    				
+  	    				if (course == null ) {
+  	    					String courseNotFound = dal.courseNotFound(courseCode);
+  	    					frame.getTextArea_Course().setText(courseNotFound);
+  	    			}else {
+  	    				ArrayList <HasStudied> courseResultList = dal.ShowAllStudentResult(courseCode);
+  	    			if (courseResultList.isEmpty()) {
+  	    				frame.getTextArea_Course().setText("No students has finished this course.");
+  	    			} else {
+  	
+  	    				for (HasStudied hs : courseResultList) {
+  	
+  	    					frame.getTextArea_Course().append("Student: " + hs.getStudentSsn() + " grade: " + hs.getGrade() + "\n");
+  	
+  	    				}
+  	    			}
+  	    				
+  	    			}
+  	    			
+  	    			}catch (SQLException sql) {
+  	    				frame.getTextArea_Course().setText(error.MessageFailureCode(sql.getErrorCode(),""));
+  	    			}
+  	    			}
+  	    			}
+  	    		});
+    	  
+    	  //SLUT PÅ FLIK COURSE
+    	  
+    	  //FLIK REGISTER
+    	  
+    	  //Button register student on course
+    	  frame.getbtnRegisterStudentCourse().addActionListener(new ActionListener() {
+  			public void actionPerformed(ActionEvent e) {
+  				
+  				String ssn = frame.getTextField_studentSSNRegister().getText();
+  						
+  				String courseCode = frame.getTextField_courseCodeRegister().getText();
+  				
+  				 if(courseCode.isEmpty() || ssn.isEmpty()) {
+  					 frame.getTextArea_Register().setText("Please type in all fields");
+
+  				 } else {
+  					 try {
+  						 Student student = dal.findStudent(ssn);
+  						 Course course = dal.findCourse(courseCode);
+  						 
+  						 if (student == null) {
+  							 String studentNotFound = dal.studentNotFound(ssn);
+  							frame.getTextArea_Register().setText(studentNotFound);
+  						
+  						 } else if (course == null) {
+  							 String courseNotFound = dal.courseNotFound(courseCode);
+  							frame.getTextArea_Register().setText(courseNotFound);
+  							 
+  						 }else {
+  							 dal.addStudentOnCourse(ssn, courseCode);
+  							frame.getTextArea_Register().setText("StudentName: " + student.getStudentName() + "\nStudentSSN: " + student.getSsn() + "\nWas registred on course: " + course.getCourseName());
+  						 }
+  					 
+  					 }catch (SQLException sql) {
+  						frame.getTextArea_Register().setText(error.MessageFailureCode(sql.getErrorCode(),""));  						 }
+  						 
+  						 
+  					 }
+  			}
+  				
+  			
+  		});
+    	  
+    	  //Button register result on student
+    	  
+    	  frame.getbtnRegisterResult().addActionListener(new ActionListener() {
+  			public void actionPerformed(ActionEvent e) {
+  				
+  				
+  				
+  				String ssn = frame.getTextField_StudentSSN2().getText();
+  						
+  				String courseCode = frame.getTextField_courseCode2().getText();
+
+  			    String grade = frame.getComboBoxGrade().getSelectedItem().toString();
+  			    
+  			    if(courseCode.isEmpty() || ssn.isEmpty() || grade.isBlank()) {
+  			    	frame.getTextArea_Register().setText("Please type in all fields");
+  			    } else {
+  			    try {
+  				Student student = dal.findStudent(ssn);
+  			    Course  course = dal.findCourse(courseCode);
+  			    
+  			     if (student == null) {
+  					 String studentNotFound = dal.studentNotFound(ssn);
+  					frame.getTextArea_Register().setText(studentNotFound);
+  				
+  				 } else if (course == null) {
+  					 String courseNotFound = dal.courseNotFound(courseCode);
+  					 frame.getTextArea_Register().setText(courseNotFound);
+  			    
+  			    
+  				 } else {	dal.addStudentOnFinishedCourse(ssn, courseCode, grade);
+  				frame.getTextArea_Register().setText("The result [" + grade + "] for following student was added; " + "\nSSN: " + student.getSsn() + "\nStudentname: " + student.getStudentName() + "\nFor course: " + "\nCourseCode: " + course.getCourseCode() + "\nCourseName: " + course.getCourseName());
+
+  			    }
+  			    } catch (SQLException sql) {
+  			    	frame.getTextArea_Register().setText(error.MessageFailureCode(sql.getErrorCode(),""));  
+  				}
+  			}
+  			}
+  			});
     	
    
     	//Dessa måsvingar = slut på metod och hela klassen
