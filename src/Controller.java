@@ -83,8 +83,8 @@ public class Controller {
 								+ " \nStudent :" + name + " \nStudentAdress :" + address);
 
 					} catch (SQLException sql) {
-						frame.getTextArea_Student().setText(error.MessageFailureCode(sql.getErrorCode(), ""));	
-					} 
+						frame.getTextArea_Student().setText(error.MessageFailureCode(sql.getErrorCode(), ""));
+					}
 
 				}
 				frame.getTextField_StudentName().setText("");

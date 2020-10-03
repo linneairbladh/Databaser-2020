@@ -23,7 +23,7 @@ public class UniversityApplication extends JFrame {
 	Controller controller;
 	private JFrame frame;
 
-	// Textfält
+	// Textfields
 	private JTextField textField_StudentSSN2;
 	private JTextField textField_courseCode2;
 	private JTextField textField_courseCode;
@@ -31,7 +31,7 @@ public class UniversityApplication extends JFrame {
 	private JTextField textField_ssn;
 	private JTextField textField_courseCredits;
 
-	// Knappar
+	// Buttons
 	private JButton btnAddStudent;
 	private JButton btnAddCourse;
 	private JButton btnFindStudent;
@@ -43,7 +43,7 @@ public class UniversityApplication extends JFrame {
 	private JButton btnShowAllCourses;
 	private JButton btnShowAllStudents;
 
-	// Textfält
+	// Textfields
 	private JTextField textField_StudentName;
 	private JTextField textField_StudentAddress;
 	private JTextField textField_studentFind;
@@ -57,11 +57,11 @@ public class UniversityApplication extends JFrame {
 	// ComboBox grade
 	private JComboBox<String> comboBoxGrade;
 
-	// Tabeller
+	// Tables
 	private JTable table_Course;
 	private JTable table_Student;
 
-	// Textareas
+	// TextAreas
 	private JTextArea textArea_Student;
 	private JTextArea textArea_Course;
 	private JTextArea textArea_Register;
