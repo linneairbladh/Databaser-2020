@@ -23,7 +23,7 @@ public class Controller {
 	}
 
 	public void declareEvents() {
-		// Knapp för att fram listan Show All Students
+		// Button to get list Show All Students
 		frame.getBtnShowAllStudents().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -42,7 +42,7 @@ public class Controller {
 			}
 		});
 
-		// Knapp för att ta fram listan Show All Courses
+		// Button to get list Show all Courses
 		frame.getBtnShowAllCourses().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -62,8 +62,8 @@ public class Controller {
 			}
 		});
 
-		// FLIK STUDENT
-		// Knapp Add Student
+		// Student Tab
+		// Button Add Student
 
 		frame.getBtnAddStudent().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -95,7 +95,7 @@ public class Controller {
 			}
 		});
 
-		// Knapp Find Student
+		// Button Find Student
 		frame.getBtnFindStudent().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String ssn = frame.getTextField_studentFind().getText();
@@ -122,7 +122,7 @@ public class Controller {
 			}
 		});
 
-		// Knapp Show Student Result
+		// Button Show Student Result
 		frame.getBtnShowStudentResult().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -165,10 +165,10 @@ public class Controller {
 
 		});
 
-		// SLUT PÅ FLIK STUDENT
+		// End of Student Tab
 
-		// FLIK COURSE
-		// Knapp Add Course
+		// Course Tan
+		// Button Add Course
 		frame.getBtnAddCourse().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -203,7 +203,7 @@ public class Controller {
 
 		});
 
-		// knapp Find Course
+		// Button Find Course
 		frame.getBtnFindCourse().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -237,7 +237,7 @@ public class Controller {
 
 		});
 
-		// Knapp för att visa alla kursresultat
+		// Button to Show all Course Results
 
 		frame.getBtnShowAllResults().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -275,11 +275,11 @@ public class Controller {
 			}
 		});
 
-		// SLUT PÅ FLIK COURSE
+		// End of Course Tab
 
-		// FLIK REGISTER
+		// Register Tab
 
-		// Button register student on course
+		// Button Register Student on Course
 		frame.getbtnRegisterStudentCourse().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -320,7 +320,7 @@ public class Controller {
 
 		});
 
-		// Button register result on student
+		// Button Register Result on Student
 
 		frame.getbtnRegisterResult().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
