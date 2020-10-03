@@ -1,17 +1,17 @@
 
 public class Studies {
-	
-	//Attributes
+
+	// Attributes
 	private String studentSsn;
-	private String courseCode; 
-	
-	//Constuctor
-	public Studies (String studentSsn, String courseCode) {
+	private String courseCode;
+
+	// Constructor
+	public Studies(String studentSsn, String courseCode) {
 		this.studentSsn = studentSsn;
-		this.courseCode = courseCode;	
+		this.courseCode = courseCode;
 	}
 
-	//Setters and Getters
+	// Setters and Getters
 	public String getStudentSsn() {
 		return studentSsn;
 	}
@@ -29,6 +29,5 @@ public class Studies {
 	}
 
 }
-
 
 

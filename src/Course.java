@@ -1,19 +1,19 @@
 
 public class Course {
 
-	//Course Attributes
-	private String courseCode; 
+	// Course Attributes
+	private String courseCode;
 	private String courseName;
 	private int credits;
-	
-	//Constructor 
+
+	// Constructor
 	public Course(String courseCode, String courseName, int credits) {
-	this.courseCode = courseCode;
-	this.courseName = courseName;
-	this.credits = credits;
+		this.courseCode = courseCode;
+		this.courseName = courseName;
+		this.credits = credits;
 	}
 
-	//Setters and getters
+	// Setters and getters
 	public String getCourseCode() {
 		return courseCode;
 	}
@@ -38,6 +38,6 @@ public class Course {
 		this.credits = credits;
 	}
 
-}	
+}
 
 

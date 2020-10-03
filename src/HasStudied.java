@@ -1,22 +1,19 @@
-import java.util.ArrayList;
 
 public class HasStudied {
 
-	//Attributes
+	// Attributes
 	private String studentSsn;
-	private String courseCode; 
+	private String courseCode;
 	private String grade;
-	
-	
 
-	//Constructor
-	public HasStudied (String studentSsn, String courseCode, String grade) {
+	// Constructor
+	public HasStudied(String studentSsn, String courseCode, String grade) {
 		this.studentSsn = studentSsn;
 		this.courseCode = courseCode;
 		this.grade = grade;
 	}
 
-	//Setters and Getters
+	// Setters and Getters
 	public String getStudentSsn() {
 		return studentSsn;
 	}
@@ -40,8 +37,6 @@ public class HasStudied {
 	public void setGrade(String grade) {
 		this.grade = grade;
 	}
-	
-
 
 }
 
