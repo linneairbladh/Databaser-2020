@@ -17,7 +17,7 @@ public class DAL {
 
 	}
 
-	// Starta kopplingen, kör sql och få restultset
+	// Start connection, run SQL and get ResultSet
 	private ResultSet runExecuteQuery(String sqlString) throws SQLException {
 		conn = Sqlcon.getConnection();
 		sql = conn.prepareStatement(sqlString);
@@ -25,46 +25,45 @@ public class DAL {
 		return rs;
 	}
 
-	// Starta kopplingen, kör sql och uppdatera
+	// Start connection, run SQL and update
 	private void runExecuteUpdate(String sqlString) throws SQLException {
 		conn = Sqlcon.getConnection();
 		sql = conn.prepareStatement(sqlString);
 		sql.executeUpdate();
 	}
 
-	///////// Metoder
+	///////// Methods
 
-	// Lägg till student!
+	// Add Student
 	public void addStudent(String ssn, String studentName, String address) throws SQLException {
 		String sqlString = "INSERT INTO Student VALUES( '" + ssn + "', '" + studentName + "', '" + address + "');";
 		runExecuteUpdate(sqlString);
 		conn.close();
 	}
 
-	// Lägg till kurs!
+	// Add Course
 	public void addCourse(String courseCode, String courseName, int credits) throws SQLException {
 		String sqlString = "INSERT INTO Course VALUES ( '" + courseCode + "', '" + courseName + "', " + credits + ");";
 		runExecuteUpdate(sqlString);
-		// sql.close();
 		conn.close();
 
 	}
 
-	// Registrerar student på kurs!
+	// Register Student on Course
 	public void addStudentOnCourse(String ssn, String courseCode) throws SQLException {
 		String sqlString = "INSERT INTO Studies VALUES( '" + ssn + "', '" + courseCode + "');";
 		runExecuteUpdate(sqlString);
 		conn.close();
 	}
 
-	// Registrerar resultat för en student på en kurs!
+	// Register Result for a Student on a Course
 	public void addStudentOnFinishedCourse(String ssn, String courseCode, String grade) throws SQLException {
 		String sqlString = "INSERT INTO HasStudied VALUES('" + ssn + "', '" + courseCode + "', '" + grade + "');";
 		runExecuteUpdate(sqlString);
 		conn.close();
 	}
 
-	// Hitta student!
+	// Find Student
 	public Student findStudent(String ssn) throws SQLException {
 		Student s;
 		String sqlString = "SELECT * FROM Student WHERE ssn = '" + ssn + "'";
@@ -101,7 +100,7 @@ public class DAL {
 
 	}
 
-	// Hitta kurs!
+	// Find Course
 	public Course findCourse(String courseCode) throws SQLException {
 		Course c;
 		String sqlString = "SELECT * FROM Course WHERE courseCode = '" + courseCode + "';";
@@ -119,7 +118,7 @@ public class DAL {
 		return null;
 	}
 
-	// Hittar alla kurser!
+	// Find all Courses
 	public ArrayList<Course> getAllCourses() throws SQLException {
 		ArrayList<Course> courseList = new ArrayList<Course>();
 		String sqlString = "SELECT * FROM Course";
@@ -139,7 +138,7 @@ public class DAL {
 
 	}
 
-	// Hittar alla studenter!
+	// Find all Students
 	public ArrayList<Student> getAllStudents() throws SQLException {
 		ArrayList<Student> studentList = new ArrayList<Student>();
 		String sqlString = "SELECT * FROM Student";
@@ -159,7 +158,7 @@ public class DAL {
 
 	}
 
-	// Hittar en students betyg för en kurs!
+	// Find a Students result for a specific Course
 	public HasStudied ShowStudentResult(String ssn, String courseCode, String grade) throws SQLException {
 
 		HasStudied hs = null;
@@ -179,7 +178,7 @@ public class DAL {
 
 	}
 
-	// Lista på alla kursers resultat!
+	// List of all courses results
 	public ArrayList<HasStudied> ShowAllCourseResult(String ssn, String courseCode) throws SQLException {
 		ArrayList<HasStudied> courseResultList = new ArrayList<HasStudied>();
 		String sqlString = "SELECT * FROM hasStudied WHERE ssn = '" + ssn + "' AND courseCode = '" + courseCode + "';";
@@ -199,7 +198,7 @@ public class DAL {
 		return courseResultList;
 	}
 
-	// Lista på alla studenters resultat!
+	// List of all students results
 	public ArrayList<HasStudied> ShowAllStudentResult(String courseCode) throws SQLException {
 		ArrayList<HasStudied> studentResultList = new ArrayList<HasStudied>();
 		String sqlString = "SELECT * FROM hasStudied WHERE  courseCode = '" + courseCode + "';";
@@ -218,13 +217,13 @@ public class DAL {
 		return studentResultList;
 	}
 
-	// Om en student inte finns!
+	// If a Student doesn't exist
 	public String studentNotFound(String str) {
 		String studentNotExistMessage = "The student was not found";
 		return studentNotExistMessage;
 	}
 
-	// Om en kurs inte finns!
+	// If a Course doesn't exist
 	public String courseNotFound(String str) {
 		String courseNotExistMessage = "The course was not found";
 		return courseNotExistMessage;
